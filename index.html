@@ -42,7 +42,7 @@
   --font-body:'Plus Jakarta Sans', sans-serif;
   --font-mono:'IBM Plex Mono', monospace;
 
-  --shelf-w:76px;
+  --shelf-w:108px;
 }
 
 *{box-sizing:border-box;}
@@ -54,6 +54,7 @@ body{
   font-family:var(--font-body);
   line-height:1.6;
   overflow-x:hidden;
+  max-width:100vw;
 }
 img,svg{display:block; max-width:100%;}
 ::selection{background:var(--peri); color:#fff;}
@@ -87,41 +88,44 @@ a{color:inherit;}
   box-shadow:6px 0 22px rgba(43,33,64,.06);
 }
 .shelf-logo{
-  height:76px; display:flex; align-items:center; justify-content:center;
+  height:64px; display:flex; align-items:center; justify-content:center;
   border-bottom:1px solid var(--line); flex-shrink:0;
 }
 .shelf-logo i{font-size:1.25rem; color:var(--ink);}
-.shelf-books{flex:1; display:flex; flex-direction:column;}
+.shelf-books{flex:1; display:flex; flex-direction:column; min-height:0;}
 .spine{
-  position:relative; flex:1; min-height:64px; border:none; cursor:pointer;
+  position:relative; flex:1 1 0; min-height:0; border:none; cursor:pointer;
   display:flex; align-items:center; justify-content:center;
   border-bottom:1px solid rgba(43,33,64,.08);
   background:var(--spine-color); color:#fff;
-  transition:flex-basis .35s cubic-bezier(.4,0,.2,1), padding-left .35s ease, box-shadow .3s ease;
-  padding:14px 0;
+  transition:flex-grow .35s cubic-bezier(.4,0,.2,1), box-shadow .3s ease;
+  padding:10px 4px;
+  overflow:hidden;
 }
 .spine .spine-label{
   writing-mode:vertical-rl; transform:rotate(180deg);
-  font-family:var(--font-display); font-weight:600; font-size:.82rem;
-  letter-spacing:.04em; white-space:nowrap; display:flex; align-items:center; gap:8px;
+  font-family:var(--font-display); font-weight:600; font-size:.72rem;
+  letter-spacing:.02em; white-space:normal; word-break:normal; overflow-wrap:break-word;
+  display:flex; align-items:center; gap:6px; max-height:100%;
+  line-height:1.3; text-align:center;
 }
-.spine .spine-num{font-family:var(--font-mono); font-size:.66rem; opacity:.85;}
+.spine .spine-num{font-family:var(--font-mono); font-size:.62rem; opacity:.9; flex-shrink:0;}
 .spine::after{
   content:''; position:absolute; right:0; top:0; bottom:0; width:3px;
   background:rgba(0,0,0,.14);
 }
 .spine.active{
-  flex-basis:20%; box-shadow:inset 6px 0 0 rgba(255,255,255,.55);
+  flex-grow:1.6; box-shadow:inset 6px 0 0 rgba(255,255,255,.55);
 }
-.spine.active .spine-label{transform:rotate(180deg) scale(1.04);}
+.spine.active .spine-label{transform:rotate(180deg) scale(1.05);}
 .spine .tab-flag{
   position:absolute; left:100%; top:50%; transform:translateY(-50%);
-  background:inherit; color:#fff; font-family:var(--font-mono); font-size:.62rem; font-weight:600;
-  padding:5px 10px; border-radius:0 6px 6px 0; opacity:0; pointer-events:none;
+  background:inherit; color:#fff; font-family:var(--font-mono); font-size:.68rem; font-weight:600;
+  padding:6px 12px; border-radius:0 6px 6px 0; opacity:0; pointer-events:none;
   transition:opacity .25s ease, transform .25s ease; white-space:nowrap;
-  box-shadow:2px 2px 10px rgba(0,0,0,.15);
+  box-shadow:2px 2px 10px rgba(0,0,0,.15); z-index:60;
 }
-.spine:hover .tab-flag{opacity:1; transform:translateY(-50%) translateX(4px);}
+.spine:hover .tab-flag, .spine:focus-visible .tab-flag{opacity:1; transform:translateY(-50%) translateX(4px);}
 
 /* mobile shelf = horizontal strip */
 .mobile-shelf{display:none;}
@@ -129,7 +133,7 @@ a{color:inherit;}
 @media (max-width: 880px){
   .shelf{display:none;}
   .mobile-shelf{
-    display:flex; position:sticky; top:0; z-index:50; overflow-x:auto;
+    display:flex; position:sticky; top:0; z-index:50; overflow-x:auto; max-width:100vw;
     background:#EFE6D3; border-bottom:1px solid var(--line);
     padding:8px 10px; gap:8px; -webkit-overflow-scrolling:touch;
   }
@@ -145,14 +149,16 @@ a{color:inherit;}
 }
 
 /* ============ layout shell ============ */
-.page{margin-left:var(--shelf-w); position:relative; z-index:1;}
+.page{margin-left:var(--shelf-w); position:relative; z-index:1; max-width:100%;}
 @media (max-width: 880px){ .page{margin-left:0;} }
 
 .chapter{
   min-height:100vh; padding:90px 7vw 90px 7vw; position:relative;
   border-bottom:1px solid var(--line);
   display:flex; flex-direction:column; justify-content:center;
+  max-width:100%; overflow-x:hidden;
 }
+@media (max-width:600px){ .chapter{padding:56px 5vw 56px 5vw;} }
 .chapter-inner{max-width:1080px; margin:0 auto; width:100%;}
 
 /* reveal-on-scroll */
@@ -166,9 +172,9 @@ a{color:inherit;}
 .chapter-kicker{
   display:inline-flex; align-items:center; gap:10px; font-family:var(--font-mono);
   font-size:.76rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
-  color:var(--chapter-color); margin-bottom:18px;
+  color:var(--chapter-color); margin-bottom:18px; flex-wrap:wrap;
 }
-.chapter-kicker .dot{width:8px; height:8px; border-radius:50%; background:var(--chapter-color);}
+.chapter-kicker .dot{width:8px; height:8px; border-radius:50%; background:var(--chapter-color); flex-shrink:0;}
 .chapter-title{font-size:clamp(2rem, 4.4vw, 3.4rem); line-height:1.05; margin-bottom:18px; max-width:16ch;}
 .chapter-title em{font-style:italic; color:var(--chapter-color);}
 .chapter-dek{font-size:1.1rem; color:var(--ink-soft); max-width:62ch; margin-bottom:12px; font-weight:500;}
@@ -188,13 +194,15 @@ a{color:inherit;}
     radial-gradient(circle at 78% 88%, var(--coral-tint), transparent 42%),
     radial-gradient(circle at 10% 86%, var(--sky-tint), transparent 40%),
     var(--paper);
+  max-width:100%; overflow-x:hidden;
 }
+@media (max-width:600px){ .hero{padding:70px 5vw;} }
 .hero-inner{max-width:900px; margin:0 auto;}
 .hero-eyebrow{
   font-family:var(--font-mono); font-size:.8rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
   color:var(--peri); margin-bottom:20px; display:flex; align-items:center; gap:10px;
 }
-.hero-eyebrow::before{content:''; width:26px; height:2px; background:var(--peri);}
+.hero-eyebrow::before{content:''; width:26px; height:2px; background:var(--peri); flex-shrink:0;}
 .hero-title{font-size:clamp(2.6rem, 6.4vw, 5rem); line-height:1.02; margin-bottom:26px;}
 .hero-title .l1{display:block;}
 .hero-title .accent{font-style:italic; color:var(--peri);}
@@ -233,9 +241,9 @@ a{color:inherit;}
   background:#fff; border-radius:18px; padding:22px 24px; border:1px solid var(--line);
   box-shadow:0 8px 22px rgba(43,33,64,.05);
 }
-.rule-card h4{font-size:1rem; margin-bottom:10px; display:flex; align-items:center; gap:8px;}
+.rule-card h4{font-size:1rem; margin-bottom:10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
 .rule-card ul{margin:0; padding-left:20px; font-size:.92rem; color:var(--ink-soft);}
-.rule-card li{margin-bottom:6px;}
+.rule-card li{margin-bottom:6px; overflow-wrap:break-word;}
 
 /* ============ shared: explainer + flow diagram ============ */
 .explain-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:44px; align-items:start; margin-bottom:46px;}
@@ -244,8 +252,9 @@ a{color:inherit;}
   background:#fff; border-radius:22px; padding:30px 32px; border:1px solid var(--line);
   box-shadow:0 10px 28px rgba(43,33,64,.06);
 }
+@media (max-width:600px){ .explain-card{padding:22px 20px;} }
 .explain-card h3{font-size:1.15rem; margin-bottom:12px;}
-.explain-card p{color:var(--ink-soft); font-size:.97rem; margin:0 0 10px;}
+.explain-card p{color:var(--ink-soft); font-size:.97rem; margin:0 0 10px; overflow-wrap:break-word;}
 .explain-card p:last-child{margin-bottom:0;}
 
 .flow-card{
@@ -254,28 +263,32 @@ a{color:inherit;}
 .flow-card h4{font-size:.82rem; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.06em; color:var(--chapter-color); margin-bottom:14px; font-weight:600;}
 
 /* ============ steps ============ */
-.steps-heading{display:flex; align-items:baseline; gap:12px; margin-bottom:22px;}
+.steps-heading{display:flex; align-items:baseline; gap:12px; margin-bottom:22px; flex-wrap:wrap;}
 .steps-heading h3{font-size:1.3rem;}
 .steps-heading .count{font-family:var(--font-mono); font-size:.78rem; color:var(--ink-faint);}
 .steps-list{display:flex; flex-direction:column; gap:14px; margin-bottom:48px;}
 .step{
   display:grid; grid-template-columns:52px 1fr; gap:18px; background:#fff; border:1px solid var(--line);
   border-radius:18px; padding:20px 22px; box-shadow:0 6px 18px rgba(43,33,64,.04);
-  transition:transform .2s ease, box-shadow .2s ease;
+  transition:transform .2s ease, box-shadow .2s ease; min-width:0;
 }
+@media (max-width:520px){ .step{grid-template-columns:40px 1fr; padding:16px; gap:12px;} }
 .step:hover{transform:translateX(4px); box-shadow:0 10px 24px rgba(43,33,64,.09);}
 .step-num{
   width:42px; height:42px; border-radius:12px; background:var(--chapter-tint); color:var(--chapter-color);
   display:grid; place-items:center; font-family:var(--font-mono); font-weight:700; font-size:1rem;
 }
-.step h5{font-size:1rem; margin-bottom:5px; font-family:var(--font-body); font-weight:700;}
-.step p{margin:0; color:var(--ink-soft); font-size:.94rem;}
+@media (max-width:520px){ .step-num{width:32px; height:32px; font-size:.85rem; border-radius:9px;} }
+.step > div{min-width:0;}
+.step h5{font-size:1rem; margin-bottom:5px; font-family:var(--font-body); font-weight:700; overflow-wrap:break-word;}
+.step p{margin:0; color:var(--ink-soft); font-size:.94rem; overflow-wrap:break-word;}
 .step .callout{
-  margin-top:10px; font-size:.84rem; padding:9px 13px; border-radius:10px; display:inline-flex; gap:8px; align-items:flex-start;
+  margin-top:10px; font-size:.84rem; padding:9px 13px; border-radius:10px;
+  display:block; overflow-wrap:break-word; word-break:normal;
 }
+.step .callout i{margin-right:7px; display:inline;}
 .step .callout.warn{background:var(--dont-tint); color:var(--dont);}
 .step .callout.tip{background:var(--do-tint); color:var(--do);}
-.step .callout i{margin-top:2px;}
 
 /* ============ dos / donts washi cards ============ */
 .dd-heading{margin-bottom:20px;}
@@ -284,8 +297,9 @@ a{color:inherit;}
 @media (max-width:760px){ .dd-grid{grid-template-columns:1fr;} }
 .dd-card{
   border-radius:4px 4px 16px 16px; padding:26px 24px 22px; position:relative;
-  box-shadow:0 10px 26px rgba(43,33,64,.08);
+  box-shadow:0 10px 26px rgba(43,33,64,.08); min-width:0;
 }
+@media (max-width:520px){ .dd-card{padding:22px 16px 18px;} }
 .dd-card.do{background:var(--do-tint); border:1px solid color-mix(in srgb, var(--do) 30%, transparent);}
 .dd-card.dont{background:var(--dont-tint); border:1px solid color-mix(in srgb, var(--dont) 30%, transparent);}
 .dd-tape{
@@ -299,17 +313,18 @@ a{color:inherit;}
 .dd-card.dont h4{color:var(--dont);}
 .dd-card ul{margin:0; padding-left:0; list-style:none;}
 .dd-card li{
-  display:flex; gap:10px; align-items:flex-start; font-size:.92rem; color:var(--ink); margin-bottom:11px; font-weight:500;
+  display:block; font-size:.92rem; color:var(--ink); margin-bottom:11px; font-weight:500;
+  overflow-wrap:break-word; word-break:normal;
 }
 .dd-card li:last-child{margin-bottom:0;}
-.dd-card li i{margin-top:3px; flex-shrink:0; font-size:.8rem;}
+.dd-card li i{margin-right:9px; display:inline; font-size:.8rem;}
 .dd-card.do li i{color:var(--do);}
 .dd-card.dont li i{color:var(--dont);}
-.dd-card li .ex{font-family:var(--font-mono); font-size:.82em; background:rgba(43,33,64,.06); padding:1px 6px; border-radius:5px;}
+.dd-card li .ex{font-family:var(--font-mono); font-size:.82em; background:rgba(43,33,64,.06); padding:1px 6px; border-radius:5px; overflow-wrap:anywhere; white-space:nowrap;}
 
 /* ============ example table ============ */
-.eg-table-wrap{margin-bottom:48px;}
-.eg-table{width:100%; border-collapse:separate; border-spacing:0; background:#fff; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 8px 22px rgba(43,33,64,.05);}
+.eg-table-wrap{margin-bottom:48px; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.eg-table{width:100%; min-width:480px; border-collapse:separate; border-spacing:0; background:#fff; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 8px 22px rgba(43,33,64,.05);}
 .eg-table th{
   background:var(--chapter-tint); color:var(--chapter-color); font-family:var(--font-mono); font-size:.72rem;
   text-transform:uppercase; letter-spacing:.05em; padding:12px 16px; text-align:left; font-weight:700;
@@ -318,18 +333,18 @@ a{color:inherit;}
 .eg-table td.mono{font-family:var(--font-mono); font-size:.86rem;}
 .eg-table tr.bad td.mono{color:var(--dont);}
 .eg-table tr.good td.mono{color:var(--do);}
-.eg-table td .verdict{font-size:.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px;}
+.eg-table td .verdict{font-size:.78rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;}
 .eg-table tr.bad .verdict{color:var(--dont);}
 .eg-table tr.good .verdict{color:var(--do);}
 
 /* ============ video ============ */
 .video-block{margin-top:10px;}
-.video-block .vh{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+.video-block .vh{display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;}
 .video-block .vh i{color:var(--chapter-color);}
 .video-block .vh h4{font-size:1rem;}
 .video-frame{
   background:#1B1526; border-radius:22px; padding:14px; box-shadow:0 20px 46px rgba(43,33,64,.22);
-  position:relative;
+  position:relative; max-width:100%;
 }
 .video-frame::before{
   content:'● ● ●'; position:absolute; top:14px; left:26px; color:rgba(255,255,255,.35); font-size:.7rem; letter-spacing:3px;
@@ -339,9 +354,27 @@ a{color:inherit;}
 }
 .video-aspect iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
 .video-cap{color:rgba(255,255,255,.55); font-size:.76rem; font-family:var(--font-mono); text-align:center; margin-top:12px;}
+.video-actions{
+  display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.video-actions a{
+  flex:1; min-width:150px; text-align:center; text-decoration:none;
+  font-family:var(--font-body); font-weight:700; font-size:.86rem;
+  padding:11px 16px; border-radius:11px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+}
+.video-actions a:hover{transform:translateY(-2px);}
+.video-actions .watch-link{background:var(--chapter-color); color:#fff;}
+.video-actions .watch-link:hover{box-shadow:0 8px 20px color-mix(in srgb, var(--chapter-color) 45%, transparent);}
+.video-actions .dl-link{background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.22);}
+.video-actions .dl-link:hover{background:rgba(255,255,255,.18);}
+.video-fallback-note{
+  font-size:.78rem; color:rgba(255,255,255,.5); text-align:center; margin-top:10px; font-family:var(--font-body);
+}
 
 /* ============ inline flow-diagram (svg) ============ */
-.flow-diagram{width:100%; height:auto;}
+.flow-diagram{width:100%; height:auto; max-width:100%;}
 .flow-box{fill:#fff; stroke:var(--chapter-color); stroke-width:1.6;}
 .flow-box.manual{stroke-dasharray:5 4;}
 .flow-label{font-family:'IBM Plex Mono', monospace; font-size:10px; fill:var(--ink); font-weight:600;}
@@ -381,15 +414,15 @@ a{color:inherit;}
   <div class="shelf-books">
     <button class="spine" data-target="ch1" style="--spine-color:var(--mint);">
       <span class="tab-flag">Add New Orders</span>
-      <span class="spine-label"><span class="spine-num">01</span>Add New Orders</span>
+      <span class="spine-label"><span class="spine-num">01</span>Add Orders</span>
     </button>
     <button class="spine" data-target="ch2" style="--spine-color:var(--amber);">
       <span class="tab-flag">Procurement — All</span>
-      <span class="spine-label"><span class="spine-num">02</span>Procurement · All</span>
+      <span class="spine-label"><span class="spine-num">02</span>Procure · All</span>
     </button>
     <button class="spine" data-target="ch3" style="--spine-color:var(--peri);">
       <span class="tab-flag">Procurement — Selected</span>
-      <span class="spine-label"><span class="spine-num">03</span>Procurement · Selected</span>
+      <span class="spine-label"><span class="spine-num">03</span>Procure · Pick</span>
     </button>
     <button class="spine" data-target="ch4" style="--spine-color:var(--sky);">
       <span class="tab-flag">Enquiry</span>
@@ -555,8 +588,8 @@ a{color:inherit;}
         </div></div>
         <div class="step"><div class="step-num">2</div><div>
           <h5>Import it as a brand-new tab in this Google Sheet</h5>
-          <p>Use File → Import → Insert new sheet. Let Google Sheets name the tab whatever it likes.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> Don't rename it to <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, or any other tab the tools already use — the tool will refuse to run.</div>
+          <p>Use <span class="mono">File → Import → Insert new sheet</span>. Google Sheets will auto-name the new tab (usually after the CSV file, e.g. "orders-export"). You're free to leave that auto-generated name as-is, or rename it to anything else you like.</p>
+          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> The one thing to avoid: don't name (or rename) this tab <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, <span class="mono">NEW PREORDER</span>, or any other tab name PI Tools already uses. The tool checks which tab is active before it runs, and it will refuse to run if you're sitting on one of those reserved tabs.</div>
         </div></div>
         <div class="step"><div class="step-num">3</div><div>
           <h5>Click into that new tab so it's the active sheet on screen</h5>
@@ -608,8 +641,13 @@ a{color:inherit;}
         <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Exporting orders &amp; adding to the order sheet</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
-            <iframe src="https://drive.google.com/file/d/1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd/preview" allow="autoplay" allowfullscreen title="Video: Exporting orders and adding to order sheet"></iframe>
+            <iframe src="https://drive.google.com/file/d/1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd/preview" allow="autoplay" allowfullscreen title="Video: Exporting orders and adding to order sheet" loading="lazy"></iframe>
           </div>
+          <div class="video-actions">
+            <a class="watch-link" href="https://drive.google.com/file/d/1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+          </div>
+          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
           <div class="video-cap">01 / 05 · ADD NEW ORDERS</div>
         </div>
       </div>
@@ -722,8 +760,13 @@ a{color:inherit;}
         <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Procurement of all orders</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
-            <iframe src="https://drive.google.com/file/d/1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV/preview" allow="autoplay" allowfullscreen title="Video: Procurement of all orders"></iframe>
+            <iframe src="https://drive.google.com/file/d/1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV/preview" allow="autoplay" allowfullscreen title="Video: Procurement of all orders" loading="lazy"></iframe>
           </div>
+          <div class="video-actions">
+            <a class="watch-link" href="https://drive.google.com/file/d/1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+          </div>
+          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
           <div class="video-cap">02 / 05 · PROCUREMENT · ALL (OPTIONAL)</div>
         </div>
       </div>
@@ -885,8 +928,13 @@ a{color:inherit;}
         <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Selected procurement, start to finish</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
-            <iframe src="https://drive.google.com/file/d/1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym/preview" allow="autoplay" allowfullscreen title="Video: Selected procurement"></iframe>
+            <iframe src="https://drive.google.com/file/d/1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym/preview" allow="autoplay" allowfullscreen title="Video: Selected procurement" loading="lazy"></iframe>
           </div>
+          <div class="video-actions">
+            <a class="watch-link" href="https://drive.google.com/file/d/1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+          </div>
+          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
           <div class="video-cap">03 / 05 · PROCUREMENT · SELECTED (MAIN TOOL)</div>
         </div>
       </div>
@@ -991,8 +1039,13 @@ a{color:inherit;}
         <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Enquiry / Check Availability</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
-            <iframe src="https://drive.google.com/file/d/1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-/preview" allow="autoplay" allowfullscreen title="Video: Enquiry check availability"></iframe>
+            <iframe src="https://drive.google.com/file/d/1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-/preview" allow="autoplay" allowfullscreen title="Video: Enquiry check availability" loading="lazy"></iframe>
           </div>
+          <div class="video-actions">
+            <a class="watch-link" href="https://drive.google.com/file/d/1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+          </div>
+          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
           <div class="video-cap">04 / 05 · ENQUIRY</div>
         </div>
       </div>
@@ -1133,8 +1186,13 @@ a{color:inherit;}
         <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Process AWB &amp; sending shipment mail</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
-            <iframe src="https://drive.google.com/file/d/1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L/preview" allow="autoplay" allowfullscreen title="Video: Process AWB and mail automation"></iframe>
+            <iframe src="https://drive.google.com/file/d/1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L/preview" allow="autoplay" allowfullscreen title="Video: Process AWB and mail automation" loading="lazy"></iframe>
           </div>
+          <div class="video-actions">
+            <a class="watch-link" href="https://drive.google.com/file/d/1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+          </div>
+          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
           <div class="video-cap">05 / 05 · PROCESS AWB &amp; MAIL</div>
         </div>
       </div>
