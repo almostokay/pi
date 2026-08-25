@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PI Tools — The Staff Playbook</title>
+<title>PI Tools — The Staff Playbook / स्टाफ गाइड</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 /* =========================================================
@@ -42,6 +42,7 @@
 
   --font-display:'Fraunces', serif;
   --font-body:'Plus Jakarta Sans', sans-serif;
+  --font-hindi:'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif;
   --font-mono:'IBM Plex Mono', monospace;
 
   --shelf-w:108px;
@@ -49,6 +50,8 @@
 
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
+html.lang-hi body{font-family:var(--font-hindi);}
+html.lang-hi h1, html.lang-hi h2, html.lang-hi h3, html.lang-hi h4{font-family:var(--font-hindi); letter-spacing:0;}
 body{
   margin:0;
   background:var(--paper);
@@ -82,6 +85,26 @@ a{color:inherit;}
   html{scroll-behavior:auto;}
 }
 
+/* ============ LANGUAGE TOGGLE (always visible, top) ============ */
+.lang-toggle{
+  position:fixed; top:14px; right:16px; z-index:200;
+  display:flex; align-items:center; gap:2px; background:#fff;
+  border:1.5px solid var(--ink); border-radius:999px; padding:4px;
+  box-shadow:0 8px 22px rgba(43,33,64,.18);
+}
+.lang-toggle button{
+  border:none; cursor:pointer; background:transparent; color:var(--ink-soft);
+  font-family:var(--font-body); font-weight:700; font-size:.8rem;
+  padding:8px 14px; border-radius:999px; transition:background .2s ease, color .2s ease;
+  display:flex; align-items:center; gap:6px;
+}
+.lang-toggle button.active{background:var(--peri); color:#fff;}
+.lang-toggle button[data-lang="hi"]{font-family:var(--font-hindi);}
+@media (max-width:600px){
+  .lang-toggle{top:auto; bottom:14px; right:14px;}
+  .lang-toggle button{padding:9px 12px; font-size:.76rem;}
+}
+
 /* ============ THE SHELF (signature nav) ============ */
 .shelf{
   position:fixed; left:0; top:0; bottom:0; width:var(--shelf-w);
@@ -111,6 +134,7 @@ a{color:inherit;}
   display:flex; align-items:center; gap:6px; max-height:100%;
   line-height:1.3; text-align:center;
 }
+html.lang-hi .spine .spine-label{font-family:var(--font-hindi); font-size:.66rem;}
 .spine .spine-num{font-family:var(--font-mono); font-size:.6rem; opacity:.9; flex-shrink:0;}
 .spine::after{
   content:''; position:absolute; right:0; top:0; bottom:0; width:3px;
@@ -146,6 +170,7 @@ a{color:inherit;}
     font-size:.76rem; white-space:nowrap; display:flex; align-items:center; gap:6px;
     transition:transform .2s ease;
   }
+  html.lang-hi .mobile-spine{font-family:var(--font-hindi);}
   .mobile-spine.active{transform:scale(1.06); box-shadow:0 4px 14px rgba(0,0,0,.18);}
   .mobile-spine .spine-num{font-family:var(--font-mono); font-size:.58rem; opacity:.85;}
 }
@@ -176,9 +201,11 @@ a{color:inherit;}
   font-size:.76rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
   color:var(--chapter-color); margin-bottom:18px; flex-wrap:wrap;
 }
+html.lang-hi .chapter-kicker{font-family:var(--font-hindi); text-transform:none; letter-spacing:0;}
 .chapter-kicker .dot{width:8px; height:8px; border-radius:50%; background:var(--chapter-color); flex-shrink:0;}
-.chapter-title{font-size:clamp(2rem, 4.4vw, 3.4rem); line-height:1.05; margin-bottom:18px; max-width:18ch;}
+.chapter-title{font-size:clamp(2rem, 4.4vw, 3.4rem); line-height:1.15; margin-bottom:18px; max-width:18ch;}
 .chapter-title em{font-style:italic; color:var(--chapter-color);}
+html.lang-hi .chapter-title em{font-style:normal;}
 .chapter-dek{font-size:1.1rem; color:var(--ink-soft); max-width:62ch; margin-bottom:12px; font-weight:500;}
 
 .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 8px;}
@@ -186,6 +213,7 @@ a{color:inherit;}
   font-family:var(--font-mono); font-size:.72rem; font-weight:600; padding:6px 12px; border-radius:999px;
   background:var(--chapter-tint); color:var(--chapter-color); border:1px solid color-mix(in srgb, var(--chapter-color) 30%, transparent);
 }
+html.lang-hi .chip{font-family:var(--font-hindi); font-size:.76rem;}
 
 /* ============ hero ============ */
 .hero{
@@ -206,9 +234,10 @@ a{color:inherit;}
   color:var(--peri); margin-bottom:20px; display:flex; align-items:center; gap:10px;
 }
 .hero-eyebrow::before{content:''; width:26px; height:2px; background:var(--peri); flex-shrink:0;}
-.hero-title{font-size:clamp(2.6rem, 6.4vw, 5rem); line-height:1.02; margin-bottom:26px;}
+.hero-title{font-size:clamp(2.6rem, 6.4vw, 5rem); line-height:1.1; margin-bottom:26px;}
 .hero-title .l1{display:block;}
 .hero-title .accent{font-style:italic; color:var(--peri);}
+html.lang-hi .hero-title .accent{font-style:normal;}
 .hero-sub{font-size:1.22rem; color:var(--ink-soft); max-width:56ch; margin-bottom:34px; font-weight:500;}
 .hero-cta-row{display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-bottom:56px;}
 .btn-primary{
@@ -216,6 +245,7 @@ a{color:inherit;}
   border:none; padding:15px 26px; border-radius:14px; cursor:pointer; display:inline-flex; align-items:center; gap:10px;
   box-shadow:0 10px 26px rgba(124,103,224,.34); transition:transform .2s ease, box-shadow .2s ease;
 }
+html.lang-hi .btn-primary{font-family:var(--font-hindi);}
 .btn-primary:hover{transform:translateY(-3px); box-shadow:0 14px 32px rgba(124,103,224,.42);}
 .hero-note{font-size:.86rem; color:var(--ink-faint); font-weight:500;}
 
@@ -230,6 +260,7 @@ a{color:inherit;}
   background:var(--c);
 }
 .preview-card .t{font-family:var(--font-display); font-weight:600; font-size:.94rem; margin-bottom:3px;}
+html.lang-hi .preview-card .t{font-family:var(--font-hindi);}
 .preview-card .d{font-size:.76rem; color:var(--ink-soft);}
 
 /* ============ global do/don't strip (top-level) ============ */
@@ -245,6 +276,7 @@ a{color:inherit;}
   box-shadow:0 8px 22px rgba(43,33,64,.05);
 }
 .rule-card h4{font-size:1rem; margin-bottom:10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+html.lang-hi .rule-card h4{font-family:var(--font-hindi);}
 .rule-card ul{margin:0; padding-left:20px; font-size:.92rem; color:var(--ink-soft);}
 .rule-card li{margin-bottom:6px; overflow-wrap:break-word;}
 
@@ -257,6 +289,7 @@ a{color:inherit;}
 }
 @media (max-width:600px){ .explain-card{padding:22px 20px;} }
 .explain-card h3{font-size:1.15rem; margin-bottom:12px;}
+html.lang-hi .explain-card h3{font-family:var(--font-hindi);}
 .explain-card p{color:var(--ink-soft); font-size:.97rem; margin:0 0 10px; overflow-wrap:break-word;}
 .explain-card p:last-child{margin-bottom:0;}
 
@@ -264,12 +297,17 @@ a{color:inherit;}
   background:var(--chapter-tint); border-radius:22px; padding:26px; border:1px solid color-mix(in srgb, var(--chapter-color) 22%, transparent);
 }
 .flow-card h4{font-size:.82rem; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.06em; color:var(--chapter-color); margin-bottom:14px; font-weight:600;}
+html.lang-hi .flow-card h4{font-family:var(--font-hindi); text-transform:none;}
 .flow-card + .flow-card{margin-top:20px;}
+.flow-note{font-size:.76rem; color:var(--ink-faint); margin-top:12px; font-style:italic;}
+html.lang-hi .flow-note{font-style:normal;}
 
 /* ============ steps ============ */
 .steps-heading{display:flex; align-items:baseline; gap:12px; margin-bottom:22px; flex-wrap:wrap;}
 .steps-heading h3{font-size:1.3rem;}
+html.lang-hi .steps-heading h3{font-family:var(--font-hindi);}
 .steps-heading .count{font-family:var(--font-mono); font-size:.78rem; color:var(--ink-faint);}
+html.lang-hi .steps-heading .count{font-family:var(--font-hindi);}
 .steps-list{display:flex; flex-direction:column; gap:14px; margin-bottom:48px;}
 .step{
   display:grid; grid-template-columns:52px 1fr; gap:18px; background:#fff; border:1px solid var(--line);
@@ -285,6 +323,7 @@ a{color:inherit;}
 @media (max-width:520px){ .step-num{width:32px; height:32px; font-size:.85rem; border-radius:9px;} }
 .step > div{min-width:0;}
 .step h5{font-size:1rem; margin-bottom:5px; font-family:var(--font-body); font-weight:700; overflow-wrap:break-word;}
+html.lang-hi .step h5{font-family:var(--font-hindi);}
 .step p{margin:0; color:var(--ink-soft); font-size:.94rem; overflow-wrap:break-word;}
 .step .callout{
   margin-top:10px; font-size:.84rem; padding:9px 13px; border-radius:10px;
@@ -297,6 +336,7 @@ a{color:inherit;}
 /* ============ dos / donts washi cards ============ */
 .dd-heading{margin-bottom:20px;}
 .dd-heading h3{font-size:1.3rem;}
+html.lang-hi .dd-heading h3{font-family:var(--font-hindi);}
 .dd-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-bottom:50px;}
 @media (max-width:760px){ .dd-grid{grid-template-columns:1fr;} }
 .dd-card{
@@ -313,6 +353,7 @@ a{color:inherit;}
 .dd-card.do .dd-tape{background:repeating-linear-gradient(45deg, #FFD873, #FFD873 6px, #FFE7A6 6px, #FFE7A6 12px);}
 .dd-card.dont .dd-tape{background:repeating-linear-gradient(45deg, #F6B7AC, #F6B7AC 6px, #FAD2CA 6px, #FAD2CA 12px);}
 .dd-card h4{font-size:1.02rem; margin:8px 0 14px; display:flex; align-items:center; gap:9px;}
+html.lang-hi .dd-card h4{font-family:var(--font-hindi);}
 .dd-card.do h4{color:var(--do);}
 .dd-card.dont h4{color:var(--dont);}
 .dd-card ul{margin:0; padding-left:0; list-style:none;}
@@ -333,6 +374,7 @@ a{color:inherit;}
   background:var(--chapter-tint); color:var(--chapter-color); font-family:var(--font-mono); font-size:.72rem;
   text-transform:uppercase; letter-spacing:.05em; padding:12px 16px; text-align:left; font-weight:700;
 }
+html.lang-hi .eg-table th{font-family:var(--font-hindi); text-transform:none;}
 .eg-table td{padding:12px 16px; font-size:.9rem; border-top:1px solid var(--line);}
 .eg-table td.mono{font-family:var(--font-mono); font-size:.86rem;}
 .eg-table tr.bad td.mono{color:var(--dont);}
@@ -347,6 +389,7 @@ a{color:inherit;}
 .video-block .vh{display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;}
 .video-block .vh i{color:var(--chapter-color);}
 .video-block .vh h4{font-size:1rem;}
+html.lang-hi .video-block .vh h4{font-family:var(--font-hindi);}
 .video-frame{
   background:#1B1526; border-radius:22px; padding:14px; box-shadow:0 20px 46px rgba(43,33,64,.22);
   position:relative; max-width:100%;
@@ -359,6 +402,7 @@ a{color:inherit;}
 }
 .video-aspect iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
 .video-cap{color:rgba(255,255,255,.55); font-size:.76rem; font-family:var(--font-mono); text-align:center; margin-top:12px;}
+html.lang-hi .video-cap{font-family:var(--font-hindi);}
 .video-actions{
   display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; padding-top:16px;
   border-top:1px solid rgba(255,255,255,.12);
@@ -369,6 +413,7 @@ a{color:inherit;}
   padding:11px 16px; border-radius:11px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
   transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
 }
+html.lang-hi .video-actions a{font-family:var(--font-hindi);}
 .video-actions a:hover{transform:translateY(-2px);}
 .video-actions .watch-link{background:var(--chapter-color); color:#fff;}
 .video-actions .watch-link:hover{box-shadow:0 8px 20px color-mix(in srgb, var(--chapter-color) 45%, transparent);}
@@ -377,6 +422,7 @@ a{color:inherit;}
 .video-fallback-note{
   font-size:.78rem; color:rgba(255,255,255,.5); text-align:center; margin-top:10px; font-family:var(--font-body);
 }
+html.lang-hi .video-fallback-note{font-family:var(--font-hindi);}
 
 /* ============ inline flow-diagram (svg) ============ */
 .flow-diagram{width:100%; height:auto; max-width:100%;}
@@ -398,8 +444,10 @@ a{color:inherit;}
 /* ============ footer ============ */
 .footer{padding:70px 7vw 60px; text-align:center; background:var(--ink); color:rgba(255,255,255,.7);}
 .footer h3{color:#fff; font-size:1.4rem; margin-bottom:12px;}
+html.lang-hi .footer h3{font-family:var(--font-hindi);}
 .footer p{max-width:56ch; margin:0 auto 6px; font-size:.92rem;}
 .footer .fnote{margin-top:26px; font-size:.78rem; color:rgba(255,255,255,.4); font-family:var(--font-mono);}
+html.lang-hi .footer .fnote{font-family:var(--font-hindi);}
 
 /* ============ misc utility ============ */
 .sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);}
@@ -407,6 +455,12 @@ a{color:inherit;}
 </style>
 </head>
 <body>
+
+<!-- ============ LANGUAGE TOGGLE — fixed, always visible ============ -->
+<div class="lang-toggle" role="group" aria-label="Language / भाषा">
+  <button type="button" data-lang="en" class="active" onclick="setLang('en')">EN</button>
+  <button type="button" data-lang="hi" onclick="setLang('hi')">हिं</button>
+</div>
 
 <div class="floaters" aria-hidden="true">
   <span style="top:8%; left:20%; animation-delay:0s;"><i class="fa-solid fa-book"></i></span>
@@ -422,39 +476,39 @@ a{color:inherit;}
   <div class="shelf-books">
     <button class="spine" data-target="ch1" style="--spine-color:var(--mint);">
       <span class="tab-flag">Add New Orders</span>
-      <span class="spine-label"><span class="spine-num">01</span>Add Orders</span>
+      <span class="spine-label"><span class="spine-num">01</span><span data-hi="नए ऑर्डर">Add Orders</span></span>
     </button>
     <button class="spine" data-target="ch2" style="--spine-color:var(--cancel);">
       <span class="tab-flag">Check Cancel Orders</span>
-      <span class="spine-label"><span class="spine-num">02</span>Cancel Orders</span>
+      <span class="spine-label"><span class="spine-num">02</span><span data-hi="कैंसल ऑर्डर">Cancel Orders</span></span>
     </button>
     <button class="spine" data-target="ch3" style="--spine-color:var(--amber);">
       <span class="tab-flag">Procurement — All</span>
-      <span class="spine-label"><span class="spine-num">03</span>Procure · All</span>
+      <span class="spine-label"><span class="spine-num">03</span><span data-hi="प्रोक्योर · सभी">Procure · All</span></span>
     </button>
     <button class="spine" data-target="ch4" style="--spine-color:var(--peri);">
       <span class="tab-flag">Procurement — Selected</span>
-      <span class="spine-label"><span class="spine-num">04</span>Procure · Pick</span>
+      <span class="spine-label"><span class="spine-num">04</span><span data-hi="प्रोक्योर · चुने हुए">Procure · Pick</span></span>
     </button>
     <button class="spine" data-target="ch5" style="--spine-color:var(--sky);">
       <span class="tab-flag">Enquiry</span>
-      <span class="spine-label"><span class="spine-num">05</span>Enquiry</span>
+      <span class="spine-label"><span class="spine-num">05</span><span data-hi="एन्क्वायरी">Enquiry</span></span>
     </button>
     <button class="spine" data-target="ch6" style="--spine-color:var(--coral);">
       <span class="tab-flag">Process AWB &amp; Mail</span>
-      <span class="spine-label"><span class="spine-num">06</span>Process AWB</span>
+      <span class="spine-label"><span class="spine-num">06</span><span data-hi="AWB प्रोसेस">Process AWB</span></span>
     </button>
   </div>
 </nav>
 
 <!-- ============ mobile shelf ============ -->
 <nav class="mobile-shelf" aria-label="Chapter navigation (mobile)">
-  <button class="mobile-spine" data-target="ch1" style="--spine-color:var(--mint);"><span class="spine-num">01</span>Add Orders</button>
-  <button class="mobile-spine" data-target="ch2" style="--spine-color:var(--cancel);"><span class="spine-num">02</span>Cancel Orders</button>
-  <button class="mobile-spine" data-target="ch3" style="--spine-color:var(--amber);"><span class="spine-num">03</span>Procure · All</button>
-  <button class="mobile-spine" data-target="ch4" style="--spine-color:var(--peri);"><span class="spine-num">04</span>Procure · Selected</button>
-  <button class="mobile-spine" data-target="ch5" style="--spine-color:var(--sky);"><span class="spine-num">05</span>Enquiry</button>
-  <button class="mobile-spine" data-target="ch6" style="--spine-color:var(--coral);"><span class="spine-num">06</span>Process AWB</button>
+  <button class="mobile-spine" data-target="ch1" style="--spine-color:var(--mint);"><span class="spine-num">01</span><span data-hi="नए ऑर्डर">Add Orders</span></button>
+  <button class="mobile-spine" data-target="ch2" style="--spine-color:var(--cancel);"><span class="spine-num">02</span><span data-hi="कैंसल ऑर्डर">Cancel Orders</span></button>
+  <button class="mobile-spine" data-target="ch3" style="--spine-color:var(--amber);"><span class="spine-num">03</span><span data-hi="प्रोक्योर · सभी">Procure · All</span></button>
+  <button class="mobile-spine" data-target="ch4" style="--spine-color:var(--peri);"><span class="spine-num">04</span><span data-hi="प्रोक्योर · चुने हुए">Procure · Selected</span></button>
+  <button class="mobile-spine" data-target="ch5" style="--spine-color:var(--sky);"><span class="spine-num">05</span><span data-hi="एन्क्वायरी">Enquiry</span></button>
+  <button class="mobile-spine" data-target="ch6" style="--spine-color:var(--coral);"><span class="spine-num">06</span><span data-hi="AWB प्रोसेस">Process AWB</span></button>
 </nav>
 
 <div class="page">
@@ -464,40 +518,40 @@ a{color:inherit;}
     <div class="hero-inner">
       <div class="hero-eyebrow">Padhega India · PI Tools</div>
       <h1 class="hero-title">
-        <span class="l1">Six operations.</span>
-        <span class="l1">One shared brain.</span>
-        <span class="l1">This is how each <span class="accent">thinks.</span></span>
+        <span class="l1" data-hi="छह ऑपरेशन।">Six operations.</span>
+        <span class="l1" data-hi="एक जैसा तरीका।">One shared brain.</span>
+        <span class="l1" data-hi='हर एक कैसे <span class="accent">काम करता है</span>, यहां जानें।'>This is how each <span class="accent">thinks.</span></span>
       </h1>
-      <p class="hero-sub">A calm, click-by-click playbook for the PI Tools menu — what each operation actually does under the hood, why it matters, and exactly what to watch for. No spreadsheet jargon required.</p>
+      <p class="hero-sub" data-hi="PI Tools मेनू के हर ऑप्शन के लिए एक शांत, कदम-दर-कदम गाइड — असल में वो क्या करता है, क्यों ज़रूरी है, और किन बातों का ध्यान रखना है। किसी टेक्निकल नॉलेज की ज़रूरत नहीं।">A calm, click-by-click playbook for the PI Tools menu — what each operation actually does under the hood, why it matters, and exactly what to watch for. No spreadsheet jargon required.</p>
       <div class="hero-cta-row">
-        <button class="btn-primary" data-target="ch1"><i class="fa-solid fa-arrow-down"></i> Start with Chapter 01</button>
-        <span class="hero-note">Takes about 15 minutes to read, saves you hours of re-work.</span>
+        <button class="btn-primary" data-target="ch1"><i class="fa-solid fa-arrow-down"></i> <span data-hi="अध्याय 01 से शुरू करें">Start with Chapter 01</span></button>
+        <span class="hero-note" data-hi="पढ़ने में करीब 15 मिनट लगेंगे, लेकिन इससे घंटों की मेहनत बचेगी।">Takes about 15 minutes to read, saves you hours of re-work.</span>
       </div>
       <div class="hero-shelf-preview">
         <div class="preview-card" data-target="ch1" style="--c:var(--mint);">
           <div class="icon"><i class="fa-solid fa-file-import"></i></div>
-          <div class="t">Add New Orders</div>
-          <div class="d">CSV → NEW / NEW PREORDER</div>
+          <div class="t" data-hi="नए ऑर्डर जोड़ें">Add New Orders</div>
+          <div class="d" data-hi="CSV → NEW / NEW PREORDER">CSV → NEW / NEW PREORDER</div>
         </div>
         <div class="preview-card" data-target="ch2" style="--c:var(--cancel);">
           <div class="icon"><i class="fa-solid fa-ban"></i></div>
-          <div class="t">Check Cancel Orders</div>
-          <div class="d">Mark cancellations on demand</div>
+          <div class="t" data-hi="कैंसल ऑर्डर चेक करें">Check Cancel Orders</div>
+          <div class="d" data-hi="जब चाहें कैंसिलेशन मार्क करें">Mark cancellations on demand</div>
         </div>
         <div class="preview-card" data-target="ch4" style="--c:var(--peri);">
           <div class="icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-          <div class="t">Selected Procurement</div>
-          <div class="d">Your everyday tool</div>
+          <div class="t" data-hi="चुने हुए ऑर्डर प्रोक्योरमेंट">Selected Procurement</div>
+          <div class="d" data-hi="आपका रोज़ का टूल">Your everyday tool</div>
         </div>
         <div class="preview-card" data-target="ch5" style="--c:var(--sky);">
           <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-          <div class="t">Enquiry</div>
-          <div class="d">ISBN → availability</div>
+          <div class="t" data-hi="एन्क्वायरी">Enquiry</div>
+          <div class="d" data-hi="ISBN → उपलब्धता">ISBN → availability</div>
         </div>
         <div class="preview-card" data-target="ch6" style="--c:var(--coral);">
           <div class="icon"><i class="fa-regular fa-paper-plane"></i></div>
-          <div class="t">Process AWB</div>
-          <div class="d">Triggers shipping mail</div>
+          <div class="t" data-hi="AWB प्रोसेस">Process AWB</div>
+          <div class="d" data-hi="शिपिंग मेल भेजता है">Triggers shipping mail</div>
         </div>
       </div>
     </div>
@@ -506,35 +560,35 @@ a{color:inherit;}
   <!-- ============ GLOBAL RULES BAND ============ -->
   <section class="rules-band reveal">
     <div class="rules-inner">
-      <div class="chapter-kicker" style="--chapter-color:var(--ink);"><span class="dot" style="background:var(--ink);"></span>Before you touch anything</div>
-      <h2 style="font-size:1.7rem; max-width:30ch;">Four house rules that apply to every single operation</h2>
+      <div class="chapter-kicker" style="--chapter-color:var(--ink);"><span class="dot" style="background:var(--ink);"></span><span data-hi="कुछ भी करने से पहले">Before you touch anything</span></div>
+      <h2 style="font-size:1.7rem; max-width:30ch;" data-hi="हर ऑपरेशन पर लागू होने वाले चार जरूरी नियम">Four house rules that apply to every single operation</h2>
       <div class="rules-grid">
         <div class="rule-card">
-          <h4><i class="fa-solid fa-hourglass-half" style="color:var(--amber);"></i> Let it finish</h4>
+          <h4><i class="fa-solid fa-hourglass-half" style="color:var(--amber);"></i> <span data-hi="काम पूरा होने दें">Let it finish</span></h4>
           <ul>
-            <li>Procurement and Enquiry both read the <em>entire</em> stock sheet — that's 3–4 minutes, every time.</li>
-            <li>Don't close the tab, click other menus, or start typing while it says <span class="mono">Working…</span>.</li>
+            <li data-hi="प्रोक्योरमेंट और एन्क्वायरी दोनों पूरा स्टॉक शीट पढ़ते हैं — हर बार 3–4 मिनट लगते हैं।">Procurement and Enquiry both read the <em>entire</em> stock sheet — that's 3–4 minutes, every time.</li>
+            <li data-hi='जब तक <span class="mono">Working…</span> लिखा दिखे, तब तक टैब बंद न करें, दूसरे मेनू पर क्लिक न करें, और कुछ टाइप न करें।'>Don't close the tab, click other menus, or start typing while it says <span class="mono">Working…</span>.</li>
           </ul>
         </div>
         <div class="rule-card">
-          <h4><i class="fa-solid fa-layer-group" style="color:var(--peri);"></i> Work top to bottom</h4>
+          <h4><i class="fa-solid fa-layer-group" style="color:var(--peri);"></i> <span data-hi="ऊपर से नीचे की तरफ काम करें">Work top to bottom</span></h4>
           <ul>
-            <li>The six chapters here are numbered in the order you'd normally use them in a day.</li>
-            <li>Add New Orders first, Process AWB last — each one assumes the previous step is already done.</li>
+            <li data-hi="यहां छह अध्याय उसी क्रम में हैं जिस क्रम में आप इन्हें रोज़ाना इस्तेमाल करते हैं।">The six chapters here are numbered in the order you'd normally use them in a day.</li>
+            <li data-hi="पहले Add New Orders, आखिर में Process AWB — हर स्टेप यह मान कर चलता है कि पिछला स्टेप हो चुका है।">Add New Orders first, Process AWB last — each one assumes the previous step is already done.</li>
           </ul>
         </div>
         <div class="rule-card">
-          <h4><i class="fa-solid fa-a" style="color:var(--mint);"></i> Exact text matters</h4>
+          <h4><i class="fa-solid fa-a" style="color:var(--mint);"></i> <span data-hi="सही शब्द ही चलेंगे">Exact text matters</span></h4>
           <ul>
-            <li>The tools look for exact words — <span class="mono">p</span>, <span class="mono">completed</span> — not anything that "means the same thing."</li>
-            <li>Close-but-not-exact entries are silently ignored, not flagged as an error. Cancelled / Cancel Request text is the one exception — that check is deliberately spelling-tolerant.</li>
+            <li data-hi='टूल्स सिर्फ ठीक वही शब्द ढूंढते हैं — जैसे <span class="mono">p</span>, <span class="mono">completed</span> — "मिलता-जुलता" मतलब वाला कोई और शब्द नहीं चलेगा।'>The tools look for exact words — <span class="mono">p</span>, <span class="mono">completed</span> — not anything that "means the same thing."</li>
+            <li data-hi="लगभग-सही, लेकिन एकदम सही न लिखी एंट्री बिना किसी एरर के चुपचाप छोड़ दी जाती है। Cancelled / Cancel Request की स्पेलिंग में यह एक अपवाद है — वहां थोड़ी गलत स्पेलिंग भी चल जाती है।">Close-but-not-exact entries are silently ignored, not flagged as an error. Cancelled / Cancel Request text is the one exception — that check is deliberately spelling-tolerant.</li>
           </ul>
         </div>
         <div class="rule-card">
-          <h4><i class="fa-solid fa-people-group" style="color:var(--coral);"></i> One person, one operation</h4>
+          <h4><i class="fa-solid fa-people-group" style="color:var(--coral);"></i> <span data-hi="एक समय में एक ही व्यक्ति">One person, one operation</span></h4>
           <ul>
-            <li>Avoid two people running PI Tools operations on the same sheet at the same time.</li>
-            <li>If something looks stuck or wrong, stop and ask — don't run it again "to see if that fixes it."</li>
+            <li data-hi="एक ही शीट पर दो लोग एक साथ PI Tools का इस्तेमाल न करें।">Avoid two people running PI Tools operations on the same sheet at the same time.</li>
+            <li data-hi="अगर कुछ अटका हुआ लगे या गलत लगे, तो रुक जाएं और किसी से पूछें — "देखते हैं ठीक होता है क्या" सोचकर दोबारा न चलाएं।">If something looks stuck or wrong, stop and ask — don't run it again "to see if that fixes it."</li>
           </ul>
         </div>
       </div>
@@ -546,26 +600,26 @@ a{color:inherit;}
   ============================================================= -->
   <section class="chapter" id="ch1" style="--chapter-color:var(--mint); --chapter-tint:var(--mint-tint);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 01 · Menu item: "Add New Orders"</div>
-      <h2 class="chapter-title reveal">Getting fresh orders <em>onto the shelf</em></h2>
-      <p class="chapter-dek reveal reveal-delay-1">Every order starts life in a raw CSV export from the website. This step reads it, quietly throws out anything you already have, and sorts the rest into "ready to ship" and "pre-order" piles — without you having to eyeball a single row. It now also catches cancellations automatically, every single time you import.</p>
+      <div class="chapter-kicker reveal"><span class="dot"></span><span data-hi='अध्याय 01 · मेन्यू ऑप्शन: "Add New Orders"'>Chapter 01 · Menu item: "Add New Orders"</span></div>
+      <h2 class="chapter-title reveal" data-hi='नए ऑर्डर को <em>सिस्टम में लाना</em>'>Getting fresh orders <em>onto the shelf</em></h2>
+      <p class="chapter-dek reveal reveal-delay-1" data-hi='हर ऑर्डर की शुरुआत वेबसाइट से आने वाली एक कच्ची CSV एक्सपोर्ट फाइल से होती है। यह स्टेप उसे पढ़ता है, जो ऑर्डर पहले से हैं उन्हें चुपचाप हटा देता है, और बाकी को "भेजने के लिए तैयार" और "प्री-ऑर्डर" — दो ढेरों में बांट देता है, बिना आपको एक भी लाइन खुद देखे। अब यह हर बार इम्पोर्ट करते समय कैंसिलेशन भी अपने-आप पकड़ लेता है।'>Every order starts life in a raw CSV export from the website. This step reads it, quietly throws out anything you already have, and sorts the rest into "ready to ship" and "pre-order" piles — without you having to eyeball a single row. It now also catches cancellations automatically, every single time you import.</p>
       <div class="chip-row reveal reveal-delay-1">
-        <span class="chip"><i class="fa-solid fa-file-csv"></i> Reads: your freshly-imported CSV tab</span>
-        <span class="chip"><i class="fa-solid fa-shield-halved"></i> Checks against: main + preorder</span>
-        <span class="chip"><i class="fa-solid fa-table"></i> Writes to: NEW + NEW PREORDER</span>
-        <span class="chip" style="background:var(--cancel-tint); color:var(--cancel); border-color:color-mix(in srgb, var(--cancel) 30%, transparent);"><i class="fa-solid fa-ban"></i> Also catches: Cancelled / Cancel Request lines</span>
+        <span class="chip" data-hi="पढ़ता है: आपकी नई इम्पोर्ट की गई CSV टैब"><i class="fa-solid fa-file-csv"></i> Reads: your freshly-imported CSV tab</span>
+        <span class="chip" data-hi='जांच करता है: main + preorder से'><i class="fa-solid fa-shield-halved"></i> Checks against: main + preorder</span>
+        <span class="chip" data-hi='लिखता है: NEW + NEW PREORDER में'><i class="fa-solid fa-table"></i> Writes to: NEW + NEW PREORDER</span>
+        <span class="chip" style="background:var(--cancel-tint); color:var(--cancel); border-color:color-mix(in srgb, var(--cancel) 30%, transparent);" data-hi="यह भी पकड़ता है: Cancelled / Cancel Request लाइनें"><i class="fa-solid fa-ban"></i> Also catches: Cancelled / Cancel Request lines</span>
       </div>
 
       <div class="explain-grid reveal reveal-delay-2">
         <div class="explain-card">
-          <h3><i class="fa-solid fa-lightbulb" style="color:var(--mint);"></i> What's actually happening</h3>
-          <p>The tool looks at the top few rows of your imported sheet to find the header automatically — you never need to trim or align anything by hand.</p>
-          <p>Then it checks every single order line against what's already sitting in <span class="mono">main</span> and <span class="mono">preorder</span>. Anything with the same Order Number + Item ID is treated as a duplicate and quietly skipped.</p>
-          <p>What's left gets sorted: if "Order Status" contains the word <span class="mono">pre</span> anywhere in it, the line goes to <span class="mono">NEW PREORDER</span>. Everything else goes to <span class="mono">NEW</span>.</p>
-          <p><strong>Important:</strong> this only fills <span class="mono">NEW</span> and <span class="mono">NEW PREORDER</span> — it does not touch <span class="mono">main</span> directly. Moving those rows into <span class="mono">main</span>/<span class="mono">preorder</span> is your last manual step, shown below.</p>
+          <h3><i class="fa-solid fa-lightbulb" style="color:var(--mint);"></i> <span data-hi="असल में हो क्या रहा है">What's actually happening</span></h3>
+          <p data-hi="यह टूल आपकी इम्पोर्ट की गई शीट की ऊपर की कुछ लाइनें देखकर हेडर खुद ढूंढ लेता है — आपको कुछ भी हाथ से काटने या सेट करने की ज़रूरत नहीं।">The tool looks at the top few rows of your imported sheet to find the header automatically — you never need to trim or align anything by hand.</p>
+          <p data-hi='फिर यह हर ऑर्डर लाइन को <span class="mono">main</span> और <span class="mono">preorder</span> में पहले से मौजूद डेटा से मिलाकर जांचता है। अगर Order Number + Item ID दोनों पहले से मौजूद हैं, तो उसे डुप्लीकेट मानकर चुपचाप छोड़ दिया जाता है।'>Then it checks every single order line against what's already sitting in <span class="mono">main</span> and <span class="mono">preorder</span>. Anything with the same Order Number + Item ID is treated as a duplicate and quietly skipped.</p>
+          <p data-hi='जो बचता है उसे बांटा जाता है: अगर "Order Status" में कहीं भी <span class="mono">pre</span> शब्द आता है, तो वह लाइन <span class="mono">NEW PREORDER</span> में जाती है। बाकी सब <span class="mono">NEW</span> में जाता है।'>What's left gets sorted: if "Order Status" contains the word <span class="mono">pre</span> anywhere in it, the line goes to <span class="mono">NEW PREORDER</span>. Everything else goes to <span class="mono">NEW</span>.</p>
+          <p data-hi='<strong>ध्यान दें:</strong> यह सिर्फ <span class="mono">NEW</span> और <span class="mono">NEW PREORDER</span> में डेटा भरता है — यह <span class="mono">main</span> को सीधे नहीं छूता। उन रो को <span class="mono">main</span>/<span class="mono">preorder</span> में डालना आपका आखिरी हाथ से करने वाला काम है, जो नीचे बताया गया है।'><strong>Important:</strong> this only fills <span class="mono">NEW</span> and <span class="mono">NEW PREORDER</span> — it does not touch <span class="mono">main</span> directly. Moving those rows into <span class="mono">main</span>/<span class="mono">preorder</span> is your last manual step, shown below.</p>
         </div>
         <div class="flow-card">
-          <h4>How the data moves</h4>
+          <h4 data-hi="डेटा कैसे आगे बढ़ता है">How the data moves</h4>
           <svg class="flow-diagram" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: CSV import splits into NEW and NEW PREORDER, then staff copy into main and preorder">
             <rect class="flow-box" x="90" y="10" width="140" height="46" rx="10"/>
             <text class="flow-label" x="160" y="30" text-anchor="middle">Imported CSV tab</text>
@@ -593,21 +647,22 @@ a{color:inherit;}
             <text class="flow-label" x="160" y="278" text-anchor="middle">main + preorder</text>
             <text class="flow-sub" x="160" y="292" text-anchor="middle">← you copy these over (manual)</text>
           </svg>
+          <p class="flow-note" data-hi="नोट: डायग्राम की भाषा अंग्रेज़ी में रखी गई है क्योंकि टैब के नाम (main, NEW आदि) शीट में वैसे ही हैं।">Note: diagram labels stay in English since they match the exact tab names in the sheet.</p>
         </div>
       </div>
 
       <div class="explain-grid reveal reveal-delay-2">
         <div class="explain-card">
-          <h3><i class="fa-solid fa-ban" style="color:var(--cancel);"></i> If your export also has Cancelled / Cancel Request lines</h3>
-          <p>You don't need a second step, and you don't need to sort anything out beforehand. Every time you run <span class="mono">Add New Orders</span>, it first quietly checks the whole import for any line whose Order Status says Cancelled or Cancel Request — including misspellings like "canceled" or "cancle."</p>
-          <p>Those lines are handled completely differently from a normal new order:</p>
-          <p><strong>1.</strong> They are never queued into <span class="mono">NEW</span> or <span class="mono">NEW PREORDER</span> — there's no point queuing a book to fulfil that's already been cancelled.</p>
-          <p><strong>2.</strong> If that same Order Number + Item ID already exists in <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, or <span class="mono">NEW PREORDER</span>, that row is coloured a medium red, and its status text is struck through with "Cancelled" or "Cancel Request" appended right after it — in both the <span class="mono">status</span> and <span class="mono">Order Status</span> columns.</p>
-          <p><strong>3.</strong> Every cancelled line — matched or not — is logged into a tab called <span class="mono">Cancelled Orders</span>, so you always have one place to look back on everything that's ever been cancelled.</p>
-          <p>One safety net: if a row is already <span class="mono">completed</span> or <span class="mono">shipped</span>, it is <strong>never</strong> auto-cancelled or coloured — a shipped book needs a human to handle the refund/return, not a silent status change. The popup will tell you if this happened so you can review it yourself.</p>
+          <h3><i class="fa-solid fa-ban" style="color:var(--cancel);"></i> <span data-hi="अगर आपकी एक्सपोर्ट फाइल में Cancelled / Cancel Request लाइनें भी हों">If your export also has Cancelled / Cancel Request lines</span></h3>
+          <p data-hi="आपको इसके लिए कोई अलग स्टेप या पहले से कुछ छांटने की ज़रूरत नहीं। जब भी आप Add New Orders चलाते हैं, यह पूरी इम्पोर्ट फाइल में सबसे पहले चुपचाप जांच लेता है कि किस लाइन का Order Status Cancelled या Cancel Request है — भले ही स्पेलिंग थोड़ी गलत हो, जैसे "canceled" या "cancle"।">You don't need a second step, and you don't need to sort anything out beforehand. Every time you run <span class="mono">Add New Orders</span>, it first quietly checks the whole import for any line whose Order Status says Cancelled or Cancel Request — including misspellings like "canceled" or "cancle."</p>
+          <p data-hi="ऐसी लाइनों को एक सामान्य नए ऑर्डर से बिल्कुल अलग तरीके से संभाला जाता है:">Those lines are handled completely differently from a normal new order:</p>
+          <p data-hi='<strong>1.</strong> इन्हें कभी भी <span class="mono">NEW</span> या <span class="mono">NEW PREORDER</span> में नहीं जोड़ा जाता — क्योंकि जो ऑर्डर पहले ही कैंसल हो चुका है, उसे पूरा करने के लिए क्यू में डालने का कोई मतलब नहीं।'><strong>1.</strong> They are never queued into <span class="mono">NEW</span> or <span class="mono">NEW PREORDER</span> — there's no point queuing a book to fulfil that's already been cancelled.</p>
+          <p data-hi='<strong>2.</strong> अगर वही Order Number + Item ID पहले से <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, या <span class="mono">NEW PREORDER</span> में मौजूद है, तो उस रो को हल्का लाल (medium red) रंग दिया जाता है, और उसके स्टेटस टेक्स्ट पर स्ट्राइकथ्रू लगाकर उसके ठीक बाद "Cancelled" या "Cancel Request" जोड़ दिया जाता है — यह <span class="mono">status</span> और <span class="mono">Order Status</span>, दोनों कॉलम में होता है।'><strong>2.</strong> If that same Order Number + Item ID already exists in <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, or <span class="mono">NEW PREORDER</span>, that row is coloured a medium red, and its status text is struck through with "Cancelled" or "Cancel Request" appended right after it — in both the <span class="mono">status</span> and <span class="mono">Order Status</span> columns.</p>
+          <p data-hi='<strong>3.</strong> हर कैंसल हुई लाइन — चाहे कहीं मैच मिले या न मिले — <span class="mono">Cancelled Orders</span> नाम की टैब में लॉग हो जाती है, ताकि आपके पास हर कैंसिलेशन देखने के लिए एक ही जगह हो।'><strong>3.</strong> Every cancelled line — matched or not — is logged into a tab called <span class="mono">Cancelled Orders</span>, so you always have one place to look back on everything that's ever been cancelled.</p>
+          <p data-hi='एक सुरक्षा नियम भी है: अगर कोई रो पहले से <span class="mono">completed</span> या <span class="mono">shipped</span> है, तो उसे कभी भी अपने-आप कैंसल या रंगीन नहीं किया जाता — जो किताब भेजी जा चुकी है उसे रिफंड/रिटर्न के लिए इंसान को ही देखना होगा, सिस्टम चुपचाप स्टेटस नहीं बदलेगा। अगर ऐसा हुआ हो तो पॉपअप आपको बता देगा, ताकि आप खुद जांच सकें।'>One safety net: if a row is already <span class="mono">completed</span> or <span class="mono">shipped</span>, it is <strong>never</strong> auto-cancelled or coloured — a shipped book needs a human to handle the refund/return, not a silent status change. The popup will tell you if this happened so you can review it yourself.</p>
         </div>
         <div class="flow-card">
-          <h4>Where a cancelled line goes instead</h4>
+          <h4 data-hi="कैंसल हुई लाइन कहां जाती है">Where a cancelled line goes instead</h4>
           <svg class="flow-diagram" viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: cancelled lines in the import are excluded from NEW and NEW PREORDER, matched and coloured red in main preorder NEW and NEW PREORDER, and logged to Cancelled Orders">
             <rect class="flow-box" x="90" y="8" width="140" height="46" rx="10"/>
             <text class="flow-label" x="160" y="28" text-anchor="middle">Imported CSV tab</text>
@@ -641,94 +696,94 @@ a{color:inherit;}
       </div>
 
       <div class="steps-heading reveal">
-        <h3>Step by step</h3>
-        <span class="count">7 steps · ~2 minutes</span>
+        <h3 data-hi="कदम-दर-कदम">Step by step</h3>
+        <span class="count" data-hi="7 स्टेप · करीब 2 मिनट">7 steps · ~2 minutes</span>
       </div>
       <div class="steps-list reveal reveal-delay-1">
         <div class="step"><div class="step-num">1</div><div>
-          <h5>Export the orders CSV from the website admin panel</h5>
-          <p>This is the raw order export you're already familiar with — no changes needed before importing it. You don't need to separate out cancellations first; the tool sorts that out for you.</p>
+          <h5 data-hi="वेबसाइट के एडमिन पैनल से ऑर्डर की CSV एक्सपोर्ट करें">Export the orders CSV from the website admin panel</h5>
+          <p data-hi="यह वही सामान्य ऑर्डर एक्सपोर्ट फाइल है जिससे आप पहले से परिचित हैं — इम्पोर्ट करने से पहले कुछ बदलने की ज़रूरत नहीं। कैंसिलेशन को अलग से छांटने की भी ज़रूरत नहीं, यह टूल खुद संभाल लेता है।">This is the raw order export you're already familiar with — no changes needed before importing it. You don't need to separate out cancellations first; the tool sorts that out for you.</p>
         </div></div>
         <div class="step"><div class="step-num">2</div><div>
-          <h5>Import it as a brand-new tab in this Google Sheet</h5>
-          <p>Use <span class="mono">File → Import → Insert new sheet</span>. Google Sheets will auto-name the new tab (usually after the CSV file, e.g. "orders-export"). You're free to leave that auto-generated name as-is, or rename it to anything else you like.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> The one thing to avoid: don't name (or rename) this tab <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, <span class="mono">NEW PREORDER</span>, <span class="mono">Cancelled Orders</span>, or any other tab name PI Tools already uses. The tool checks which tab is active before it runs, and it will refuse to run if you're sitting on one of those reserved tabs.</div>
+          <h5 data-hi="इसे इस Google Sheet में एक नई टैब की तरह इम्पोर्ट करें">Import it as a brand-new tab in this Google Sheet</h5>
+          <p data-hi='<span class="mono">File → Import → Insert new sheet</span> का इस्तेमाल करें। Google Sheets खुद नई टैब का नाम रख देगा (आमतौर पर CSV फाइल के नाम पर, जैसे "orders-export")। आप यह ऑटो-नाम वैसा ही रहने दें, या चाहें तो कोई और नाम भी रख सकते हैं।'>Use <span class="mono">File → Import → Insert new sheet</span>. Google Sheets will auto-name the new tab (usually after the CSV file, e.g. "orders-export"). You're free to leave that auto-generated name as-is, or rename it to anything else you like.</p>
+          <div class="callout warn" data-hi='<i class="fa-solid fa-triangle-exclamation"></i> एक बात का ज़रूर ध्यान रखें: इस टैब का नाम <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, <span class="mono">NEW PREORDER</span>, <span class="mono">Cancelled Orders</span>, या किसी और PI Tools टैब जैसा न रखें। टूल यह देखता है कि इस समय कौन सी टैब खुली है, और अगर आप किसी रिज़र्व्ड टैब पर हैं तो यह चलने से मना कर देगा।'><i class="fa-solid fa-triangle-exclamation"></i> The one thing to avoid: don't name (or rename) this tab <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, <span class="mono">NEW PREORDER</span>, <span class="mono">Cancelled Orders</span>, or any other tab name PI Tools already uses. The tool checks which tab is active before it runs, and it will refuse to run if you're sitting on one of those reserved tabs.</div>
         </div></div>
         <div class="step"><div class="step-num">3</div><div>
-          <h5>Click into that new tab so it's the active sheet on screen</h5>
-          <p>Whichever tab is open when you run the tool is the one it reads.</p>
+          <h5 data-hi="उस नई टैब पर क्लिक करें ताकि वह स्क्रीन पर एक्टिव टैब बन जाए">Click into that new tab so it's the active sheet on screen</h5>
+          <p data-hi="जब भी आप टूल चलाते हैं, जो टैब उस समय खुली होती है, वही पढ़ी जाती है।">Whichever tab is open when you run the tool is the one it reads.</p>
         </div></div>
         <div class="step"><div class="step-num">4</div><div>
-          <h5>Go to <span class="mono">PI Tools → Add New Orders</span></h5>
-          <p>Confirm the popup that appears. If any Cancelled / Cancel Request lines were spotted in the import, the popup will already warn you how many, before you even click through.</p>
+          <h5 data-hi='<span class="mono">PI Tools → Add New Orders</span> पर जाएं'>Go to <span class="mono">PI Tools → Add New Orders</span></h5>
+          <p data-hi="जो पॉपअप आता है उसे कन्फर्म करें। अगर इम्पोर्ट में कोई Cancelled / Cancel Request लाइन मिली हो, तो पॉपअप आपको क्लिक करने से पहले ही बता देगा कि कितनी मिलीं।">Confirm the popup that appears. If any Cancelled / Cancel Request lines were spotted in the import, the popup will already warn you how many, before you even click through.</p>
         </div></div>
         <div class="step"><div class="step-num">5</div><div>
-          <h5>Let it scan, dedupe, sort, and mark cancellations</h5>
-          <p>This part takes a few seconds. It's comparing every row against your existing main + preorder tabs, and separately checking each line's status for a cancellation.</p>
+          <h5 data-hi="इसे स्कैन, डुप्लीकेट-हटाना, सॉर्टिंग और कैंसिलेशन मार्किंग करने दें">Let it scan, dedupe, sort, and mark cancellations</h5>
+          <p data-hi="इसमें कुछ ही सेकंड लगते हैं। यह हर रो को आपके मौजूदा main + preorder टैब से मिला रहा होता है, और साथ ही हर लाइन के स्टेटस में कैंसिलेशन भी अलग से जांच रहा होता है।">This part takes a few seconds. It's comparing every row against your existing main + preorder tabs, and separately checking each line's status for a cancellation.</p>
         </div></div>
         <div class="step"><div class="step-num">6</div><div>
-          <h5>Read the summary popup</h5>
-          <p>It tells you exactly how many new regular orders, new pre-order items, and skipped duplicates it found — and, if relevant, how many Cancelled / Cancel Request lines were found, how many rows got marked in each tab, and how many new lines were logged to <span class="mono">Cancelled Orders</span>.</p>
-          <div class="callout tip"><i class="fa-solid fa-circle-check"></i> If duplicates skipped = 0 on a re-run of the same file, that's expected — it means nothing new was found. Same logic applies to cancellations already logged before: they won't be logged twice.</div>
+          <h5 data-hi="सारांश वाला पॉपअप पढ़ें">Read the summary popup</h5>
+          <p data-hi='यह आपको बताता है कि कितने नए रेगुलर ऑर्डर, कितने नए प्री-ऑर्डर आइटम, और कितने डुप्लीकेट स्किप किए गए — और अगर लागू हो, तो कितनी Cancelled / Cancel Request लाइनें मिलीं, हर टैब में कितनी रो मार्क हुईं, और <span class="mono">Cancelled Orders</span> में कितनी नई लाइनें लॉग हुईं।'>It tells you exactly how many new regular orders, new pre-order items, and skipped duplicates it found — and, if relevant, how many Cancelled / Cancel Request lines were found, how many rows got marked in each tab, and how many new lines were logged to <span class="mono">Cancelled Orders</span>.</p>
+          <div class="callout tip" data-hi="अगर उसी फाइल को दोबारा चलाने पर 'duplicates skipped = 0' दिखे, तो यह सामान्य है — इसका मतलब कुछ भी नया नहीं मिला। पहले से लॉग हो चुकी कैंसिलेशन भी दोबारा लॉग नहीं होगी।"><i class="fa-solid fa-circle-check"></i> If duplicates skipped = 0 on a re-run of the same file, that's expected — it means nothing new was found. Same logic applies to cancellations already logged before: they won't be logged twice.</div>
         </div></div>
         <div class="step"><div class="step-num">7</div><div>
-          <h5>Copy the rows from <span class="mono">NEW</span> / <span class="mono">NEW PREORDER</span> into <span class="mono">main</span> / <span class="mono">preorder</span></h5>
-          <p>This is the one manual hand-off in the whole chapter — the tool stages the rows for you, but placing them into the live sheets is still your call. Cancelled lines are never in this pile, so you won't accidentally copy a cancelled order in as new.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> Skip this and every other PI Tools operation will act like these orders don't exist yet.</div>
+          <h5 data-hi='<span class="mono">NEW</span> / <span class="mono">NEW PREORDER</span> से रो को <span class="mono">main</span> / <span class="mono">preorder</span> में कॉपी करें'>Copy the rows from <span class="mono">NEW</span> / <span class="mono">NEW PREORDER</span> into <span class="mono">main</span> / <span class="mono">preorder</span></h5>
+          <p data-hi="इस पूरे अध्याय में यही एकमात्र हाथ से करने वाला काम है — टूल आपके लिए रो तैयार करके रख देता है, लेकिन उन्हें असली शीट में डालना अभी भी आपको ही करना है। कैंसल हुई लाइनें इस ढेर में कभी नहीं आतीं, इसलिए गलती से किसी कैंसल ऑर्डर को नए की तरह कॉपी करने का डर नहीं।">This is the one manual hand-off in the whole chapter — the tool stages the rows for you, but placing them into the live sheets is still your call. Cancelled lines are never in this pile, so you won't accidentally copy a cancelled order in as new.</p>
+          <div class="callout warn" data-hi="इसे छोड़ देने पर बाकी सारे PI Tools ऑपरेशन ऐसे काम करेंगे जैसे ये ऑर्डर अभी तक मौजूद ही नहीं हैं।"><i class="fa-solid fa-triangle-exclamation"></i> Skip this and every other PI Tools operation will act like these orders don't exist yet.</div>
         </div></div>
       </div>
 
-      <div class="dd-heading reveal"><h3>Dos &amp; Don'ts</h3></div>
+      <div class="dd-heading reveal"><h3 data-hi="क्या करें और क्या न करें">Dos &amp; Don'ts</h3></div>
       <div class="dd-grid reveal reveal-delay-1">
         <div class="dd-card do">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-check"></i> Do</h4>
+          <h4><i class="fa-solid fa-circle-check"></i> <span data-hi="करें">Do</span></h4>
           <ul>
-            <li><i class="fa-solid fa-check"></i> Run this first, before any procurement or enquiry work, so main/preorder are current.</li>
-            <li><i class="fa-solid fa-check"></i> Read the popup counts before closing it — they're your receipt, cancellations included.</li>
-            <li><i class="fa-solid fa-check"></i> Move NEW / NEW PREORDER into main / preorder right away, same sitting.</li>
-            <li><i class="fa-solid fa-check"></i> Open the <span class="ex">Cancelled Orders</span> tab afterwards if the popup flagged anything "Already Completed/Shipped" — that needs your manual review.</li>
+            <li data-hi="किसी भी प्रोक्योरमेंट या एन्क्वायरी काम से पहले इसे सबसे पहले चलाएं, ताकि main/preorder अप-टू-डेट रहें।"><i class="fa-solid fa-check"></i> Run this first, before any procurement or enquiry work, so main/preorder are current.</li>
+            <li data-hi="पॉपअप बंद करने से पहले उसमें दिए गए नंबर ज़रूर पढ़ें — कैंसिलेशन समेत — वही आपकी रसीद है।"><i class="fa-solid fa-check"></i> Read the popup counts before closing it — they're your receipt, cancellations included.</li>
+            <li data-hi="NEW / NEW PREORDER को उसी बैठक में तुरंत main / preorder में डाल दें।"><i class="fa-solid fa-check"></i> Move NEW / NEW PREORDER into main / preorder right away, same sitting.</li>
+            <li data-hi='अगर पॉपअप में "Already Completed/Shipped" फ्लैग हुआ हो, तो बाद में <span class="ex">Cancelled Orders</span> टैब खोलकर खुद जांचें।'><i class="fa-solid fa-check"></i> Open the <span class="ex">Cancelled Orders</span> tab afterwards if the popup flagged anything "Already Completed/Shipped" — that needs your manual review.</li>
           </ul>
         </div>
         <div class="dd-card dont">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-xmark"></i> Don't</h4>
+          <h4><i class="fa-solid fa-circle-xmark"></i> <span data-hi="न करें">Don't</span></h4>
           <ul>
-            <li><i class="fa-solid fa-xmark"></i> Don't run this while sitting on <span class="ex">main</span> or another reserved tab — it must be the fresh import.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't import the same CSV twice expecting different results — duplicates are blocked automatically.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't worry when the import tab disappears afterward — that's automatic clean-up, not an error.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't manually delete or "fix" a red row you weren't expecting — it means that Order Number + Item ID really was cancelled somewhere in your import.</li>
+            <li data-hi='<span class="ex">main</span> या किसी और रिज़र्व्ड टैब पर बैठकर इसे न चलाएं — यह सिर्फ नई इम्पोर्ट की गई टैब पर ही चलना चाहिए।'><i class="fa-solid fa-xmark"></i> Don't run this while sitting on <span class="ex">main</span> or another reserved tab — it must be the fresh import.</li>
+            <li data-hi="अलग रिज़ल्ट की उम्मीद से एक ही CSV को दो बार इम्पोर्ट न करें — डुप्लीकेट अपने-आप रोक दिए जाते हैं।"><i class="fa-solid fa-xmark"></i> Don't import the same CSV twice expecting different results — duplicates are blocked automatically.</li>
+            <li data-hi="बाद में इम्पोर्ट टैब गायब होने पर घबराएं नहीं — यह ऑटोमैटिक सफाई है, कोई एरर नहीं।"><i class="fa-solid fa-xmark"></i> Don't worry when the import tab disappears afterward — that's automatic clean-up, not an error.</li>
+            <li data-hi="अचानक दिखी लाल रो को हाथ से न हटाएं या 'ठीक' करने की कोशिश न करें — इसका मतलब है कि वह Order Number + Item ID आपकी इम्पोर्ट में सच में कैंसल हुआ था।"><i class="fa-solid fa-xmark"></i> Don't manually delete or "fix" a red row you weren't expecting — it means that Order Number + Item ID really was cancelled somewhere in your import.</li>
           </ul>
         </div>
       </div>
 
       <div class="video-block reveal">
-        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Exporting orders &amp; adding to the order sheet</h4></div>
+        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4 data-hi="देखिए कैसे होता है — ऑर्डर एक्सपोर्ट करना और ऑर्डर शीट में जोड़ना">Watch it happen — Exporting orders &amp; adding to the order sheet</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
             <iframe src="https://drive.google.com/file/d/1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd/preview" allow="autoplay" allowfullscreen title="Video: Exporting orders and adding to order sheet" loading="lazy"></iframe>
           </div>
           <div class="video-actions">
-            <a class="watch-link" href="https://drive.google.com/file/d/1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
-            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+            <a class="watch-link" href="https://drive.google.com/file/d/1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> <span data-hi="Drive में ऑनलाइन देखें">Watch online in Drive</span></a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> <span data-hi="वीडियो डाउनलोड करें">Download video</span></a>
           </div>
-          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">01a — THE BASIC IMPORT</div>
+          <div class="video-fallback-note" data-hi='अगर ऊपर वीडियो नहीं चल रहा, तो "Drive में ऑनलाइन देखें" पर क्लिक करें — कुछ नेटवर्क पर एम्बेडेड वीडियो ब्लॉक हो जाता है।'>If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
+          <div class="video-cap" data-hi="01a — साधारण इम्पोर्ट">01a — THE BASIC IMPORT</div>
         </div>
       </div>
 
       <div class="video-block reveal">
-        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Add New Orders with cancellations in the same import</h4></div>
+        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4 data-hi="देखिए कैसे होता है — Add New Orders जब उसी इम्पोर्ट में कैंसिलेशन भी हों">Watch it happen — Add New Orders with cancellations in the same import</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
             <iframe src="https://drive.google.com/file/d/1QNVyAoYJAtoMahsBsT-Luy7cfy2ZmZq8/preview" allow="autoplay" allowfullscreen title="Video: Add New Orders with cancelled orders marked" loading="lazy"></iframe>
           </div>
           <div class="video-actions">
-            <a class="watch-link" href="https://drive.google.com/file/d/1QNVyAoYJAtoMahsBsT-Luy7cfy2ZmZq8/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
-            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1QNVyAoYJAtoMahsBsT-Luy7cfy2ZmZq8" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+            <a class="watch-link" href="https://drive.google.com/file/d/1QNVyAoYJAtoMahsBsT-Luy7cfy2ZmZq8/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> <span data-hi="Drive में ऑनलाइन देखें">Watch online in Drive</span></a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1QNVyAoYJAtoMahsBsT-Luy7cfy2ZmZq8" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> <span data-hi="वीडियो डाउनलोड करें">Download video</span></a>
           </div>
-          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">01b — SAME IMPORT, WITH CANCELLATIONS MARKED</div>
+          <div class="video-fallback-note" data-hi='अगर ऊपर वीडियो नहीं चल रहा, तो "Drive में ऑनलाइन देखें" पर क्लिक करें — कुछ नेटवर्क पर एम्बेडेड वीडियो ब्लॉक हो जाता है।'>If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
+          <div class="video-cap" data-hi="01b — वही इम्पोर्ट, कैंसिलेशन मार्क होने के साथ">01b — SAME IMPORT, WITH CANCELLATIONS MARKED</div>
         </div>
       </div>
     </div>
@@ -739,27 +794,27 @@ a{color:inherit;}
   ============================================================= -->
   <section class="chapter" id="ch2" style="--chapter-color:var(--cancel); --chapter-tint:var(--cancel-tint); background:linear-gradient(180deg, var(--paper) 0%, var(--cancel-tint) 120%);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 02 · Menu item: "Check Cancel Orders"</div>
-      <h2 class="chapter-title reveal">Marking cancellations <em>on their own</em></h2>
-      <p class="chapter-dek reveal reveal-delay-1">Chapter 01 already catches cancellations automatically whenever you import a new order batch. This chapter is for the other situation: the website (or a customer) has sent you a cancellation update on its own — separate from your usual new-orders cycle — and you just want existing rows in <span class="mono">main</span> / <span class="mono">preorder</span> marked, nothing else.</p>
+      <div class="chapter-kicker reveal"><span class="dot"></span><span data-hi='अध्याय 02 · मेन्यू ऑप्शन: "Check Cancel Orders"'>Chapter 02 · Menu item: "Check Cancel Orders"</span></div>
+      <h2 class="chapter-title reveal" data-hi="कैंसिलेशन को <em>अकेले भी</em> मार्क करना">Marking cancellations <em>on their own</em></h2>
+      <p class="chapter-dek reveal reveal-delay-1" data-hi='अध्याय 01 तो नए ऑर्डर इम्पोर्ट करते समय कैंसिलेशन अपने-आप पकड़ ही लेता है। यह अध्याय दूसरी स्थिति के लिए है: जब वेबसाइट (या किसी ग्राहक) की तरफ से कैंसिलेशन की जानकारी अलग से आई हो — आपके सामान्य नए-ऑर्डर वाले चक्र से अलग — और आप बस <span class="mono">main</span> / <span class="mono">preorder</span> में मौजूद रो को मार्क करना चाहते हों, बस इतना ही।'>Chapter 01 already catches cancellations automatically whenever you import a new order batch. This chapter is for the other situation: the website (or a customer) has sent you a cancellation update on its own — separate from your usual new-orders cycle — and you just want existing rows in <span class="mono">main</span> / <span class="mono">preorder</span> marked, nothing else.</p>
       <div class="chip-row reveal reveal-delay-1">
-        <span class="chip"><i class="fa-solid fa-file-import"></i> Reads: whichever tab is active</span>
-        <span class="chip"><i class="fa-solid fa-highlighter"></i> Marks: main + preorder + NEW + NEW PREORDER</span>
-        <span class="chip"><i class="fa-solid fa-table-list"></i> Logs to: Cancelled Orders</span>
-        <span class="chip"><i class="fa-solid fa-bolt"></i> Order-independent — run any time</span>
+        <span class="chip" data-hi="पढ़ता है: जो भी टैब उस समय खुली हो"><i class="fa-solid fa-file-import"></i> Reads: whichever tab is active</span>
+        <span class="chip" data-hi="मार्क करता है: main + preorder + NEW + NEW PREORDER"><i class="fa-solid fa-highlighter"></i> Marks: main + preorder + NEW + NEW PREORDER</span>
+        <span class="chip" data-hi="लॉग करता है: Cancelled Orders में"><i class="fa-solid fa-table-list"></i> Logs to: Cancelled Orders</span>
+        <span class="chip" data-hi="किसी भी क्रम में चलाएं — जब चाहें"><i class="fa-solid fa-bolt"></i> Order-independent — run any time</span>
       </div>
 
       <div class="explain-grid reveal reveal-delay-2">
         <div class="explain-card">
-          <h3><i class="fa-solid fa-lightbulb" style="color:var(--cancel);"></i> What's actually happening</h3>
-          <p>Import whatever the website gave you — a dedicated cancellations report, or even a full orders export — into a fresh tab, just like Chapter 01. This tool reads that active tab and looks specifically at the "Order Status" column for anything that says Cancelled or Cancel Request. The check is spelling-tolerant, so "canceled," "cancle," or "cancellation request" are all caught too.</p>
-          <p>For every cancelled line it finds, it looks for that same Order Number + Item ID in <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, and <span class="mono">NEW PREORDER</span> — checking all four, since a cancelled order might still be sitting in NEW/NEW PREORDER if it hasn't been copied into main yet.</p>
-          <p>Wherever it finds a match, it colours that entire row a medium red, then strikes through the old text in both the <span class="mono">status</span> and <span class="mono">Order Status</span> cells and appends "Cancelled" or "Cancel Request" right after it, in the same cell.</p>
-          <p>Every cancelled line — whether or not a match was found anywhere — gets logged to the <span class="mono">Cancelled Orders</span> tab, using the same columns as <span class="mono">main</span> plus a trailing "Cancellation Reason." Lines already logged on a previous run are never logged twice.</p>
-          <p>Just like Chapter 01, any row that's already <span class="mono">completed</span> or <span class="mono">shipped</span> is left completely untouched — no colour, no strike-through — because a shipped book needs manual handling (refund/return), not an automatic status change. The popup flags these separately so you know to look at them yourself.</p>
+          <h3><i class="fa-solid fa-lightbulb" style="color:var(--cancel);"></i> <span data-hi="असल में हो क्या रहा है">What's actually happening</span></h3>
+          <p data-hi="वेबसाइट से जो भी मिले उसे इम्पोर्ट करें — चाहे एक अलग कैंसिलेशन रिपोर्ट हो, या पूरा ऑर्डर एक्सपोर्ट — अध्याय 01 की तरह एक नई टैब में। यह टूल उस एक्टिव टैब को पढ़ता है और सिर्फ "Order Status" कॉलम में देखता है कि कहीं Cancelled या Cancel Request तो नहीं लिखा। यह जांच स्पेलिंग की गलतियों को भी माफ करती है, इसलिए "canceled," "cancle," या "cancellation request" जैसे शब्द भी पकड़ में आ जाते हैं।">Import whatever the website gave you — a dedicated cancellations report, or even a full orders export — into a fresh tab, just like Chapter 01. This tool reads that active tab and looks specifically at the "Order Status" column for anything that says Cancelled or Cancel Request. The check is spelling-tolerant, so "canceled," "cancle," or "cancellation request" are all caught too.</p>
+          <p data-hi='हर कैंसल हुई लाइन के लिए, यह उसी Order Number + Item ID को <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, और <span class="mono">NEW PREORDER</span> — चारों में ढूंढता है, क्योंकि हो सकता है कैंसल हुआ ऑर्डर अभी भी NEW/NEW PREORDER में पड़ा हो, अगर वह अभी तक main में कॉपी नहीं हुआ।'>For every cancelled line it finds, it looks for that same Order Number + Item ID in <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, and <span class="mono">NEW PREORDER</span> — checking all four, since a cancelled order might still be sitting in NEW/NEW PREORDER if it hasn't been copied into main yet.</p>
+          <p data-hi='जहां भी मैच मिलता है, पूरी रो को हल्का लाल रंग दिया जाता है, फिर <span class="mono">status</span> और <span class="mono">Order Status</span> दोनों सेल में पुराने टेक्स्ट पर स्ट्राइकथ्रू लगाकर उसके ठीक बाद "Cancelled" या "Cancel Request" जोड़ दिया जाता है, उसी सेल में।'>Wherever it finds a match, it colours that entire row a medium red, then strikes through the old text in both the <span class="mono">status</span> and <span class="mono">Order Status</span> cells and appends "Cancelled" or "Cancel Request" right after it, in the same cell.</p>
+          <p data-hi='हर कैंसल हुई लाइन — चाहे मैच मिले या न मिले — <span class="mono">Cancelled Orders</span> टैब में लॉग होती है, जिसमें <span class="mono">main</span> जैसे ही कॉलम होते हैं, साथ में एक आखिरी "Cancellation Reason" कॉलम भी। पहले से लॉग हो चुकी लाइनें दोबारा लॉग नहीं होतीं।'>Every cancelled line — whether or not a match was found anywhere — gets logged to the <span class="mono">Cancelled Orders</span> tab, using the same columns as <span class="mono">main</span> plus a trailing "Cancellation Reason." Lines already logged on a previous run are never logged twice.</p>
+          <p data-hi='अध्याय 01 की तरह ही, जो रो पहले से <span class="mono">completed</span> या <span class="mono">shipped</span> है, उसे बिल्कुल नहीं छुआ जाता — न कोई रंग, न स्ट्राइकथ्रू — क्योंकि भेजी जा चुकी किताब को इंसान को ही संभालना चाहिए (रिफंड/रिटर्न), न कि सिस्टम को अपने-आप स्टेटस बदलना चाहिए। पॉपअप इन्हें अलग से बताता है ताकि आप खुद देख सकें।'>Just like Chapter 01, any row that's already <span class="mono">completed</span> or <span class="mono">shipped</span> is left completely untouched — no colour, no strike-through — because a shipped book needs manual handling (refund/return), not an automatic status change. The popup flags these separately so you know to look at them yourself.</p>
         </div>
         <div class="flow-card">
-          <h4>How the data moves</h4>
+          <h4 data-hi="डेटा कैसे आगे बढ़ता है">How the data moves</h4>
           <svg class="flow-diagram" viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: an imported cancellations tab is scanned for cancelled or cancel request lines, matched against main preorder NEW and NEW PREORDER, coloured red with status struck through, and logged to Cancelled Orders">
             <rect class="flow-box" x="70" y="8" width="180" height="50" rx="10"/>
             <text class="flow-label" x="160" y="28" text-anchor="middle">Imported tab</text>
@@ -795,87 +850,91 @@ a{color:inherit;}
       </div>
 
       <div class="steps-heading reveal">
-        <h3>Step by step</h3>
-        <span class="count">6 steps · under a minute</span>
+        <h3 data-hi="कदम-दर-कदम">Step by step</h3>
+        <span class="count" data-hi="6 स्टेप · 1 मिनट से भी कम">6 steps · under a minute</span>
       </div>
       <div class="steps-list reveal reveal-delay-1">
         <div class="step"><div class="step-num">1</div><div>
-          <h5>Get the cancellations update from the website</h5>
-          <p>This can be a report that only lists cancelled / cancel-request orders, or a full orders export — either works, since the tool only acts on the lines that actually say Cancelled or Cancel Request.</p>
+          <h5 data-hi="वेबसाइट से कैंसिलेशन की जानकारी लें">Get the cancellations update from the website</h5>
+          <p data-hi="यह सिर्फ कैंसल्ड / कैंसल-रिक्वेस्ट ऑर्डर वाली रिपोर्ट भी हो सकती है, या पूरा ऑर्डर एक्सपोर्ट भी — दोनों में से कोई भी चलेगा, क्योंकि टूल सिर्फ उन्हीं लाइनों पर काम करता है जिनमें वाकई Cancelled या Cancel Request लिखा हो।">This can be a report that only lists cancelled / cancel-request orders, or a full orders export — either works, since the tool only acts on the lines that actually say Cancelled or Cancel Request.</p>
         </div></div>
         <div class="step"><div class="step-num">2</div><div>
-          <h5>Import it as a brand-new tab, exactly like Chapter 01</h5>
-          <p>Use <span class="mono">File → Import → Insert new sheet</span>. Any name is fine, as long as it isn't one of the reserved PI Tools tab names.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> Must contain an "Order Status" column, or the tool will stop and tell you it can't find one.</div>
+          <h5 data-hi="इसे बिल्कुल अध्याय 01 की तरह एक नई टैब में इम्पोर्ट करें">Import it as a brand-new tab, exactly like Chapter 01</h5>
+          <p data-hi='<span class="mono">File → Import → Insert new sheet</span> का इस्तेमाल करें। कोई भी नाम चलेगा, बस वह PI Tools की रिज़र्व्ड टैब में से न हो।'>Use <span class="mono">File → Import → Insert new sheet</span>. Any name is fine, as long as it isn't one of the reserved PI Tools tab names.</p>
+          <div class="callout warn" data-hi='इसमें एक "Order Status" कॉलम ज़रूर होना चाहिए, वरना टूल रुक जाएगा और बताएगा कि यह कॉलम नहीं मिला।'><i class="fa-solid fa-triangle-exclamation"></i> Must contain an "Order Status" column, or the tool will stop and tell you it can't find one.</div>
         </div></div>
         <div class="step"><div class="step-num">3</div><div>
-          <h5>Click into that new tab so it's the active sheet on screen</h5>
-          <p>Same rule as everywhere else — the active tab is what gets read.</p>
+          <h5 data-hi="उस नई टैब पर क्लिक करें ताकि वह स्क्रीन पर एक्टिव टैब बन जाए">Click into that new tab so it's the active sheet on screen</h5>
+          <p data-hi="बाकी सब जगह जैसा ही नियम — जो टैब एक्टिव होगी, वही पढ़ी जाएगी।">Same rule as everywhere else — the active tab is what gets read.</p>
         </div></div>
         <div class="step"><div class="step-num">4</div><div>
-          <h5>Go to <span class="mono">PI Tools → Check Cancel Orders</span></h5>
-          <p>If nothing cancelled is found in this import, you'll just get a short "nothing found" message and nothing else happens. If something is found, you'll see exactly how many lines, and a reminder of what's about to be marked, before you confirm.</p>
+          <h5 data-hi='<span class="mono">PI Tools → Check Cancel Orders</span> पर जाएं'>Go to <span class="mono">PI Tools → Check Cancel Orders</span></h5>
+          <p data-hi='अगर इस इम्पोर्ट में कुछ भी कैंसल नहीं मिलता, तो बस एक छोटा सा "कुछ नहीं मिला" मैसेज आएगा और आगे कुछ नहीं होगा। अगर कुछ मिलता है, तो कन्फर्म करने से पहले ही आपको बता दिया जाएगा कि कितनी लाइनें मिलीं और क्या-क्या मार्क होने वाला है।'>If nothing cancelled is found in this import, you'll just get a short "nothing found" message and nothing else happens. If something is found, you'll see exactly how many lines, and a reminder of what's about to be marked, before you confirm.</p>
         </div></div>
         <div class="step"><div class="step-num">5</div><div>
-          <h5>Confirm, and let it mark + log</h5>
-          <p>This runs in a few seconds — it's only scanning four tabs plus writing to the log, not the whole stock sheet.</p>
+          <h5 data-hi="कन्फर्म करें, और इसे मार्क + लॉग करने दें">Confirm, and let it mark + log</h5>
+          <p data-hi="यह कुछ ही सेकंड में हो जाता है — यह सिर्फ चार टैब स्कैन कर रहा है और लॉग में लिख रहा है, पूरी स्टॉक शीट नहीं पढ़ रहा।">This runs in a few seconds — it's only scanning four tabs plus writing to the log, not the whole stock sheet.</p>
         </div></div>
         <div class="step"><div class="step-num">6</div><div>
-          <h5>Read the summary popup</h5>
-          <p>It breaks down exactly how many rows were matched and marked in each of <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, and <span class="mono">NEW PREORDER</span>, how many were already Completed/Shipped and left alone, and how many new lines were logged to <span class="mono">Cancelled Orders</span>.</p>
-          <div class="callout tip"><i class="fa-solid fa-circle-check"></i> A tab showing "(tab not found)" simply means that tab doesn't exist right now — that's not an error, it's just skipped.</div>
+          <h5 data-hi="सारांश वाला पॉपअप पढ़ें">Read the summary popup</h5>
+          <p data-hi='यह बताता है कि <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, और <span class="mono">NEW PREORDER</span> — हर एक में कितनी रो मैच होकर मार्क हुईं, कितनी पहले से Completed/Shipped होने के कारण छोड़ दी गईं, और <span class="mono">Cancelled Orders</span> में कितनी नई लाइनें लॉग हुईं।'>It breaks down exactly how many rows were matched and marked in each of <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, and <span class="mono">NEW PREORDER</span>, how many were already Completed/Shipped and left alone, and how many new lines were logged to <span class="mono">Cancelled Orders</span>.</p>
+          <div class="callout tip" data-hi='"(tab not found)" दिखने का मतलब बस इतना है कि वह टैब अभी मौजूद ही नहीं है — यह कोई एरर नहीं, बस उसे छोड़ दिया जाता है।'><i class="fa-solid fa-circle-check"></i> A tab showing "(tab not found)" simply means that tab doesn't exist right now — that's not an error, it's just skipped.</div>
         </div></div>
       </div>
 
       <div class="eg-table-wrap reveal reveal-delay-1">
-        <div class="dd-heading"><h3>What happens to a matched row, by its current status</h3></div>
+        <div class="dd-heading"><h3 data-hi="मौजूदा स्टेटस के हिसाब से मैच हुई रो का क्या होता है">What happens to a matched row, by its current status</h3></div>
         <table class="eg-table">
-          <thead><tr><th>Row's current status</th><th>What Check Cancel Orders does</th><th>Verdict</th></tr></thead>
+          <thead><tr>
+            <th data-hi="रो का मौजूदा स्टेटस">Row's current status</th>
+            <th data-hi="Check Cancel Orders क्या करता है">What Check Cancel Orders does</th>
+            <th data-hi="नतीजा">Verdict</th>
+          </tr></thead>
           <tbody>
-            <tr class="good"><td class="mono">Confirmed</td><td>Coloured red, status struck through + "Cancelled" appended</td><td><span class="verdict"><i class="fa-solid fa-circle-check"></i> Auto-marked</span></td></tr>
-            <tr class="good"><td class="mono">Processing</td><td>Coloured red, status struck through + "Cancel Request" appended</td><td><span class="verdict"><i class="fa-solid fa-circle-check"></i> Auto-marked</span></td></tr>
-            <tr class="bad"><td class="mono">Completed</td><td>Left completely untouched — no colour, no strike-through</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Manual review needed</span></td></tr>
-            <tr class="bad"><td class="mono">Shipped</td><td>Left completely untouched — no colour, no strike-through</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Manual review needed</span></td></tr>
-            <tr class="good"><td class="mono">(already marked Cancelled)</td><td>Detected, but the label isn't appended a second time</td><td><span class="verdict"><i class="fa-solid fa-circle-check"></i> Safe to re-run</span></td></tr>
+            <tr class="good"><td class="mono">Confirmed</td><td data-hi='लाल रंग दिया गया, स्टेटस पर स्ट्राइकथ्रू लगाकर "Cancelled" जोड़ा गया'>Coloured red, status struck through + "Cancelled" appended</td><td><span class="verdict" data-hi="ऑटो-मार्क हुआ"><i class="fa-solid fa-circle-check"></i> Auto-marked</span></td></tr>
+            <tr class="good"><td class="mono">Processing</td><td data-hi='लाल रंग दिया गया, स्टेटस पर स्ट्राइकथ्रू लगाकर "Cancel Request" जोड़ा गया'>Coloured red, status struck through + "Cancel Request" appended</td><td><span class="verdict" data-hi="ऑटो-मार्क हुआ"><i class="fa-solid fa-circle-check"></i> Auto-marked</span></td></tr>
+            <tr class="bad"><td class="mono">Completed</td><td data-hi="बिल्कुल नहीं छुआ गया — न कोई रंग, न स्ट्राइकथ्रू">Left completely untouched — no colour, no strike-through</td><td><span class="verdict" data-hi="मैनुअल रिव्यू ज़रूरी"><i class="fa-solid fa-circle-xmark"></i> Manual review needed</span></td></tr>
+            <tr class="bad"><td class="mono">Shipped</td><td data-hi="बिल्कुल नहीं छुआ गया — न कोई रंग, न स्ट्राइकथ्रू">Left completely untouched — no colour, no strike-through</td><td><span class="verdict" data-hi="मैनुअल रिव्यू ज़रूरी"><i class="fa-solid fa-circle-xmark"></i> Manual review needed</span></td></tr>
+            <tr class="good"><td class="mono">(already marked Cancelled)</td><td data-hi="पहचान लिया गया, लेकिन लेबल दोबारा नहीं जोड़ा जाता">Detected, but the label isn't appended a second time</td><td><span class="verdict" data-hi="दोबारा चलाना सुरक्षित है"><i class="fa-solid fa-circle-check"></i> Safe to re-run</span></td></tr>
           </tbody>
         </table>
       </div>
 
-      <div class="dd-heading reveal"><h3>Dos &amp; Don'ts</h3></div>
+      <div class="dd-heading reveal"><h3 data-hi="क्या करें और क्या न करें">Dos &amp; Don'ts</h3></div>
       <div class="dd-grid reveal reveal-delay-1">
         <div class="dd-card do">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-check"></i> Do</h4>
+          <h4><i class="fa-solid fa-circle-check"></i> <span data-hi="करें">Do</span></h4>
           <ul>
-            <li><i class="fa-solid fa-check"></i> Use this any time you get a cancellation update on its own — you don't need to wait for your next new-orders import.</li>
-            <li><i class="fa-solid fa-check"></i> Read the per-tab breakdown in the popup so you know exactly what got touched.</li>
-            <li><i class="fa-solid fa-check"></i> Manually review anything flagged "Already Completed/Shipped" — that's a refund/return conversation, not a status flip.</li>
-            <li><i class="fa-solid fa-check"></i> Run this and Chapter 01 in either order — the result is identical either way.</li>
+            <li data-hi="जब भी कैंसिलेशन की जानकारी अलग से आए, इसे तुरंत इस्तेमाल करें — अगले नए-ऑर्डर इम्पोर्ट का इंतज़ार करने की ज़रूरत नहीं।"><i class="fa-solid fa-check"></i> Use this any time you get a cancellation update on its own — you don't need to wait for your next new-orders import.</li>
+            <li data-hi="पॉपअप में हर टैब की अलग-अलग जानकारी ज़रूर पढ़ें, ताकि पता रहे कि असल में क्या-क्या बदला।"><i class="fa-solid fa-check"></i> Read the per-tab breakdown in the popup so you know exactly what got touched.</li>
+            <li data-hi='जो "Already Completed/Shipped" फ्लैग हो, उसे हाथ से जांचें — वह रिफंड/रिटर्न वाली बातचीत है, सिर्फ स्टेटस बदलने वाली नहीं।'><i class="fa-solid fa-check"></i> Manually review anything flagged "Already Completed/Shipped" — that's a refund/return conversation, not a status flip.</li>
+            <li data-hi="इसे और अध्याय 01 को किसी भी क्रम में चलाएं — नतीजा दोनों बार एक जैसा ही आता है।"><i class="fa-solid fa-check"></i> Run this and Chapter 01 in either order — the result is identical either way.</li>
           </ul>
         </div>
         <div class="dd-card dont">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-xmark"></i> Don't</h4>
+          <h4><i class="fa-solid fa-circle-xmark"></i> <span data-hi="न करें">Don't</span></h4>
           <ul>
-            <li><i class="fa-solid fa-xmark"></i> Don't run this while sitting on <span class="ex">main</span> or another reserved tab — it needs the freshly imported tab active.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't expect it to touch <span class="ex">porders</span>, <span class="ex">SelAllProc</span>, or any procurement tab — it only ever marks main / preorder / NEW / NEW PREORDER.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't manually un-colour a red row — procurement already skips red/cancelled rows on purpose, so leaving it marked is what keeps that book from being re-ordered by mistake.</li>
+            <li data-hi='<span class="ex">main</span> या किसी और रिज़र्व्ड टैब पर बैठकर इसे न चलाएं — नई इम्पोर्ट की गई टैब ही एक्टिव होनी चाहिए।'><i class="fa-solid fa-xmark"></i> Don't run this while sitting on <span class="ex">main</span> or another reserved tab — it needs the freshly imported tab active.</li>
+            <li data-hi='<span class="ex">porders</span>, <span class="ex">SelAllProc</span>, या किसी भी प्रोक्योरमेंट टैब पर असर की उम्मीद न रखें — यह सिर्फ main / preorder / NEW / NEW PREORDER को ही मार्क करता है।'><i class="fa-solid fa-xmark"></i> Don't expect it to touch <span class="ex">porders</span>, <span class="ex">SelAllProc</span>, or any procurement tab — it only ever marks main / preorder / NEW / NEW PREORDER.</li>
+            <li data-hi="किसी लाल रो का रंग हाथ से न हटाएं — प्रोक्योरमेंट पहले से ही जान-बूझकर लाल/कैंसल्ड रो को छोड़ देता है, इसलिए उसे मार्क रहने देना ही उस किताब को गलती से दोबारा ऑर्डर होने से रोकता है।"><i class="fa-solid fa-xmark"></i> Don't manually un-colour a red row — procurement already skips red/cancelled rows on purpose, so leaving it marked is what keeps that book from being re-ordered by mistake.</li>
           </ul>
         </div>
       </div>
 
       <div class="video-block reveal">
-        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Check Cancel Orders, on its own</h4></div>
+        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4 data-hi="देखिए कैसे होता है — Check Cancel Orders, अकेले चलाकर">Watch it happen — Check Cancel Orders, on its own</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
             <iframe src="https://drive.google.com/file/d/1g6liOFzCOkvIx38CtXzcNW-VUfGmTfPX/preview" allow="autoplay" allowfullscreen title="Video: Check Cancel Orders" loading="lazy"></iframe>
           </div>
           <div class="video-actions">
-            <a class="watch-link" href="https://drive.google.com/file/d/1g6liOFzCOkvIx38CtXzcNW-VUfGmTfPX/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
-            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1g6liOFzCOkvIx38CtXzcNW-VUfGmTfPX" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+            <a class="watch-link" href="https://drive.google.com/file/d/1g6liOFzCOkvIx38CtXzcNW-VUfGmTfPX/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> <span data-hi="Drive में ऑनलाइन देखें">Watch online in Drive</span></a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1g6liOFzCOkvIx38CtXzcNW-VUfGmTfPX" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> <span data-hi="वीडियो डाउनलोड करें">Download video</span></a>
           </div>
-          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">02 / 06 · CHECK CANCEL ORDERS</div>
+          <div class="video-fallback-note" data-hi='अगर ऊपर वीडियो नहीं चल रहा, तो "Drive में ऑनलाइन देखें" पर क्लिक करें — कुछ नेटवर्क पर एम्बेडेड वीडियो ब्लॉक हो जाता है।'>If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
+          <div class="video-cap" data-hi="02 / 06 · CHECK CANCEL ORDERS">02 / 06 · CHECK CANCEL ORDERS</div>
         </div>
       </div>
     </div>
@@ -886,26 +945,26 @@ a{color:inherit;}
   ============================================================= -->
   <section class="chapter" id="ch3" style="--chapter-color:var(--amber); --chapter-tint:var(--amber-tint); background:linear-gradient(180deg, var(--paper) 0%, var(--amber-tint) 120%);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 03 · Menu item: "Process Procurement - All"</div>
-      <h2 class="chapter-title reveal">The <em>whole-sheet</em> sweep — use sparingly</h2>
-      <p class="chapter-dek reveal reveal-delay-1">This one procures every uncoloured row in <span class="mono">main</span> at once. Powerful, but blunt — most days you want Chapter 04 instead. Think of this as the "spring cleaning" option, not the daily one.</p>
+      <div class="chapter-kicker reveal"><span class="dot"></span><span data-hi='अध्याय 03 · मेन्यू ऑप्शन: "Process Procurement - All"'>Chapter 03 · Menu item: "Process Procurement - All"</span></div>
+      <h2 class="chapter-title reveal" data-hi="<em>पूरी शीट</em> का सफाया — कम इस्तेमाल करें">The <em>whole-sheet</em> sweep — use sparingly</h2>
+      <p class="chapter-dek reveal reveal-delay-1" data-hi='यह टूल <span class="mono">main</span> की हर बिना रंग वाली रो को एक साथ प्रोक्योर कर देता है। ताकतवर, पर मोटा-मोटा काम करता है — ज़्यादातर दिन आपको अध्याय 04 ही चाहिए होगा। इसे "बड़ी सफाई" वाला ऑप्शन समझें, रोज़ इस्तेमाल करने वाला नहीं।'>This one procures every uncoloured row in <span class="mono">main</span> at once. Powerful, but blunt — most days you want Chapter 04 instead. Think of this as the "spring cleaning" option, not the daily one.</p>
       <div class="chip-row reveal reveal-delay-1">
-        <span class="chip"><i class="fa-solid fa-triangle-exclamation"></i> Optional — not for daily use</span>
-        <span class="chip"><i class="fa-solid fa-fill-drip"></i> Rule: white AWB cell = include</span>
-        <span class="chip"><i class="fa-solid fa-ban"></i> Cancelled / Cancel Request rows are always skipped</span>
-        <span class="chip"><i class="fa-solid fa-clock"></i> Takes 3–4 minutes</span>
+        <span class="chip" data-hi="वैकल्पिक — रोज़ इस्तेमाल के लिए नहीं"><i class="fa-solid fa-triangle-exclamation"></i> Optional — not for daily use</span>
+        <span class="chip" data-hi="नियम: सफेद AWB सेल = शामिल किया जाएगा"><i class="fa-solid fa-fill-drip"></i> Rule: white AWB cell = include</span>
+        <span class="chip" data-hi="Cancelled / Cancel Request रो हमेशा छोड़ी जाती हैं"><i class="fa-solid fa-ban"></i> Cancelled / Cancel Request rows are always skipped</span>
+        <span class="chip" data-hi="3–4 मिनट लगते हैं"><i class="fa-solid fa-clock"></i> Takes 3–4 minutes</span>
       </div>
 
       <div class="explain-grid reveal reveal-delay-2">
         <div class="explain-card">
-          <h3><i class="fa-solid fa-lightbulb" style="color:var(--amber);"></i> What's actually happening</h3>
-          <p>This tool scans <span class="mono">main</span> top to bottom and looks at the background <em>colour</em> of each row's AWB cell — not the text, the colour.</p>
-          <p>If the AWB cell has no fill colour (plain white / uncoloured), that row is treated as "not yet handled" and gets pulled in for procurement. Any row you've coloured — for any reason, including a cancellation mark from Chapter 01 or 02 — is skipped. As a safety net, it also checks the "status" text itself and skips anything that reads Cancelled / Cancel Request, even if the colour is missing for some reason.</p>
-          <p>Everything pulled in is checked against every tab in the PI Stock sheet, quantities are totalled per ISBN, and two tabs are produced: one consolidated list, and one split by publisher/distributor.</p>
-          <p>Because it reads <em>every</em> row in <span class="mono">main</span>, it's slower and much less targeted than Chapter 04 — that's exactly why it's the occasional-use option.</p>
+          <h3><i class="fa-solid fa-lightbulb" style="color:var(--amber);"></i> <span data-hi="असल में हो क्या रहा है">What's actually happening</span></h3>
+          <p data-hi='यह टूल <span class="mono">main</span> को ऊपर से नीचे तक स्कैन करता है और हर रो के AWB सेल के बैकग्राउंड <em>रंग</em> को देखता है — टेक्स्ट नहीं, रंग।'>This tool scans <span class="mono">main</span> top to bottom and looks at the background <em>colour</em> of each row's AWB cell — not the text, the colour.</p>
+          <p data-hi="अगर AWB सेल में कोई रंग नहीं है (सादा सफेद / बिना रंग), तो उस रो को 'अभी तक नहीं संभाला गया' मानकर प्रोक्योरमेंट में शामिल कर लिया जाता है। जिस भी रो को आपने रंग दिया है — किसी भी कारण से, चाहे अध्याय 01 या 02 की कैंसिलेशन मार्किंग हो — उसे छोड़ दिया जाता है। सुरक्षा के तौर पर, यह 'status' टेक्स्ट भी जांचता है और Cancelled / Cancel Request लिखी किसी भी रो को छोड़ देता है, भले ही किसी वजह से रंग न लगा हो।">If the AWB cell has no fill colour (plain white / uncoloured), that row is treated as "not yet handled" and gets pulled in for procurement. Any row you've coloured — for any reason, including a cancellation mark from Chapter 01 or 02 — is skipped. As a safety net, it also checks the "status" text itself and skips anything that reads Cancelled / Cancel Request, even if the colour is missing for some reason.</p>
+          <p data-hi="जो भी शामिल होता है उसे PI Stock शीट की हर टैब से मिलाकर जांचा जाता है, हर ISBN की क्वांटिटी जोड़ी जाती है, और दो टैब बनती हैं: एक इकट्ठी लिस्ट, और एक पब्लिशर/डिस्ट्रीब्यूटर के हिसाब से बंटी हुई।">Everything pulled in is checked against every tab in the PI Stock sheet, quantities are totalled per ISBN, and two tabs are produced: one consolidated list, and one split by publisher/distributor.</p>
+          <p data-hi='चूंकि यह <span class="mono">main</span> की <em>हर</em> रो पढ़ता है, इसलिए यह अध्याय 04 से धीमा और कम टारगेटेड है — इसीलिए यह कभी-कभार इस्तेमाल होने वाला ऑप्शन है।'>Because it reads <em>every</em> row in <span class="mono">main</span>, it's slower and much less targeted than Chapter 04 — that's exactly why it's the occasional-use option.</p>
         </div>
         <div class="flow-card">
-          <h4>How the data moves</h4>
+          <h4 data-hi="डेटा कैसे आगे बढ़ता है">How the data moves</h4>
           <svg class="flow-diagram" viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: main sheet white rows checked against PI Stock, producing proc all and PI Procurement All">
             <rect class="flow-box" x="20" y="10" width="130" height="50" rx="10"/>
             <text class="flow-label" x="85" y="30" text-anchor="middle">main</text>
@@ -941,61 +1000,61 @@ a{color:inherit;}
       </div>
 
       <div class="steps-heading reveal">
-        <h3>Step by step</h3>
-        <span class="count">4 steps · 3–4 min wait</span>
+        <h3 data-hi="कदम-दर-कदम">Step by step</h3>
+        <span class="count" data-hi="4 स्टेप · 3–4 मिनट इंतज़ार">4 steps · 3–4 min wait</span>
       </div>
       <div class="steps-list reveal reveal-delay-1">
         <div class="step"><div class="step-num">1</div><div>
-          <h5>Decide which rows you actually want swept up</h5>
-          <p>Look at the AWB column in <span class="mono">main</span>. Rows you want procured this way must be left with no background colour.</p>
+          <h5 data-hi="तय करें कि कौन सी रो असल में शामिल करनी है">Decide which rows you actually want swept up</h5>
+          <p data-hi='<span class="mono">main</span> में AWB कॉलम देखें। जो रो इस तरीके से प्रोक्योर करनी हैं, उन्हें बिना किसी बैकग्राउंड रंग के छोड़ें।'>Look at the AWB column in <span class="mono">main</span>. Rows you want procured this way must be left with no background colour.</p>
         </div></div>
         <div class="step"><div class="step-num">2</div><div>
-          <h5>Colour-fill any rows you want excluded</h5>
-          <p>Any fill colour at all — it doesn't matter which one — tells the tool "already handled, skip me." Rows marked red by Chapter 01 or 02 are already excluded automatically.</p>
+          <h5 data-hi="जिन रो को बाहर रखना है, उन्हें रंग से भर दें">Colour-fill any rows you want excluded</h5>
+          <p data-hi='कोई भी रंग — फर्क नहीं पड़ता कौन सा — टूल को बताता है "यह पहले ही संभाला जा चुका है, छोड़ो।" अध्याय 01 या 02 से लाल हुई रो पहले से ही अपने-आप बाहर रहती हैं।'>Any fill colour at all — it doesn't matter which one — tells the tool "already handled, skip me." Rows marked red by Chapter 01 or 02 are already excluded automatically.</p>
         </div></div>
         <div class="step"><div class="step-num">3</div><div>
-          <h5>Go to <span class="mono">PI Tools → Process Procurement - All</span></h5>
-          <p>Then wait. It's reading the full order sheet and the full stock sheet.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> This is the slowest tool on the menu. Don't interrupt it.</div>
+          <h5 data-hi='<span class="mono">PI Tools → Process Procurement - All</span> पर जाएं'>Go to <span class="mono">PI Tools → Process Procurement - All</span></h5>
+          <p data-hi="फिर इंतज़ार करें। यह पूरी ऑर्डर शीट और पूरी स्टॉक शीट पढ़ रहा है।">Then wait. It's reading the full order sheet and the full stock sheet.</p>
+          <div class="callout warn" data-hi="यह मेनू का सबसे धीमा टूल है। इसे बीच में न रोकें।"><i class="fa-solid fa-triangle-exclamation"></i> This is the slowest tool on the menu. Don't interrupt it.</div>
         </div></div>
         <div class="step"><div class="step-num">4</div><div>
-          <h5>Review <span class="mono">proc all</span> and <span class="mono">PI Procurement All</span></h5>
-          <p>Same output shape as Chapter 04 — one flat list, one grouped-by-publisher view — just built from the whole sheet instead of a hand-picked list. The popup also tells you how many Cancelled/Cancel Request lines were skipped.</p>
+          <h5 data-hi='<span class="mono">proc all</span> और <span class="mono">PI Procurement All</span> की समीक्षा करें'>Review <span class="mono">proc all</span> and <span class="mono">PI Procurement All</span></h5>
+          <p data-hi="अध्याय 04 जैसा ही आउटपुट — एक इकट्ठी लिस्ट, एक पब्लिशर के हिसाब से बंटी हुई — बस यह पूरी शीट से बनता है, चुनी हुई लिस्ट से नहीं। पॉपअप यह भी बताता है कि कितनी Cancelled/Cancel Request लाइनें छोड़ी गईं।">Same output shape as Chapter 04 — one flat list, one grouped-by-publisher view — just built from the whole sheet instead of a hand-picked list. The popup also tells you how many Cancelled/Cancel Request lines were skipped.</p>
         </div></div>
       </div>
 
-      <div class="dd-heading reveal"><h3>Dos &amp; Don'ts</h3></div>
+      <div class="dd-heading reveal"><h3 data-hi="क्या करें और क्या न करें">Dos &amp; Don'ts</h3></div>
       <div class="dd-grid reveal reveal-delay-1">
         <div class="dd-card do">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-check"></i> Do</h4>
+          <h4><i class="fa-solid fa-circle-check"></i> <span data-hi="करें">Do</span></h4>
           <ul>
-            <li><i class="fa-solid fa-check"></i> Use this occasionally — a periodic sanity sweep, not a daily habit.</li>
-            <li><i class="fa-solid fa-check"></i> Double-check row colours first if you only want a subset procured.</li>
+            <li data-hi="इसे कभी-कभार इस्तेमाल करें — बीच-बीच में एक जांच-परख की तरह, रोज़ की आदत की तरह नहीं।"><i class="fa-solid fa-check"></i> Use this occasionally — a periodic sanity sweep, not a daily habit.</li>
+            <li data-hi="अगर सिर्फ कुछ रो प्रोक्योर करनी हैं, तो पहले रो के रंग दोबारा जांच लें।"><i class="fa-solid fa-check"></i> Double-check row colours first if you only want a subset procured.</li>
           </ul>
         </div>
         <div class="dd-card dont">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-xmark"></i> Don't</h4>
+          <h4><i class="fa-solid fa-circle-xmark"></i> <span data-hi="न करें">Don't</span></h4>
           <ul>
-            <li><i class="fa-solid fa-xmark"></i> Don't make this your everyday procurement tool — that's Chapter 04.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't run it expecting a quick result on a large sheet — budget the full 3–4 minutes.</li>
+            <li data-hi="इसे अपना रोज़ का प्रोक्योरमेंट टूल न बनाएं — वह काम अध्याय 04 का है।"><i class="fa-solid fa-xmark"></i> Don't make this your everyday procurement tool — that's Chapter 04.</li>
+            <li data-hi="बड़ी शीट पर इसे जल्दी नतीजे की उम्मीद से न चलाएं — पूरे 3–4 मिनट का समय रखें।"><i class="fa-solid fa-xmark"></i> Don't run it expecting a quick result on a large sheet — budget the full 3–4 minutes.</li>
           </ul>
         </div>
       </div>
 
       <div class="video-block reveal">
-        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Procurement of all orders</h4></div>
+        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4 data-hi="देखिए कैसे होता है — सभी ऑर्डर का प्रोक्योरमेंट">Watch it happen — Procurement of all orders</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
             <iframe src="https://drive.google.com/file/d/1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV/preview" allow="autoplay" allowfullscreen title="Video: Procurement of all orders" loading="lazy"></iframe>
           </div>
           <div class="video-actions">
-            <a class="watch-link" href="https://drive.google.com/file/d/1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
-            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+            <a class="watch-link" href="https://drive.google.com/file/d/1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> <span data-hi="Drive में ऑनलाइन देखें">Watch online in Drive</span></a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> <span data-hi="वीडियो डाउनलोड करें">Download video</span></a>
           </div>
-          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">03 / 06 · PROCUREMENT · ALL (OPTIONAL)</div>
+          <div class="video-fallback-note" data-hi='अगर ऊपर वीडियो नहीं चल रहा, तो "Drive में ऑनलाइन देखें" पर क्लिक करें — कुछ नेटवर्क पर एम्बेडेड वीडियो ब्लॉक हो जाता है।'>If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
+          <div class="video-cap" data-hi="03 / 06 · प्रोक्योरमेंट · सभी (वैकल्पिक)">03 / 06 · PROCUREMENT · ALL (OPTIONAL)</div>
         </div>
       </div>
     </div>
@@ -1006,26 +1065,26 @@ a{color:inherit;}
   ============================================================= -->
   <section class="chapter" id="ch4" style="--chapter-color:var(--peri); --chapter-tint:var(--peri-tint);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 04 · Menu items: "Selected Procurement (Fetch P orders)" + "Process Procurement - Selected"</div>
-      <h2 class="chapter-title reveal">Your <em>everyday</em> procurement engine</h2>
-      <p class="chapter-dek reveal reveal-delay-1">This is the one you'll reach for most. You choose exactly which orders to procure by marking them, and the tool does the rest — checking every publisher's stock, totalling quantities, and flagging anything available from more than one place.</p>
+      <div class="chapter-kicker reveal"><span class="dot"></span><span data-hi='अध्याय 04 · मेन्यू ऑप्शन: "Selected Procurement (Fetch P orders)" + "Process Procurement - Selected"'>Chapter 04 · Menu items: "Selected Procurement (Fetch P orders)" + "Process Procurement - Selected"</span></div>
+      <h2 class="chapter-title reveal" data-hi="आपका <em>रोज़ का</em> प्रोक्योरमेंट इंजन">Your <em>everyday</em> procurement engine</h2>
+      <p class="chapter-dek reveal reveal-delay-1" data-hi="यही वह टूल है जिसका सबसे ज़्यादा इस्तेमाल होगा। आप ऑर्डर मार्क करके तय करते हैं कि किन्हें प्रोक्योर करना है, और बाकी काम टूल करता है — हर पब्लिशर का स्टॉक जांचना, क्वांटिटी जोड़ना, और जो एक से ज़्यादा जगह मिले उसे फ्लैग करना।">This is the one you'll reach for most. You choose exactly which orders to procure by marking them, and the tool does the rest — checking every publisher's stock, totalling quantities, and flagging anything available from more than one place.</p>
       <div class="chip-row reveal reveal-delay-1">
-        <span class="chip"><i class="fa-solid fa-star"></i> Main daily tool</span>
-        <span class="chip"><i class="fa-solid fa-keyboard"></i> Trigger: AWB = p or P, exactly</span>
-        <span class="chip"><i class="fa-solid fa-clock"></i> Takes 3–4 minutes</span>
+        <span class="chip" data-hi="मुख्य रोज़ का टूल"><i class="fa-solid fa-star"></i> Main daily tool</span>
+        <span class="chip" data-hi="ट्रिगर: AWB = p या P, बिल्कुल यही"><i class="fa-solid fa-keyboard"></i> Trigger: AWB = p or P, exactly</span>
+        <span class="chip" data-hi="3–4 मिनट लगते हैं"><i class="fa-solid fa-clock"></i> Takes 3–4 minutes</span>
       </div>
 
       <div class="explain-grid reveal reveal-delay-2">
         <div class="explain-card">
-          <h3><i class="fa-solid fa-lightbulb" style="color:var(--peri);"></i> What's actually happening</h3>
-          <p>This chapter is really two clicks working together. First, <span class="mono">Fetch P orders</span> scans <span class="mono">main</span> for any row where the AWB column is exactly <span class="mono">p</span> or <span class="mono">P</span> — nothing else counts — and copies just those rows into a working tab called <span class="mono">porders</span>.</p>
-          <p>Then, <span class="mono">Process Procurement - Selected</span> reads <span class="mono">porders</span>, cleans up each ISBN, and adds quantities together if the same book was ordered more than once. It then checks that ISBN against <em>every single tab</em> in the PI Stock sheet — each tab there represents one publisher or distributor's own list.</p>
-          <p>If a book is found in more than one publisher's tab, that row gets highlighted <strong style="color:var(--peri);">light purple</strong> and every source is listed together — useful when one distributor is faster or cheaper than another.</p>
-          <p>Any row whose status already says Cancelled / Cancel Request is skipped here too, so a cancelled book can never accidentally slip into a procurement list.</p>
-          <p>The result lands in two places: a consolidated master list, and a second tab with a separate little table for each publisher — ready to copy straight into a message or email to that distributor.</p>
+          <h3><i class="fa-solid fa-lightbulb" style="color:var(--peri);"></i> <span data-hi="असल में हो क्या रहा है">What's actually happening</span></h3>
+          <p data-hi='यह अध्याय असल में दो क्लिक साथ मिलकर काम करते हैं। पहला, <span class="mono">Fetch P orders</span> <span class="mono">main</span> में हर उस रो को ढूंढता है जहां AWB कॉलम बिल्कुल <span class="mono">p</span> या <span class="mono">P</span> हो — कुछ और नहीं चलेगा — और सिर्फ उन्हीं रो को <span class="mono">porders</span> नाम की वर्किंग टैब में कॉपी कर देता है।'>This chapter is really two clicks working together. First, <span class="mono">Fetch P orders</span> scans <span class="mono">main</span> for any row where the AWB column is exactly <span class="mono">p</span> or <span class="mono">P</span> — nothing else counts — and copies just those rows into a working tab called <span class="mono">porders</span>.</p>
+          <p data-hi='फिर, <span class="mono">Process Procurement - Selected</span> <span class="mono">porders</span> को पढ़ता है, हर ISBN को साफ करता है, और अगर एक ही किताब कई बार ऑर्डर हुई है तो उनकी क्वांटिटी जोड़ देता है। फिर यह उस ISBN को PI Stock शीट की <em>हर एक</em> टैब से मिलाकर जांचता है — वहां हर टैब किसी एक पब्लिशर या डिस्ट्रीब्यूटर की अपनी लिस्ट होती है।'>Then, <span class="mono">Process Procurement - Selected</span> reads <span class="mono">porders</span>, cleans up each ISBN, and adds quantities together if the same book was ordered more than once. It then checks that ISBN against <em>every single tab</em> in the PI Stock sheet — each tab there represents one publisher or distributor's own list.</p>
+          <p data-hi='अगर कोई किताब एक से ज़्यादा पब्लिशर की टैब में मिलती है, तो उस रो को <strong style="color:var(--peri);">हल्के बैंगनी (light purple)</strong> रंग में हाइलाइट किया जाता है और हर सोर्स को साथ में लिस्ट किया जाता है — जब कोई एक डिस्ट्रीब्यूटर दूसरे से तेज़ या सस्ता हो, तब यह काम आता है।'>If a book is found in more than one publisher's tab, that row gets highlighted <strong style="color:var(--peri);">light purple</strong> and every source is listed together — useful when one distributor is faster or cheaper than another.</p>
+          <p data-hi="जिस भी रो का स्टेटस पहले से Cancelled / Cancel Request है, उसे भी यहां छोड़ दिया जाता है, ताकि कोई कैंसल हुई किताब गलती से प्रोक्योरमेंट लिस्ट में न आ जाए।">Any row whose status already says Cancelled / Cancel Request is skipped here too, so a cancelled book can never accidentally slip into a procurement list.</p>
+          <p data-hi="नतीजा दो जगह मिलता है: एक इकट्ठी मास्टर लिस्ट, और दूसरी टैब जिसमें हर पब्लिशर की अपनी छोटी टेबल होती है — जिसे सीधे उस डिस्ट्रीब्यूटर को भेजने वाले मैसेज या ईमेल में कॉपी किया जा सकता है।">The result lands in two places: a consolidated master list, and a second tab with a separate little table for each publisher — ready to copy straight into a message or email to that distributor.</p>
         </div>
         <div class="flow-card">
-          <h4>How the data moves</h4>
+          <h4 data-hi="डेटा कैसे आगे बढ़ता है">How the data moves</h4>
           <svg class="flow-diagram" viewBox="0 0 320 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: main rows marked p go to porders, matched against PI Stock, producing SelAllProc and SelProcurement, then AWB is updated manually">
             <rect class="flow-box" x="95" y="8" width="130" height="48" rx="10"/>
             <text class="flow-label" x="160" y="28" text-anchor="middle">main</text>
@@ -1072,99 +1131,103 @@ a{color:inherit;}
       </div>
 
       <div class="steps-heading reveal">
-        <h3>Step by step</h3>
-        <span class="count">8 steps · 3–4 min wait</span>
+        <h3 data-hi="कदम-दर-कदम">Step by step</h3>
+        <span class="count" data-hi="8 स्टेप · 3–4 मिनट इंतज़ार">8 steps · 3–4 min wait</span>
       </div>
       <div class="steps-list reveal reveal-delay-1">
         <div class="step"><div class="step-num">1</div><div>
-          <h5>In <span class="mono">main</span>, mark every order you want procured</h5>
-          <p>Type exactly <span class="mono">p</span> or <span class="mono">P</span> in the AWB column for that row. Nothing else is recognised — see the table just below for exact examples.</p>
+          <h5 data-hi='<span class="mono">main</span> में जो भी ऑर्डर प्रोक्योर करने हैं, उन्हें मार्क करें'>In <span class="mono">main</span>, mark every order you want procured</h5>
+          <p data-hi='उस रो के AWB कॉलम में बिल्कुल <span class="mono">p</span> या <span class="mono">P</span> टाइप करें। इसके अलावा कुछ भी नहीं पहचाना जाता — ठीक नीचे दी गई टेबल में सही उदाहरण देखें।'>Type exactly <span class="mono">p</span> or <span class="mono">P</span> in the AWB column for that row. Nothing else is recognised — see the table just below for exact examples.</p>
         </div></div>
         <div class="step"><div class="step-num">2</div><div>
-          <h5>Go to <span class="mono">PI Tools → Selected Procurement (Fetch P orders)</span></h5>
-          <p>This copies just your marked rows into the <span class="mono">porders</span> working tab, clearing out whatever was there before.</p>
+          <h5 data-hi='<span class="mono">PI Tools → Selected Procurement (Fetch P orders)</span> पर जाएं'>Go to <span class="mono">PI Tools → Selected Procurement (Fetch P orders)</span></h5>
+          <p data-hi='इससे सिर्फ आपकी मार्क की गई रो <span class="mono">porders</span> वर्किंग टैब में कॉपी हो जाती हैं, और वहां पहले से जो कुछ था वह हट जाता है।'>This copies just your marked rows into the <span class="mono">porders</span> working tab, clearing out whatever was there before.</p>
         </div></div>
         <div class="step"><div class="step-num">3</div><div>
-          <h5>Read the confirmation popup</h5>
-          <p>It tells you exactly how many order lines were found and copied — a quick sanity check before the heavy lifting starts.</p>
+          <h5 data-hi="कन्फर्मेशन पॉपअप पढ़ें">Read the confirmation popup</h5>
+          <p data-hi="यह बताता है कि कितनी ऑर्डर लाइनें मिलीं और कॉपी हुईं — असली काम शुरू होने से पहले एक जल्दी जांच।">It tells you exactly how many order lines were found and copied — a quick sanity check before the heavy lifting starts.</p>
         </div></div>
         <div class="step"><div class="step-num">4</div><div>
-          <h5>Go to <span class="mono">PI Tools → Process Procurement - Selected</span></h5>
-          <p>This is the step that checks stock, totals quantities, and builds your procurement lists.</p>
+          <h5 data-hi='<span class="mono">PI Tools → Process Procurement - Selected</span> पर जाएं'>Go to <span class="mono">PI Tools → Process Procurement - Selected</span></h5>
+          <p data-hi="यही वह स्टेप है जो स्टॉक जांचता है, क्वांटिटी जोड़ता है, और आपकी प्रोक्योरमेंट लिस्ट बनाता है।">This is the step that checks stock, totals quantities, and builds your procurement lists.</p>
         </div></div>
         <div class="step"><div class="step-num">5</div><div>
-          <h5>Wait 3–4 minutes</h5>
-          <p>It's checking every ISBN against every tab in the PI Stock sheet — this is genuinely the slow part.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> Don't close the sheet or click into other menus while this runs.</div>
+          <h5 data-hi="3–4 मिनट इंतज़ार करें">Wait 3–4 minutes</h5>
+          <p data-hi="यह हर ISBN को PI Stock शीट की हर टैब से मिला रहा है — यही असली धीमा हिस्सा है।">It's checking every ISBN against every tab in the PI Stock sheet — this is genuinely the slow part.</p>
+          <div class="callout warn" data-hi="जब तक यह चल रहा हो, शीट बंद न करें और दूसरे मेनू पर क्लिक न करें।"><i class="fa-solid fa-triangle-exclamation"></i> Don't close the sheet or click into other menus while this runs.</div>
         </div></div>
         <div class="step"><div class="step-num">6</div><div>
-          <h5>Open <span class="mono">SelAllProc</span> for the master list</h5>
-          <p>One row per ISBN, quantities already totalled. Light purple rows are available from more than one publisher/distributor.</p>
+          <h5 data-hi='मास्टर लिस्ट के लिए <span class="mono">SelAllProc</span> खोलें'>Open <span class="mono">SelAllProc</span> for the master list</h5>
+          <p data-hi="हर ISBN की एक रो, क्वांटिटी पहले से जुड़ी हुई। हल्के बैंगनी रंग की रो एक से ज़्यादा पब्लिशर/डिस्ट्रीब्यूटर के पास उपलब्ध हैं।">One row per ISBN, quantities already totalled. Light purple rows are available from more than one publisher/distributor.</p>
         </div></div>
         <div class="step"><div class="step-num">7</div><div>
-          <h5>Open <span class="mono">SelProcurement</span> to place your actual orders</h5>
-          <p>Scroll to each publisher's own little table and copy it straight into your message or email to them.</p>
+          <h5 data-hi='असली ऑर्डर देने के लिए <span class="mono">SelProcurement</span> खोलें'>Open <span class="mono">SelProcurement</span> to place your actual orders</h5>
+          <p data-hi="हर पब्लिशर की अपनी छोटी टेबल तक स्क्रॉल करें और उसे सीधे उस डिस्ट्रीब्यूटर को भेजने वाले मैसेज या ईमेल में कॉपी करें।">Scroll to each publisher's own little table and copy it straight into your message or email to them.</p>
         </div></div>
         <div class="step"><div class="step-num">8</div><div>
-          <h5>Go back to <span class="mono">main</span> and change the AWB value for everything you just procured</h5>
-          <p>Replace <span class="mono">p</span> with the real AWB once you have it, or any placeholder that isn't <span class="mono">p</span>/<span class="mono">P</span> in the meantime.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> This is the single most common mistake: skip it, and the exact same orders get fetched — and procured — all over again next time.</div>
+          <h5 data-hi='वापस <span class="mono">main</span> में जाएं और अभी-अभी प्रोक्योर की हर रो का AWB बदल दें'>Go back to <span class="mono">main</span> and change the AWB value for everything you just procured</h5>
+          <p data-hi='असली AWB मिलते ही <span class="mono">p</span> की जगह उसे लिख दें, या तब तक कोई भी ऐसा प्लेसहोल्डर लिखें जो <span class="mono">p</span>/<span class="mono">P</span> न हो।'>Replace <span class="mono">p</span> with the real AWB once you have it, or any placeholder that isn't <span class="mono">p</span>/<span class="mono">P</span> in the meantime.</p>
+          <div class="callout warn" data-hi="यह सबसे आम गलती है: इसे छोड़ दिया तो अगली बार बिल्कुल वही ऑर्डर दोबारा फेच होंगे — और दोबारा प्रोक्योर हो जाएंगे।"><i class="fa-solid fa-triangle-exclamation"></i> This is the single most common mistake: skip it, and the exact same orders get fetched — and procured — all over again next time.</div>
         </div></div>
       </div>
 
       <div class="eg-table-wrap reveal reveal-delay-1">
-        <div class="dd-heading"><h3>What counts as "marked for procurement"?</h3></div>
+        <div class="dd-heading"><h3 data-hi='"प्रोक्योरमेंट के लिए मार्क किया गया" किसे माना जाता है?'>What counts as "marked for procurement"?</h3></div>
         <table class="eg-table">
-          <thead><tr><th>AWB column entry</th><th>Fetched by "Fetch P orders"?</th><th>Verdict</th></tr></thead>
+          <thead><tr>
+            <th data-hi="AWB कॉलम में क्या लिखा है">AWB column entry</th>
+            <th data-hi='क्या "Fetch P orders" इसे उठाएगा?'>Fetched by "Fetch P orders"?</th>
+            <th data-hi="नतीजा">Verdict</th>
+          </tr></thead>
           <tbody>
-            <tr class="good"><td class="mono">p</td><td>Yes</td><td><span class="verdict"><i class="fa-solid fa-circle-check"></i> Correct</span></td></tr>
-            <tr class="good"><td class="mono">P</td><td>Yes</td><td><span class="verdict"><i class="fa-solid fa-circle-check"></i> Correct</span></td></tr>
-            <tr class="bad"><td class="mono">PP</td><td>No</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
-            <tr class="bad"><td class="mono">proc</td><td>No</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
-            <tr class="bad"><td class="mono">pending</td><td>No</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
-            <tr class="bad"><td class="mono">send later</td><td>No</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
-            <tr class="bad"><td class="mono">Temp</td><td>No</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
-            <tr class="bad"><td class="mono">(blank)</td><td>No</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
+            <tr class="good"><td class="mono">p</td><td data-hi="हां">Yes</td><td><span class="verdict" data-hi="सही"><i class="fa-solid fa-circle-check"></i> Correct</span></td></tr>
+            <tr class="good"><td class="mono">P</td><td data-hi="हां">Yes</td><td><span class="verdict" data-hi="सही"><i class="fa-solid fa-circle-check"></i> Correct</span></td></tr>
+            <tr class="bad"><td class="mono">PP</td><td data-hi="नहीं">No</td><td><span class="verdict" data-hi="पहचाना नहीं जाता"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
+            <tr class="bad"><td class="mono">proc</td><td data-hi="नहीं">No</td><td><span class="verdict" data-hi="पहचाना नहीं जाता"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
+            <tr class="bad"><td class="mono">pending</td><td data-hi="नहीं">No</td><td><span class="verdict" data-hi="पहचाना नहीं जाता"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
+            <tr class="bad"><td class="mono">send later</td><td data-hi="नहीं">No</td><td><span class="verdict" data-hi="पहचाना नहीं जाता"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
+            <tr class="bad"><td class="mono">Temp</td><td data-hi="नहीं">No</td><td><span class="verdict" data-hi="पहचाना नहीं जाता"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
+            <tr class="bad"><td class="mono">(blank)</td><td data-hi="नहीं">No</td><td><span class="verdict" data-hi="पहचाना नहीं जाता"><i class="fa-solid fa-circle-xmark"></i> Not recognised</span></td></tr>
           </tbody>
         </table>
       </div>
 
-      <div class="dd-heading reveal"><h3>Dos &amp; Don'ts</h3></div>
+      <div class="dd-heading reveal"><h3 data-hi="क्या करें और क्या न करें">Dos &amp; Don'ts</h3></div>
       <div class="dd-grid reveal reveal-delay-1">
         <div class="dd-card do">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-check"></i> Do</h4>
+          <h4><i class="fa-solid fa-circle-check"></i> <span data-hi="करें">Do</span></h4>
           <ul>
-            <li><i class="fa-solid fa-check"></i> Type exactly <span class="ex">p</span> or <span class="ex">P</span> — nothing else works.</li>
-            <li><i class="fa-solid fa-check"></i> Wait out the full 3–4 minutes without touching the sheet.</li>
-            <li><i class="fa-solid fa-check"></i> Treat purple rows specially — compare sources before ordering.</li>
-            <li><i class="fa-solid fa-check"></i> Update the AWB column immediately after procuring.</li>
+            <li data-hi='बिल्कुल <span class="ex">p</span> या <span class="ex">P</span> ही लिखें — और कुछ काम नहीं करेगा।'><i class="fa-solid fa-check"></i> Type exactly <span class="ex">p</span> or <span class="ex">P</span> — nothing else works.</li>
+            <li data-hi="पूरे 3–4 मिनट बिना शीट को छेड़े इंतज़ार करें।"><i class="fa-solid fa-check"></i> Wait out the full 3–4 minutes without touching the sheet.</li>
+            <li data-hi="बैंगनी रो को अलग से देखें — ऑर्डर देने से पहले सभी सोर्स की तुलना करें।"><i class="fa-solid fa-check"></i> Treat purple rows specially — compare sources before ordering.</li>
+            <li data-hi="प्रोक्योर करते ही तुरंत AWB कॉलम अपडेट करें।"><i class="fa-solid fa-check"></i> Update the AWB column immediately after procuring.</li>
           </ul>
         </div>
         <div class="dd-card dont">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-xmark"></i> Don't</h4>
+          <h4><i class="fa-solid fa-circle-xmark"></i> <span data-hi="न करें">Don't</span></h4>
           <ul>
-            <li><i class="fa-solid fa-xmark"></i> Don't use words like <span class="ex">proc</span>, <span class="ex">pending</span>, <span class="ex">PP</span> thinking they'll work.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't close or refresh the sheet while it says <span class="ex">Working…</span>.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't forget Step 8 — it's the #1 cause of duplicate procurement.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't reach for Chapter 03 out of habit — this is your daily tool.</li>
+            <li data-hi='<span class="ex">proc</span>, <span class="ex">pending</span>, <span class="ex">PP</span> जैसे शब्द सोचकर न लिखें कि वे भी काम कर जाएंगे।'><i class="fa-solid fa-xmark"></i> Don't use words like <span class="ex">proc</span>, <span class="ex">pending</span>, <span class="ex">PP</span> thinking they'll work.</li>
+            <li data-hi='जब तक <span class="ex">Working…</span> लिखा दिखे, शीट बंद या रीफ्रेश न करें।'><i class="fa-solid fa-xmark"></i> Don't close or refresh the sheet while it says <span class="ex">Working…</span>.</li>
+            <li data-hi="स्टेप 8 न भूलें — यही डुप्लीकेट प्रोक्योरमेंट की सबसे बड़ी वजह है।"><i class="fa-solid fa-xmark"></i> Don't forget Step 8 — it's the #1 cause of duplicate procurement.</li>
+            <li data-hi="आदत से अध्याय 03 की तरफ न जाएं — यह आपका रोज़ का टूल है।"><i class="fa-solid fa-xmark"></i> Don't reach for Chapter 03 out of habit — this is your daily tool.</li>
           </ul>
         </div>
       </div>
 
       <div class="video-block reveal">
-        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Selected procurement, start to finish</h4></div>
+        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4 data-hi="देखिए कैसे होता है — शुरू से आखिर तक चुने हुए ऑर्डर का प्रोक्योरमेंट">Watch it happen — Selected procurement, start to finish</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
             <iframe src="https://drive.google.com/file/d/1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym/preview" allow="autoplay" allowfullscreen title="Video: Selected procurement" loading="lazy"></iframe>
           </div>
           <div class="video-actions">
-            <a class="watch-link" href="https://drive.google.com/file/d/1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
-            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+            <a class="watch-link" href="https://drive.google.com/file/d/1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> <span data-hi="Drive में ऑनलाइन देखें">Watch online in Drive</span></a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> <span data-hi="वीडियो डाउनलोड करें">Download video</span></a>
           </div>
-          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">04 / 06 · PROCUREMENT · SELECTED (MAIN TOOL)</div>
+          <div class="video-fallback-note" data-hi='अगर ऊपर वीडियो नहीं चल रहा, तो "Drive में ऑनलाइन देखें" पर क्लिक करें — कुछ नेटवर्क पर एम्बेडेड वीडियो ब्लॉक हो जाता है।'>If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
+          <div class="video-cap" data-hi="04 / 06 · प्रोक्योरमेंट · चुने हुए (मुख्य टूल)">04 / 06 · PROCUREMENT · SELECTED (MAIN TOOL)</div>
         </div>
       </div>
     </div>
@@ -1175,24 +1238,24 @@ a{color:inherit;}
   ============================================================= -->
   <section class="chapter" id="ch5" style="--chapter-color:var(--sky); --chapter-tint:var(--sky-tint); background:linear-gradient(180deg, var(--paper) 0%, var(--sky-tint) 120%);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 05 · Menu item: "Check Availability (Enquiry)"</div>
-      <h2 class="chapter-title reveal">A quick "<em>do we have this?</em>" check</h2>
-      <p class="chapter-dek reveal reveal-delay-1">No orders involved — this is purely for checking whether a book exists anywhere in your stock network before you promise it to a customer or place an order.</p>
+      <div class="chapter-kicker reveal"><span class="dot"></span><span data-hi='अध्याय 05 · मेन्यू ऑप्शन: "Check Availability (Enquiry)"'>Chapter 05 · Menu item: "Check Availability (Enquiry)"</span></div>
+      <h2 class="chapter-title reveal" data-hi='एक झटपट "<em>क्या हमारे पास है?</em>" जांच'>A quick "<em>do we have this?</em>" check</h2>
+      <p class="chapter-dek reveal reveal-delay-1" data-hi="इसमें कोई ऑर्डर शामिल नहीं होता — यह सिर्फ यह जांचने के लिए है कि कोई किताब आपके स्टॉक नेटवर्क में कहीं है भी या नहीं, इससे पहले कि आप उसे किसी ग्राहक से वादा करें या उसका ऑर्डर दें।">No orders involved — this is purely for checking whether a book exists anywhere in your stock network before you promise it to a customer or place an order.</p>
       <div class="chip-row reveal reveal-delay-1">
-        <span class="chip"><i class="fa-solid fa-list-ol"></i> ISBNs go in column A, from row 4</span>
-        <span class="chip"><i class="fa-solid fa-clock"></i> Takes 3–4 minutes</span>
-        <span class="chip"><i class="fa-solid fa-table-cells"></i> No order sheet involved</span>
+        <span class="chip" data-hi="ISBN कॉलम A में, रो 4 से लिखें"><i class="fa-solid fa-list-ol"></i> ISBNs go in column A, from row 4</span>
+        <span class="chip" data-hi="3–4 मिनट लगते हैं"><i class="fa-solid fa-clock"></i> Takes 3–4 minutes</span>
+        <span class="chip" data-hi="ऑर्डर शीट से कोई लेना-देना नहीं"><i class="fa-solid fa-table-cells"></i> No order sheet involved</span>
       </div>
 
       <div class="explain-grid reveal reveal-delay-2">
         <div class="explain-card">
-          <h3><i class="fa-solid fa-lightbulb" style="color:var(--sky);"></i> What's actually happening</h3>
-          <p>Every ISBN you list gets checked against every tab in PI Stock — the exact same search Chapter 04 uses, just without any order data attached.</p>
-          <p>For each ISBN it finds, it fills in the title, author, publisher, every location it's available ("Available Where"), stock quantity, and regular price. If it can't find the ISBN anywhere, the Status column simply says <span class="mono">❌ Not found</span>.</p>
-          <p>Cell E1 keeps you posted — it shows <span class="mono">Working…</span> while the search is running, then switches to a timestamp with a "X / Y found" count when it's done.</p>
+          <h3><i class="fa-solid fa-lightbulb" style="color:var(--sky);"></i> <span data-hi="असल में हो क्या रहा है">What's actually happening</span></h3>
+          <p data-hi="आपके दिए हर ISBN को PI Stock की हर टैब से मिलाया जाता है — बिल्कुल वही सर्च जो अध्याय 04 इस्तेमाल करता है, बस इसमें कोई ऑर्डर डेटा नहीं जुड़ा होता।">Every ISBN you list gets checked against every tab in PI Stock — the exact same search Chapter 04 uses, just without any order data attached.</p>
+          <p data-hi='जो भी ISBN मिलता है, उसके लिए टाइटल, लेखक, पब्लिशर, हर उपलब्ध जगह ("Available Where"), स्टॉक क्वांटिटी, और नियमित कीमत भर दी जाती है। अगर कहीं नहीं मिलता, तो Status कॉलम में बस <span class="mono">❌ Not found</span> लिख दिया जाता है।'>For each ISBN it finds, it fills in the title, author, publisher, every location it's available ("Available Where"), stock quantity, and regular price. If it can't find the ISBN anywhere, the Status column simply says <span class="mono">❌ Not found</span>.</p>
+          <p data-hi='सेल E1 आपको बताता रहता है — सर्च चलते समय यह <span class="mono">Working…</span> दिखाता है, और पूरा होने पर एक टाइमस्टैम्प के साथ "X / Y found" गिनती दिखाने लगता है।'>Cell E1 keeps you posted — it shows <span class="mono">Working…</span> while the search is running, then switches to a timestamp with a "X / Y found" count when it's done.</p>
         </div>
         <div class="flow-card">
-          <h4>How the data moves</h4>
+          <h4 data-hi="डेटा कैसे आगे बढ़ता है">How the data moves</h4>
           <svg class="flow-diagram" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: ISBNs in Enquiry column A checked against PI Stock, results fill columns B through H">
             <rect class="flow-box" x="20" y="10" width="130" height="50" rx="10"/>
             <text class="flow-label" x="85" y="30" text-anchor="middle">Enquiry · col A</text>
@@ -1221,61 +1284,61 @@ a{color:inherit;}
       </div>
 
       <div class="steps-heading reveal">
-        <h3>Step by step</h3>
-        <span class="count">4 steps · 3–4 min wait</span>
+        <h3 data-hi="कदम-दर-कदम">Step by step</h3>
+        <span class="count" data-hi="4 स्टेप · 3–4 मिनट इंतज़ार">4 steps · 3–4 min wait</span>
       </div>
       <div class="steps-list reveal reveal-delay-1">
         <div class="step"><div class="step-num">1</div><div>
-          <h5>Open the <span class="mono">Enquiry</span> tab</h5>
-          <p>Row 3 is the header — leave it exactly as it is.</p>
+          <h5 data-hi='<span class="mono">Enquiry</span> टैब खोलें'>Open the <span class="mono">Enquiry</span> tab</h5>
+          <p data-hi="रो 3 हेडर है — इसे बिल्कुल वैसा ही रहने दें।">Row 3 is the header — leave it exactly as it is.</p>
         </div></div>
         <div class="step"><div class="step-num">2</div><div>
-          <h5>Paste or type ISBNs into column A, starting at row 4</h5>
-          <p>One ISBN per row. Pasted numbers with a stray <span class="mono">.0</span> at the end (an Excel quirk) are cleaned up automatically.</p>
+          <h5 data-hi="कॉलम A में, रो 4 से शुरू करते हुए ISBN पेस्ट या टाइप करें">Paste or type ISBNs into column A, starting at row 4</h5>
+          <p data-hi='हर रो में एक ISBN। अगर पेस्ट किए नंबर के आखिर में गलती से <span class="mono">.0</span> लगा हो (Excel की एक आम गड़बड़ी), तो यह अपने-आप साफ हो जाता है।'>One ISBN per row. Pasted numbers with a stray <span class="mono">.0</span> at the end (an Excel quirk) are cleaned up automatically.</p>
         </div></div>
         <div class="step"><div class="step-num">3</div><div>
-          <h5>Go to <span class="mono">PI Tools → Check Availability (Enquiry)</span></h5>
-          <p>Watch cell E1 — it will say <span class="mono">Working…</span> while the search runs.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> Don't start typing new ISBNs while it's still working — let the current search finish first.</div>
+          <h5 data-hi='<span class="mono">PI Tools → Check Availability (Enquiry)</span> पर जाएं'>Go to <span class="mono">PI Tools → Check Availability (Enquiry)</span></h5>
+          <p data-hi='सेल E1 देखते रहें — जब तक सर्च चल रहा है, यह <span class="mono">Working…</span> दिखाएगा।'>Watch cell E1 — it will say <span class="mono">Working…</span> while the search runs.</p>
+          <div class="callout warn" data-hi="जब तक यह चल रहा हो, नए ISBN टाइप न करें — पहले मौजूदा सर्च पूरा होने दें।"><i class="fa-solid fa-triangle-exclamation"></i> Don't start typing new ISBNs while it's still working — let the current search finish first.</div>
         </div></div>
         <div class="step"><div class="step-num">4</div><div>
-          <h5>Read the results across columns B–H</h5>
-          <p>E1 updates with a timestamp and a "found" count once it's done — that's your cue it's safe to read the results.</p>
+          <h5 data-hi="कॉलम B–H में नतीजे पढ़ें">Read the results across columns B–H</h5>
+          <p data-hi='काम पूरा होने पर E1 में टाइमस्टैम्प और "found" वाली गिनती दिख जाती है — यही आपको बताता है कि अब नतीजे पढ़ना सुरक्षित है।'>E1 updates with a timestamp and a "found" count once it's done — that's your cue it's safe to read the results.</p>
         </div></div>
       </div>
 
-      <div class="dd-heading reveal"><h3>Dos &amp; Don'ts</h3></div>
+      <div class="dd-heading reveal"><h3 data-hi="क्या करें और क्या न करें">Dos &amp; Don'ts</h3></div>
       <div class="dd-grid reveal reveal-delay-1">
         <div class="dd-card do">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-check"></i> Do</h4>
+          <h4><i class="fa-solid fa-circle-check"></i> <span data-hi="करें">Do</span></h4>
           <ul>
-            <li><i class="fa-solid fa-check"></i> Paste ISBNs as plain numbers — the tool tidies up stray formatting.</li>
-            <li><i class="fa-solid fa-check"></i> Give it the full 3–4 minutes on a long list.</li>
+            <li data-hi="ISBN को सादे नंबर की तरह पेस्ट करें — टूल फॉर्मेटिंग की गड़बड़ियां खुद ठीक कर लेता है।"><i class="fa-solid fa-check"></i> Paste ISBNs as plain numbers — the tool tidies up stray formatting.</li>
+            <li data-hi="लंबी लिस्ट पर पूरे 3–4 मिनट दें।"><i class="fa-solid fa-check"></i> Give it the full 3–4 minutes on a long list.</li>
           </ul>
         </div>
         <div class="dd-card dont">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-xmark"></i> Don't</h4>
+          <h4><i class="fa-solid fa-circle-xmark"></i> <span data-hi="न करें">Don't</span></h4>
           <ul>
-            <li><i class="fa-solid fa-xmark"></i> Don't touch the header row (row 3) or shuffle the columns.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't edit column A again until E1 shows a finished timestamp.</li>
+            <li data-hi="हेडर रो (रो 3) को न छुएं और कॉलम को इधर-उधर न करें।"><i class="fa-solid fa-xmark"></i> Don't touch the header row (row 3) or shuffle the columns.</li>
+            <li data-hi="जब तक E1 में पूरा हुआ टाइमस्टैम्प न दिखे, तब तक कॉलम A दोबारा एडिट न करें।"><i class="fa-solid fa-xmark"></i> Don't edit column A again until E1 shows a finished timestamp.</li>
           </ul>
         </div>
       </div>
 
       <div class="video-block reveal">
-        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Enquiry / Check Availability</h4></div>
+        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4 data-hi="देखिए कैसे होता है — एन्क्वायरी / उपलब्धता जांच">Watch it happen — Enquiry / Check Availability</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
             <iframe src="https://drive.google.com/file/d/1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-/preview" allow="autoplay" allowfullscreen title="Video: Enquiry check availability" loading="lazy"></iframe>
           </div>
           <div class="video-actions">
-            <a class="watch-link" href="https://drive.google.com/file/d/1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
-            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+            <a class="watch-link" href="https://drive.google.com/file/d/1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> <span data-hi="Drive में ऑनलाइन देखें">Watch online in Drive</span></a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> <span data-hi="वीडियो डाउनलोड करें">Download video</span></a>
           </div>
-          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">05 / 06 · ENQUIRY</div>
+          <div class="video-fallback-note" data-hi='अगर ऊपर वीडियो नहीं चल रहा, तो "Drive में ऑनलाइन देखें" पर क्लिक करें — कुछ नेटवर्क पर एम्बेडेड वीडियो ब्लॉक हो जाता है।'>If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
+          <div class="video-cap" data-hi="05 / 06 · एन्क्वायरी">05 / 06 · ENQUIRY</div>
         </div>
       </div>
     </div>
@@ -1286,24 +1349,24 @@ a{color:inherit;}
   ============================================================= -->
   <section class="chapter" id="ch6" style="--chapter-color:var(--coral); --chapter-tint:var(--coral-tint);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 06 · Menu item: "Process AWB" + a manual website step</div>
-      <h2 class="chapter-title reveal">From "<em>packed</em>" to "<em>customer notified</em>"</h2>
-      <p class="chapter-dek reveal reveal-delay-1">This is the last mile — and the one with the most real-world consequences, because the end of this chapter is an actual email landing in a customer's inbox. Two stages: the sheet does the sorting, the website does the sending.</p>
+      <div class="chapter-kicker reveal"><span class="dot"></span><span data-hi='अध्याय 06 · मेन्यू ऑप्शन: "Process AWB" + वेबसाइट पर एक मैनुअल स्टेप'>Chapter 06 · Menu item: "Process AWB" + a manual website step</span></div>
+      <h2 class="chapter-title reveal" data-hi='"<em>पैक हुआ</em>" से "<em>ग्राहक को बता दिया</em>" तक'>From "<em>packed</em>" to "<em>customer notified</em>"</h2>
+      <p class="chapter-dek reveal reveal-delay-1" data-hi="यह आखिरी पड़ाव है — और सबसे ज़्यादा असर वाला भी, क्योंकि इस अध्याय के आखिर में एक असली ईमेल ग्राहक के इनबॉक्स में पहुंचती है। दो चरण: शीट सॉर्टिंग करती है, वेबसाइट भेजने का काम करती है।">This is the last mile — and the one with the most real-world consequences, because the end of this chapter is an actual email landing in a customer's inbox. Two stages: the sheet does the sorting, the website does the sending.</p>
       <div class="chip-row reveal reveal-delay-1">
-        <span class="chip"><i class="fa-solid fa-key"></i> Needs 3 columns filled: AWB + Logistic + status</span>
-        <span class="chip"><i class="fa-solid fa-envelope-circle-check"></i> Ends with a real email being sent</span>
-        <span class="chip"><i class="fa-solid fa-ban"></i> Can't be re-sent the same way twice</span>
+        <span class="chip" data-hi="3 कॉलम भरने ज़रूरी: AWB + Logistic + status"><i class="fa-solid fa-key"></i> Needs 3 columns filled: AWB + Logistic + status</span>
+        <span class="chip" data-hi="आखिर में असली ईमेल भेजी जाती है"><i class="fa-solid fa-envelope-circle-check"></i> Ends with a real email being sent</span>
+        <span class="chip" data-hi="एक बार भेजने के बाद दोबारा उसी तरह नहीं भेजा जा सकता"><i class="fa-solid fa-ban"></i> Can't be re-sent the same way twice</span>
       </div>
 
       <div class="explain-grid reveal reveal-delay-2">
         <div class="explain-card">
-          <h3><i class="fa-solid fa-lightbulb" style="color:var(--coral);"></i> What's actually happening — in the sheet</h3>
-          <p><span class="mono">Process AWB</span> scans <span class="mono">main</span> looking for rows where three things are all true at once: the AWB cell has a real tracking number (not blank, not just "p"), the Logistic cell names a courier, and the <span class="mono">status</span> column — the small lowercase one, not "Order Status" — reads exactly <span class="mono">completed</span>.</p>
-          <p>Every row that matches, and isn't already in <span class="mono">Tracking Summary</span>, gets appended there with today's date in "Modification Date" and a starting tracking status of <span class="mono">shipped</span>.</p>
-          <p>That "Modification Date" is your handle for the next stage — it's how you'll find "everything scheduled today" a moment from now.</p>
+          <h3><i class="fa-solid fa-lightbulb" style="color:var(--coral);"></i> <span data-hi="असल में हो क्या रहा है — शीट में">What's actually happening — in the sheet</span></h3>
+          <p data-hi='<span class="mono">Process AWB</span> <span class="mono">main</span> में उन रो को ढूंढता है जहां तीनों बातें एक साथ सही हों: AWB सेल में एक असली ट्रैकिंग नंबर हो (खाली नहीं, सिर्फ "p" भी नहीं), Logistic सेल में किसी कूरियर का नाम हो, और <span class="mono">status</span> कॉलम — छोटा वाला, "Order Status" नहीं — बिल्कुल <span class="mono">completed</span> लिखा हो।'><span class="mono">Process AWB</span> scans <span class="mono">main</span> looking for rows where three things are all true at once: the AWB cell has a real tracking number (not blank, not just "p"), the Logistic cell names a courier, and the <span class="mono">status</span> column — the small lowercase one, not "Order Status" — reads exactly <span class="mono">completed</span>.</p>
+          <p data-hi='जो भी रो मैच करती है, और <span class="mono">Tracking Summary</span> में पहले से नहीं है, वह वहां आज की तारीख के साथ "Modification Date" में जुड़ जाती है, और शुरुआती ट्रैकिंग स्टेटस <span class="mono">shipped</span> रहता है।'>Every row that matches, and isn't already in <span class="mono">Tracking Summary</span>, gets appended there with today's date in "Modification Date" and a starting tracking status of <span class="mono">shipped</span>.</p>
+          <p data-hi='वही "Modification Date" अगले चरण के लिए आपका सहारा है — इसी से आप एक पल में "आज का पूरा बैच" ढूंढ पाएंगे।'>That "Modification Date" is your handle for the next stage — it's how you'll find "everything scheduled today" a moment from now.</p>
         </div>
         <div class="flow-card">
-          <h4>How the data moves</h4>
+          <h4 data-hi="डेटा कैसे आगे बढ़ता है">How the data moves</h4>
           <svg class="flow-diagram" viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: main rows with AWB Logistic and status completed go to Tracking Summary, then manually exported and imported to the website to send mail">
             <rect class="flow-box" x="70" y="8" width="180" height="56" rx="10"/>
             <text class="flow-label" x="160" y="28" text-anchor="middle" style="font-size:9px;">main: AWB + Logistic + status</text>
@@ -1338,91 +1401,91 @@ a{color:inherit;}
       </div>
 
       <div class="steps-heading reveal">
-        <h3>Stage A — inside the sheet</h3>
-        <span class="count">4 steps</span>
+        <h3 data-hi="चरण A — शीट के अंदर">Stage A — inside the sheet</h3>
+        <span class="count" data-hi="4 स्टेप">4 steps</span>
       </div>
       <div class="steps-list reveal reveal-delay-1">
         <div class="step"><div class="step-num">1</div><div>
-          <h5>On every row that's genuinely packed &amp; ready, fill in three columns</h5>
-          <p><span class="mono">AWB</span> = the real tracking number · <span class="mono">Logistic</span> = the courier name · <span class="mono">status</span> = exactly <span class="mono">completed</span>.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> This "status" is the small lowercase column near AWB — not the "Order Status" column further along. Mixing the two up is the most common reason a shipment gets missed.</div>
+          <h5 data-hi="जो भी रो सच में पैक और भेजने के लिए तैयार है, उसमें तीन कॉलम भरें">On every row that's genuinely packed &amp; ready, fill in three columns</h5>
+          <p data-hi='<span class="mono">AWB</span> = असली ट्रैकिंग नंबर · <span class="mono">Logistic</span> = कूरियर का नाम · <span class="mono">status</span> = बिल्कुल <span class="mono">completed</span>।'><span class="mono">AWB</span> = the real tracking number · <span class="mono">Logistic</span> = the courier name · <span class="mono">status</span> = exactly <span class="mono">completed</span>.</p>
+          <div class="callout warn" data-hi='यह "status" AWB के पास वाला छोटा कॉलम है — आगे वाला "Order Status" कॉलम नहीं। इन दोनों को मिला देना शिपमेंट छूटने की सबसे आम वजह है।'><i class="fa-solid fa-triangle-exclamation"></i> This "status" is the small lowercase column near AWB — not the "Order Status" column further along. Mixing the two up is the most common reason a shipment gets missed.</div>
         </div></div>
         <div class="step"><div class="step-num">2</div><div>
-          <h5>Go to <span class="mono">PI Tools → Process AWB</span></h5>
-          <p>Confirm the popup to proceed.</p>
+          <h5 data-hi='<span class="mono">PI Tools → Process AWB</span> पर जाएं'>Go to <span class="mono">PI Tools → Process AWB</span></h5>
+          <p data-hi="आगे बढ़ने के लिए पॉपअप कन्फर्म करें।">Confirm the popup to proceed.</p>
         </div></div>
         <div class="step"><div class="step-num">3</div><div>
-          <h5>Let it scan <span class="mono">main</span> and append to <span class="mono">Tracking Summary</span></h5>
-          <p>Only rows with all three fields correctly filled, and not already tracked, get added.</p>
+          <h5 data-hi='इसे <span class="mono">main</span> स्कैन करके <span class="mono">Tracking Summary</span> में जोड़ने दें'>Let it scan <span class="mono">main</span> and append to <span class="mono">Tracking Summary</span></h5>
+          <p data-hi="सिर्फ वही रो जुड़ती हैं जिनमें तीनों फील्ड सही भरे हों, और जो पहले से ट्रैक नहीं हो रहीं।">Only rows with all three fields correctly filled, and not already tracked, get added.</p>
         </div></div>
         <div class="step"><div class="step-num">4</div><div>
-          <h5>Read the popup — "New tracking entries: N"</h5>
-          <p>That's how many rows just landed in Tracking Summary with today's date.</p>
+          <h5 data-hi='पॉपअप पढ़ें — "New tracking entries: N"'>Read the popup — "New tracking entries: N"</h5>
+          <p data-hi="यह बताता है कि आज की तारीख के साथ Tracking Summary में कितनी रो अभी-अभी जुड़ी हैं।">That's how many rows just landed in Tracking Summary with today's date.</p>
         </div></div>
       </div>
 
       <div class="steps-heading reveal">
-        <h3>Stage B — on the website (manual, outside this script)</h3>
-        <span class="count">5 steps</span>
+        <h3 data-hi="चरण B — वेबसाइट पर (मैनुअल, इस स्क्रिप्ट के बाहर)">Stage B — on the website (manual, outside this script)</h3>
+        <span class="count" data-hi="5 स्टेप">5 steps</span>
       </div>
       <div class="steps-list reveal reveal-delay-1">
         <div class="step"><div class="step-num">5</div><div>
-          <h5>In <span class="mono">Tracking Summary</span>, find today's batch</h5>
-          <p>Filter or sort by Modification Date — anything dated today is what you're about to mail out.</p>
+          <h5 data-hi='<span class="mono">Tracking Summary</span> में आज का बैच ढूंढें'>In <span class="mono">Tracking Summary</span>, find today's batch</h5>
+          <p data-hi="Modification Date के हिसाब से फिल्टर या सॉर्ट करें — जिस भी रो पर आज की तारीख हो, वही अभी मेल भेजने के लिए है।">Filter or sort by Modification Date — anything dated today is what you're about to mail out.</p>
         </div></div>
         <div class="step"><div class="step-num">6</div><div>
-          <h5>Copy those rows into a fresh sheet and save/download as CSV</h5>
-          <p>This becomes the file you'll hand to the website's import tool.</p>
+          <h5 data-hi="उन रो को एक नई शीट में कॉपी करके CSV की तरह सेव/डाउनलोड करें">Copy those rows into a fresh sheet and save/download as CSV</h5>
+          <p data-hi="यही फाइल है जिसे आप वेबसाइट के इम्पोर्ट टूल में देंगे।">This becomes the file you'll hand to the website's import tool.</p>
         </div></div>
         <div class="step"><div class="step-num">7</div><div>
-          <h5>Go to the website's tracking import screen and map the columns as usual</h5>
-          <p>Same mapping process each time — nothing changes here run to run.</p>
-          <div class="callout tip"><i class="fa-solid fa-circle-info"></i> If this batch has a mix of shipped and partially-shipped orders, map the "status" field too — otherwise everything defaults to "shipped" even the partial ones.</div>
+          <h5 data-hi="वेबसाइट के ट्रैकिंग इम्पोर्ट स्क्रीन पर जाकर हमेशा की तरह कॉलम मैप करें">Go to the website's tracking import screen and map the columns as usual</h5>
+          <p data-hi="हर बार वही मैपिंग प्रोसेस — कुछ भी नहीं बदलता।">Same mapping process each time — nothing changes here run to run.</p>
+          <div class="callout tip" data-hi='अगर इस बैच में shipped और partially-shipped दोनों तरह के ऑर्डर हैं, तो "status" फील्ड भी मैप करें — वरना सब कुछ अपने-आप "shipped" मान लिया जाएगा, आधे-भेजे हुए भी।'><i class="fa-solid fa-circle-info"></i> If this batch has a mix of shipped and partially-shipped orders, map the "status" field too — otherwise everything defaults to "shipped" even the partial ones.</div>
         </div></div>
         <div class="step"><div class="step-num">8</div><div>
-          <h5>Import, and watch the two progress lines</h5>
-          <p>When the second line reaches 100%, every mail in that batch has gone out.</p>
+          <h5 data-hi="इम्पोर्ट करें, और दोनों प्रोग्रेस लाइनें देखते रहें">Import, and watch the two progress lines</h5>
+          <p data-hi="जब दूसरी लाइन 100% पर पहुंच जाए, तो उस बैच की हर मेल भेजी जा चुकी है।">When the second line reaches 100%, every mail in that batch has gone out.</p>
         </div></div>
         <div class="step"><div class="step-num">9</div><div>
-          <h5>Confirm in the Sent folder of order@padhegaindia.in</h5>
-          <p>Your final proof that the batch actually went out, not just that the import "completed."</p>
+          <h5 data-hi="order@padhegaindia.in के Sent फोल्डर में कन्फर्म करें">Confirm in the Sent folder of order@padhegaindia.in</h5>
+          <p data-hi='यही आपका असली सबूत है कि बैच सच में भेज दिया गया — सिर्फ इम्पोर्ट "पूरा" होना काफी नहीं।'>Your final proof that the batch actually went out, not just that the import "completed."</p>
         </div></div>
       </div>
 
-      <div class="dd-heading reveal"><h3>Dos &amp; Don'ts</h3></div>
+      <div class="dd-heading reveal"><h3 data-hi="क्या करें और क्या न करें">Dos &amp; Don'ts</h3></div>
       <div class="dd-grid reveal reveal-delay-1">
         <div class="dd-card do">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-check"></i> Do</h4>
+          <h4><i class="fa-solid fa-circle-check"></i> <span data-hi="करें">Do</span></h4>
           <ul>
-            <li><i class="fa-solid fa-check"></i> Triple-check the status column literally says <span class="ex">completed</span> before running.</li>
-            <li><i class="fa-solid fa-check"></i> Map the status field on import if the batch has mixed shipped / partial-shipped orders.</li>
-            <li><i class="fa-solid fa-check"></i> Check the Sent folder afterward — that's your real confirmation.</li>
+            <li data-hi='चलाने से पहले तीन बार जांच लें कि status कॉलम में सचमुच <span class="ex">completed</span> ही लिखा है।'><i class="fa-solid fa-check"></i> Triple-check the status column literally says <span class="ex">completed</span> before running.</li>
+            <li data-hi='अगर बैच में shipped और partial-shipped दोनों मिले-जुले हों, तो इम्पोर्ट पर status फील्ड भी मैप करें।'><i class="fa-solid fa-check"></i> Map the status field on import if the batch has mixed shipped / partial-shipped orders.</li>
+            <li data-hi="बाद में Sent फोल्डर ज़रूर जांचें — यही असली कन्फर्मेशन है।"><i class="fa-solid fa-check"></i> Check the Sent folder afterward — that's your real confirmation.</li>
           </ul>
         </div>
         <div class="dd-card dont">
           <div class="dd-tape"></div>
-          <h4><i class="fa-solid fa-circle-xmark"></i> Don't</h4>
+          <h4><i class="fa-solid fa-circle-xmark"></i> <span data-hi="न करें">Don't</span></h4>
           <ul>
-            <li><i class="fa-solid fa-xmark"></i> Don't import the same batch twice through the website — once mailed, that route won't send again (only a manual resend from the order panel can).</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't expect a row to be picked up if status says <span class="ex">processing</span>, <span class="ex">confirmed</span>, or anything other than <span class="ex">completed</span>.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't leave the Logistic column blank — AWB alone isn't enough, that row gets silently skipped.</li>
+            <li data-hi="एक ही बैच को वेबसाइट से दो बार इम्पोर्ट न करें — एक बार मेल जा चुकी हो तो वह रास्ता दोबारा नहीं भेजेगा (सिर्फ ऑर्डर पैनल से हाथ से दोबारा भेजा जा सकता है)।"><i class="fa-solid fa-xmark"></i> Don't import the same batch twice through the website — once mailed, that route won't send again (only a manual resend from the order panel can).</li>
+            <li data-hi='अगर status में <span class="ex">processing</span>, <span class="ex">confirmed</span>, या <span class="ex">completed</span> के अलावा कुछ और लिखा हो, तो उसे उठाए जाने की उम्मीद न रखें।'><i class="fa-solid fa-xmark"></i> Don't expect a row to be picked up if status says <span class="ex">processing</span>, <span class="ex">confirmed</span>, or anything other than <span class="ex">completed</span>.</li>
+            <li data-hi="Logistic कॉलम खाली न छोड़ें — अकेला AWB काफी नहीं है, वह रो चुपचाप छूट जाएगी।"><i class="fa-solid fa-xmark"></i> Don't leave the Logistic column blank — AWB alone isn't enough, that row gets silently skipped.</li>
           </ul>
         </div>
       </div>
 
       <div class="video-block reveal">
-        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Process AWB &amp; sending shipment mail</h4></div>
+        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4 data-hi="देखिए कैसे होता है — AWB प्रोसेस करना और शिपमेंट मेल भेजना">Watch it happen — Process AWB &amp; sending shipment mail</h4></div>
         <div class="video-frame">
           <div class="video-aspect">
             <iframe src="https://drive.google.com/file/d/1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L/preview" allow="autoplay" allowfullscreen title="Video: Process AWB and mail automation" loading="lazy"></iframe>
           </div>
           <div class="video-actions">
-            <a class="watch-link" href="https://drive.google.com/file/d/1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
-            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+            <a class="watch-link" href="https://drive.google.com/file/d/1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> <span data-hi="Drive में ऑनलाइन देखें">Watch online in Drive</span></a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> <span data-hi="वीडियो डाउनलोड करें">Download video</span></a>
           </div>
-          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">06 / 06 · PROCESS AWB &amp; MAIL</div>
+          <div class="video-fallback-note" data-hi='अगर ऊपर वीडियो नहीं चल रहा, तो "Drive में ऑनलाइन देखें" पर क्लिक करें — कुछ नेटवर्क पर एम्बेडेड वीडियो ब्लॉक हो जाता है।'>If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
+          <div class="video-cap" data-hi="06 / 06 · AWB प्रोसेस और मेल">06 / 06 · PROCESS AWB &amp; MAIL</div>
         </div>
       </div>
     </div>
@@ -1430,9 +1493,9 @@ a{color:inherit;}
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <h3>That's the whole shelf.</h3>
-    <p>Six operations, one shared brain: the order sheet, the stock sheet, and a handful of exact-match words that decide what happens next — including the spelling-tolerant check that catches every cancellation.</p>
-    <p>When in doubt — check the AWB column, check the status column, and check the clock (3–4 minutes is normal, not stuck).</p>
+    <h3 data-hi="बस, पूरी शेल्फ यही है।">That's the whole shelf.</h3>
+    <p data-hi="छह ऑपरेशन, एक जैसा तरीका: ऑर्डर शीट, स्टॉक शीट, और कुछ बिल्कुल-सही शब्द जो तय करते हैं आगे क्या होगा — जिसमें वह स्पेलिंग-सहनशील जांच भी शामिल है जो हर कैंसिलेशन पकड़ लेती है।">Six operations, one shared brain: the order sheet, the stock sheet, and a handful of exact-match words that decide what happens next — including the spelling-tolerant check that catches every cancellation.</p>
+    <p data-hi="जब भी कंफ्यूज़न हो — AWB कॉलम देखें, status कॉलम देखें, और घड़ी देखें (3–4 मिनट सामान्य है, अटका हुआ नहीं)।">When in doubt — check the AWB column, check the status column, and check the clock (3–4 minutes is normal, not stuck).</p>
     <div class="fnote">PI TOOLS · INTERNAL STAFF PLAYBOOK · PADHEGA INDIA</div>
   </footer>
 
@@ -1440,10 +1503,27 @@ a{color:inherit;}
 
 <script>
 /* =========================================================
-   Scroll-spy for The Shelf + reveal-on-scroll + nav clicks
+   Language toggle + Scroll-spy for The Shelf + reveal-on-scroll
    ========================================================= */
 (function(){
   "use strict";
+
+  var currentLang = 'en';
+
+  window.setLang = function(lang){
+    currentLang = lang;
+    document.documentElement.classList.toggle('lang-hi', lang === 'hi');
+    document.documentElement.setAttribute('lang', lang === 'hi' ? 'hi' : 'en');
+
+    document.querySelectorAll('[data-hi]').forEach(function(el){
+      if(el.dataset.en === undefined){ el.dataset.en = el.innerHTML; }
+      el.innerHTML = lang === 'hi' ? el.getAttribute('data-hi') : el.dataset.en;
+    });
+
+    document.querySelectorAll('.lang-toggle button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+  };
 
   var spines = Array.prototype.slice.call(document.querySelectorAll('.spine, .mobile-spine, [data-target]'));
   var sections = {};
