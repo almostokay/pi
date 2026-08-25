@@ -24,13 +24,15 @@
 
   --mint:#3FC79A;       /* ch1 add orders */
   --mint-tint:#DFF7EC;
-  --amber:#F2A93B;      /* ch2 procurement all */
+  --cancel:#D6455B;     /* ch2 check cancel orders */
+  --cancel-tint:#FBE1E5;
+  --amber:#F2A93B;      /* ch3 procurement all */
   --amber-tint:#FCEBD1;
-  --peri:#7C67E0;       /* ch3 selected procurement — hero chapter */
+  --peri:#7C67E0;       /* ch4 selected procurement — hero chapter */
   --peri-tint:#E9E4FB;
-  --sky:#39A7E0;        /* ch4 enquiry */
+  --sky:#39A7E0;        /* ch5 enquiry */
   --sky-tint:#DCF1FC;
-  --coral:#F0614C;      /* ch5 process AWB */
+  --coral:#F0614C;      /* ch6 process AWB */
   --coral-tint:#FCE1DB;
 
   --do:#2F9E6E;
@@ -99,17 +101,17 @@ a{color:inherit;}
   border-bottom:1px solid rgba(43,33,64,.08);
   background:var(--spine-color); color:#fff;
   transition:flex-grow .35s cubic-bezier(.4,0,.2,1), box-shadow .3s ease;
-  padding:10px 4px;
+  padding:8px 4px;
   overflow:hidden;
 }
 .spine .spine-label{
   writing-mode:vertical-rl; transform:rotate(180deg);
-  font-family:var(--font-display); font-weight:600; font-size:.72rem;
+  font-family:var(--font-display); font-weight:600; font-size:.68rem;
   letter-spacing:.02em; white-space:normal; word-break:normal; overflow-wrap:break-word;
   display:flex; align-items:center; gap:6px; max-height:100%;
   line-height:1.3; text-align:center;
 }
-.spine .spine-num{font-family:var(--font-mono); font-size:.62rem; opacity:.9; flex-shrink:0;}
+.spine .spine-num{font-family:var(--font-mono); font-size:.6rem; opacity:.9; flex-shrink:0;}
 .spine::after{
   content:''; position:absolute; right:0; top:0; bottom:0; width:3px;
   background:rgba(0,0,0,.14);
@@ -120,7 +122,7 @@ a{color:inherit;}
 .spine.active .spine-label{transform:rotate(180deg) scale(1.05);}
 .spine .tab-flag{
   position:absolute; left:100%; top:50%; transform:translateY(-50%);
-  background:inherit; color:#fff; font-family:var(--font-mono); font-size:.68rem; font-weight:600;
+  background:inherit; color:#fff; font-family:var(--font-mono); font-size:.66rem; font-weight:600;
   padding:6px 12px; border-radius:0 6px 6px 0; opacity:0; pointer-events:none;
   transition:opacity .25s ease, transform .25s ease; white-space:nowrap;
   box-shadow:2px 2px 10px rgba(0,0,0,.15); z-index:60;
@@ -141,11 +143,11 @@ a{color:inherit;}
   .mobile-spine{
     flex-shrink:0; border:none; cursor:pointer; padding:9px 14px; border-radius:999px;
     background:var(--spine-color); color:#fff; font-family:var(--font-display); font-weight:600;
-    font-size:.78rem; white-space:nowrap; display:flex; align-items:center; gap:6px;
+    font-size:.76rem; white-space:nowrap; display:flex; align-items:center; gap:6px;
     transition:transform .2s ease;
   }
   .mobile-spine.active{transform:scale(1.06); box-shadow:0 4px 14px rgba(0,0,0,.18);}
-  .mobile-spine .spine-num{font-family:var(--font-mono); font-size:.6rem; opacity:.85;}
+  .mobile-spine .spine-num{font-family:var(--font-mono); font-size:.58rem; opacity:.85;}
 }
 
 /* ============ layout shell ============ */
@@ -175,7 +177,7 @@ a{color:inherit;}
   color:var(--chapter-color); margin-bottom:18px; flex-wrap:wrap;
 }
 .chapter-kicker .dot{width:8px; height:8px; border-radius:50%; background:var(--chapter-color); flex-shrink:0;}
-.chapter-title{font-size:clamp(2rem, 4.4vw, 3.4rem); line-height:1.05; margin-bottom:18px; max-width:16ch;}
+.chapter-title{font-size:clamp(2rem, 4.4vw, 3.4rem); line-height:1.05; margin-bottom:18px; max-width:18ch;}
 .chapter-title em{font-style:italic; color:var(--chapter-color);}
 .chapter-dek{font-size:1.1rem; color:var(--ink-soft); max-width:62ch; margin-bottom:12px; font-weight:500;}
 
@@ -193,6 +195,7 @@ a{color:inherit;}
     radial-gradient(circle at 86% 12%, var(--peri-tint), transparent 40%),
     radial-gradient(circle at 78% 88%, var(--coral-tint), transparent 42%),
     radial-gradient(circle at 10% 86%, var(--sky-tint), transparent 40%),
+    radial-gradient(circle at 50% 96%, var(--cancel-tint), transparent 36%),
     var(--paper);
   max-width:100%; overflow-x:hidden;
 }
@@ -261,6 +264,7 @@ a{color:inherit;}
   background:var(--chapter-tint); border-radius:22px; padding:26px; border:1px solid color-mix(in srgb, var(--chapter-color) 22%, transparent);
 }
 .flow-card h4{font-size:.82rem; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.06em; color:var(--chapter-color); margin-bottom:14px; font-weight:600;}
+.flow-card + .flow-card{margin-top:20px;}
 
 /* ============ steps ============ */
 .steps-heading{display:flex; align-items:baseline; gap:12px; margin-bottom:22px; flex-wrap:wrap;}
@@ -339,6 +343,7 @@ a{color:inherit;}
 
 /* ============ video ============ */
 .video-block{margin-top:10px;}
+.video-block + .video-block{margin-top:34px;}
 .video-block .vh{display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;}
 .video-block .vh i{color:var(--chapter-color);}
 .video-block .vh h4{font-size:1rem;}
@@ -377,11 +382,14 @@ a{color:inherit;}
 .flow-diagram{width:100%; height:auto; max-width:100%;}
 .flow-box{fill:#fff; stroke:var(--chapter-color); stroke-width:1.6;}
 .flow-box.manual{stroke-dasharray:5 4;}
+.flow-box.cancel{stroke:var(--cancel);}
 .flow-label{font-family:'IBM Plex Mono', monospace; font-size:10px; fill:var(--ink); font-weight:600;}
 .flow-sub{font-family:'Plus Jakarta Sans', sans-serif; font-size:8.5px; fill:var(--ink-soft);}
 .flow-path{fill:none; stroke:var(--chapter-color); stroke-width:1.6; opacity:.55;}
 .flow-path.dashed{stroke-dasharray:4 4;}
+.flow-path.cancel{stroke:var(--cancel);}
 .flow-dot{fill:var(--chapter-color);}
+.flow-dot.cancel{fill:var(--cancel);}
 @media (prefers-reduced-motion: no-preference){
   .flow-dot{ animation:travel 3.2s linear infinite; offset-rotate:0deg; }
 }
@@ -416,21 +424,25 @@ a{color:inherit;}
       <span class="tab-flag">Add New Orders</span>
       <span class="spine-label"><span class="spine-num">01</span>Add Orders</span>
     </button>
-    <button class="spine" data-target="ch2" style="--spine-color:var(--amber);">
+    <button class="spine" data-target="ch2" style="--spine-color:var(--cancel);">
+      <span class="tab-flag">Check Cancel Orders</span>
+      <span class="spine-label"><span class="spine-num">02</span>Cancel Orders</span>
+    </button>
+    <button class="spine" data-target="ch3" style="--spine-color:var(--amber);">
       <span class="tab-flag">Procurement — All</span>
-      <span class="spine-label"><span class="spine-num">02</span>Procure · All</span>
+      <span class="spine-label"><span class="spine-num">03</span>Procure · All</span>
     </button>
-    <button class="spine" data-target="ch3" style="--spine-color:var(--peri);">
+    <button class="spine" data-target="ch4" style="--spine-color:var(--peri);">
       <span class="tab-flag">Procurement — Selected</span>
-      <span class="spine-label"><span class="spine-num">03</span>Procure · Pick</span>
+      <span class="spine-label"><span class="spine-num">04</span>Procure · Pick</span>
     </button>
-    <button class="spine" data-target="ch4" style="--spine-color:var(--sky);">
+    <button class="spine" data-target="ch5" style="--spine-color:var(--sky);">
       <span class="tab-flag">Enquiry</span>
-      <span class="spine-label"><span class="spine-num">04</span>Enquiry</span>
+      <span class="spine-label"><span class="spine-num">05</span>Enquiry</span>
     </button>
-    <button class="spine" data-target="ch5" style="--spine-color:var(--coral);">
+    <button class="spine" data-target="ch6" style="--spine-color:var(--coral);">
       <span class="tab-flag">Process AWB &amp; Mail</span>
-      <span class="spine-label"><span class="spine-num">05</span>Process AWB</span>
+      <span class="spine-label"><span class="spine-num">06</span>Process AWB</span>
     </button>
   </div>
 </nav>
@@ -438,10 +450,11 @@ a{color:inherit;}
 <!-- ============ mobile shelf ============ -->
 <nav class="mobile-shelf" aria-label="Chapter navigation (mobile)">
   <button class="mobile-spine" data-target="ch1" style="--spine-color:var(--mint);"><span class="spine-num">01</span>Add Orders</button>
-  <button class="mobile-spine" data-target="ch2" style="--spine-color:var(--amber);"><span class="spine-num">02</span>Procure · All</button>
-  <button class="mobile-spine" data-target="ch3" style="--spine-color:var(--peri);"><span class="spine-num">03</span>Procure · Selected</button>
-  <button class="mobile-spine" data-target="ch4" style="--spine-color:var(--sky);"><span class="spine-num">04</span>Enquiry</button>
-  <button class="mobile-spine" data-target="ch5" style="--spine-color:var(--coral);"><span class="spine-num">05</span>Process AWB</button>
+  <button class="mobile-spine" data-target="ch2" style="--spine-color:var(--cancel);"><span class="spine-num">02</span>Cancel Orders</button>
+  <button class="mobile-spine" data-target="ch3" style="--spine-color:var(--amber);"><span class="spine-num">03</span>Procure · All</button>
+  <button class="mobile-spine" data-target="ch4" style="--spine-color:var(--peri);"><span class="spine-num">04</span>Procure · Selected</button>
+  <button class="mobile-spine" data-target="ch5" style="--spine-color:var(--sky);"><span class="spine-num">05</span>Enquiry</button>
+  <button class="mobile-spine" data-target="ch6" style="--spine-color:var(--coral);"><span class="spine-num">06</span>Process AWB</button>
 </nav>
 
 <div class="page">
@@ -451,14 +464,14 @@ a{color:inherit;}
     <div class="hero-inner">
       <div class="hero-eyebrow">Padhega India · PI Tools</div>
       <h1 class="hero-title">
-        <span class="l1">Five buttons.</span>
+        <span class="l1">Six operations.</span>
         <span class="l1">One shared brain.</span>
         <span class="l1">This is how each <span class="accent">thinks.</span></span>
       </h1>
       <p class="hero-sub">A calm, click-by-click playbook for the PI Tools menu — what each operation actually does under the hood, why it matters, and exactly what to watch for. No spreadsheet jargon required.</p>
       <div class="hero-cta-row">
         <button class="btn-primary" data-target="ch1"><i class="fa-solid fa-arrow-down"></i> Start with Chapter 01</button>
-        <span class="hero-note">Takes about 12 minutes to read, saves you hours of re-work.</span>
+        <span class="hero-note">Takes about 15 minutes to read, saves you hours of re-work.</span>
       </div>
       <div class="hero-shelf-preview">
         <div class="preview-card" data-target="ch1" style="--c:var(--mint);">
@@ -466,17 +479,22 @@ a{color:inherit;}
           <div class="t">Add New Orders</div>
           <div class="d">CSV → NEW / NEW PREORDER</div>
         </div>
-        <div class="preview-card" data-target="ch3" style="--c:var(--peri);">
+        <div class="preview-card" data-target="ch2" style="--c:var(--cancel);">
+          <div class="icon"><i class="fa-solid fa-ban"></i></div>
+          <div class="t">Check Cancel Orders</div>
+          <div class="d">Mark cancellations on demand</div>
+        </div>
+        <div class="preview-card" data-target="ch4" style="--c:var(--peri);">
           <div class="icon"><i class="fa-solid fa-boxes-stacked"></i></div>
           <div class="t">Selected Procurement</div>
           <div class="d">Your everyday tool</div>
         </div>
-        <div class="preview-card" data-target="ch4" style="--c:var(--sky);">
+        <div class="preview-card" data-target="ch5" style="--c:var(--sky);">
           <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
           <div class="t">Enquiry</div>
           <div class="d">ISBN → availability</div>
         </div>
-        <div class="preview-card" data-target="ch5" style="--c:var(--coral);">
+        <div class="preview-card" data-target="ch6" style="--c:var(--coral);">
           <div class="icon"><i class="fa-regular fa-paper-plane"></i></div>
           <div class="t">Process AWB</div>
           <div class="d">Triggers shipping mail</div>
@@ -501,7 +519,7 @@ a{color:inherit;}
         <div class="rule-card">
           <h4><i class="fa-solid fa-layer-group" style="color:var(--peri);"></i> Work top to bottom</h4>
           <ul>
-            <li>The five chapters here are numbered in the order you'd normally use them in a day.</li>
+            <li>The six chapters here are numbered in the order you'd normally use them in a day.</li>
             <li>Add New Orders first, Process AWB last — each one assumes the previous step is already done.</li>
           </ul>
         </div>
@@ -509,7 +527,7 @@ a{color:inherit;}
           <h4><i class="fa-solid fa-a" style="color:var(--mint);"></i> Exact text matters</h4>
           <ul>
             <li>The tools look for exact words — <span class="mono">p</span>, <span class="mono">completed</span> — not anything that "means the same thing."</li>
-            <li>Close-but-not-exact entries are silently ignored, not flagged as an error.</li>
+            <li>Close-but-not-exact entries are silently ignored, not flagged as an error. Cancelled / Cancel Request text is the one exception — that check is deliberately spelling-tolerant.</li>
           </ul>
         </div>
         <div class="rule-card">
@@ -530,11 +548,12 @@ a{color:inherit;}
     <div class="chapter-inner">
       <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 01 · Menu item: "Add New Orders"</div>
       <h2 class="chapter-title reveal">Getting fresh orders <em>onto the shelf</em></h2>
-      <p class="chapter-dek reveal reveal-delay-1">Every order starts life in a raw CSV export from the website. This step reads it, quietly throws out anything you already have, and sorts the rest into "ready to ship" and "pre-order" piles — without you having to eyeball a single row.</p>
+      <p class="chapter-dek reveal reveal-delay-1">Every order starts life in a raw CSV export from the website. This step reads it, quietly throws out anything you already have, and sorts the rest into "ready to ship" and "pre-order" piles — without you having to eyeball a single row. It now also catches cancellations automatically, every single time you import.</p>
       <div class="chip-row reveal reveal-delay-1">
         <span class="chip"><i class="fa-solid fa-file-csv"></i> Reads: your freshly-imported CSV tab</span>
         <span class="chip"><i class="fa-solid fa-shield-halved"></i> Checks against: main + preorder</span>
         <span class="chip"><i class="fa-solid fa-table"></i> Writes to: NEW + NEW PREORDER</span>
+        <span class="chip" style="background:var(--cancel-tint); color:var(--cancel); border-color:color-mix(in srgb, var(--cancel) 30%, transparent);"><i class="fa-solid fa-ban"></i> Also catches: Cancelled / Cancel Request lines</span>
       </div>
 
       <div class="explain-grid reveal reveal-delay-2">
@@ -577,6 +596,50 @@ a{color:inherit;}
         </div>
       </div>
 
+      <div class="explain-grid reveal reveal-delay-2">
+        <div class="explain-card">
+          <h3><i class="fa-solid fa-ban" style="color:var(--cancel);"></i> If your export also has Cancelled / Cancel Request lines</h3>
+          <p>You don't need a second step, and you don't need to sort anything out beforehand. Every time you run <span class="mono">Add New Orders</span>, it first quietly checks the whole import for any line whose Order Status says Cancelled or Cancel Request — including misspellings like "canceled" or "cancle."</p>
+          <p>Those lines are handled completely differently from a normal new order:</p>
+          <p><strong>1.</strong> They are never queued into <span class="mono">NEW</span> or <span class="mono">NEW PREORDER</span> — there's no point queuing a book to fulfil that's already been cancelled.</p>
+          <p><strong>2.</strong> If that same Order Number + Item ID already exists in <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, or <span class="mono">NEW PREORDER</span>, that row is coloured a medium red, and its status text is struck through with "Cancelled" or "Cancel Request" appended right after it — in both the <span class="mono">status</span> and <span class="mono">Order Status</span> columns.</p>
+          <p><strong>3.</strong> Every cancelled line — matched or not — is logged into a tab called <span class="mono">Cancelled Orders</span>, so you always have one place to look back on everything that's ever been cancelled.</p>
+          <p>One safety net: if a row is already <span class="mono">completed</span> or <span class="mono">shipped</span>, it is <strong>never</strong> auto-cancelled or coloured — a shipped book needs a human to handle the refund/return, not a silent status change. The popup will tell you if this happened so you can review it yourself.</p>
+        </div>
+        <div class="flow-card">
+          <h4>Where a cancelled line goes instead</h4>
+          <svg class="flow-diagram" viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: cancelled lines in the import are excluded from NEW and NEW PREORDER, matched and coloured red in main preorder NEW and NEW PREORDER, and logged to Cancelled Orders">
+            <rect class="flow-box" x="90" y="8" width="140" height="46" rx="10"/>
+            <text class="flow-label" x="160" y="28" text-anchor="middle">Imported CSV tab</text>
+            <text class="flow-sub" x="160" y="41" text-anchor="middle">line says Cancelled / Cancel Req</text>
+
+            <path id="pc1" class="flow-path cancel" d="M160,54 L160,80"/>
+            <circle class="flow-dot cancel" r="3.6"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#pc1"/></animateMotion></circle>
+
+            <rect class="flow-box cancel" x="70" y="82" width="180" height="44" rx="10"/>
+            <text class="flow-label" x="160" y="101" text-anchor="middle" style="font-size:9px;">excluded from NEW / NEW PREORDER</text>
+            <text class="flow-sub" x="160" y="114" text-anchor="middle" style="font-size:7.5px;">not queued as a new order</text>
+
+            <path id="pc2a" class="flow-path cancel" d="M130,126 C90,150 60,155 45,170"/>
+            <path id="pc2b" class="flow-path cancel" d="M190,126 C230,150 260,155 275,170"/>
+            <circle class="flow-dot cancel" r="3.2"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".4s"><mpath href="#pc2a"/></animateMotion></circle>
+            <circle class="flow-dot cancel" r="3.2"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".7s"><mpath href="#pc2b"/></animateMotion></circle>
+
+            <rect class="flow-box cancel" x="0" y="172" width="130" height="44" rx="10"/>
+            <text class="flow-label" x="65" y="191" text-anchor="middle" style="font-size:8.5px;">main / preorder /</text>
+            <text class="flow-label" x="65" y="203" text-anchor="middle" style="font-size:8.5px;">NEW / NEW PREORDER</text>
+
+            <rect class="flow-box cancel" x="190" y="172" width="130" height="44" rx="10"/>
+            <text class="flow-label" x="255" y="191" text-anchor="middle" style="font-size:9px;">Cancelled Orders</text>
+            <text class="flow-sub" x="255" y="204" text-anchor="middle" style="font-size:7.5px;">logged, one line each</text>
+
+            <text class="flow-sub" x="65" y="228" text-anchor="middle" style="font-size:7.5px;">row coloured red,</text>
+            <text class="flow-sub" x="65" y="238" text-anchor="middle" style="font-size:7.5px;">status struck through</text>
+            <text class="flow-sub" x="65" y="252" text-anchor="middle" style="font-size:7px; font-weight:700;">(only if a match is found there)</text>
+          </svg>
+        </div>
+      </div>
+
       <div class="steps-heading reveal">
         <h3>Step by step</h3>
         <span class="count">7 steps · ~2 minutes</span>
@@ -584,12 +647,12 @@ a{color:inherit;}
       <div class="steps-list reveal reveal-delay-1">
         <div class="step"><div class="step-num">1</div><div>
           <h5>Export the orders CSV from the website admin panel</h5>
-          <p>This is the raw order export you're already familiar with — no changes needed before importing it.</p>
+          <p>This is the raw order export you're already familiar with — no changes needed before importing it. You don't need to separate out cancellations first; the tool sorts that out for you.</p>
         </div></div>
         <div class="step"><div class="step-num">2</div><div>
           <h5>Import it as a brand-new tab in this Google Sheet</h5>
           <p>Use <span class="mono">File → Import → Insert new sheet</span>. Google Sheets will auto-name the new tab (usually after the CSV file, e.g. "orders-export"). You're free to leave that auto-generated name as-is, or rename it to anything else you like.</p>
-          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> The one thing to avoid: don't name (or rename) this tab <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, <span class="mono">NEW PREORDER</span>, or any other tab name PI Tools already uses. The tool checks which tab is active before it runs, and it will refuse to run if you're sitting on one of those reserved tabs.</div>
+          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> The one thing to avoid: don't name (or rename) this tab <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, <span class="mono">NEW PREORDER</span>, <span class="mono">Cancelled Orders</span>, or any other tab name PI Tools already uses. The tool checks which tab is active before it runs, and it will refuse to run if you're sitting on one of those reserved tabs.</div>
         </div></div>
         <div class="step"><div class="step-num">3</div><div>
           <h5>Click into that new tab so it's the active sheet on screen</h5>
@@ -597,20 +660,20 @@ a{color:inherit;}
         </div></div>
         <div class="step"><div class="step-num">4</div><div>
           <h5>Go to <span class="mono">PI Tools → Add New Orders</span></h5>
-          <p>Confirm the popup that appears — it just double-checks you want to proceed.</p>
+          <p>Confirm the popup that appears. If any Cancelled / Cancel Request lines were spotted in the import, the popup will already warn you how many, before you even click through.</p>
         </div></div>
         <div class="step"><div class="step-num">5</div><div>
-          <h5>Let it scan, dedupe, and sort</h5>
-          <p>This part takes a few seconds. It's comparing every row against your existing main + preorder tabs.</p>
+          <h5>Let it scan, dedupe, sort, and mark cancellations</h5>
+          <p>This part takes a few seconds. It's comparing every row against your existing main + preorder tabs, and separately checking each line's status for a cancellation.</p>
         </div></div>
         <div class="step"><div class="step-num">6</div><div>
           <h5>Read the summary popup</h5>
-          <p>It tells you exactly how many new regular orders, new pre-order items, and skipped duplicates it found.</p>
-          <div class="callout tip"><i class="fa-solid fa-circle-check"></i> If duplicates skipped = 0 on a re-run of the same file, that's expected — it means nothing new was found.</div>
+          <p>It tells you exactly how many new regular orders, new pre-order items, and skipped duplicates it found — and, if relevant, how many Cancelled / Cancel Request lines were found, how many rows got marked in each tab, and how many new lines were logged to <span class="mono">Cancelled Orders</span>.</p>
+          <div class="callout tip"><i class="fa-solid fa-circle-check"></i> If duplicates skipped = 0 on a re-run of the same file, that's expected — it means nothing new was found. Same logic applies to cancellations already logged before: they won't be logged twice.</div>
         </div></div>
         <div class="step"><div class="step-num">7</div><div>
           <h5>Copy the rows from <span class="mono">NEW</span> / <span class="mono">NEW PREORDER</span> into <span class="mono">main</span> / <span class="mono">preorder</span></h5>
-          <p>This is the one manual hand-off in the whole chapter — the tool stages the rows for you, but placing them into the live sheets is still your call.</p>
+          <p>This is the one manual hand-off in the whole chapter — the tool stages the rows for you, but placing them into the live sheets is still your call. Cancelled lines are never in this pile, so you won't accidentally copy a cancelled order in as new.</p>
           <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> Skip this and every other PI Tools operation will act like these orders don't exist yet.</div>
         </div></div>
       </div>
@@ -622,8 +685,9 @@ a{color:inherit;}
           <h4><i class="fa-solid fa-circle-check"></i> Do</h4>
           <ul>
             <li><i class="fa-solid fa-check"></i> Run this first, before any procurement or enquiry work, so main/preorder are current.</li>
-            <li><i class="fa-solid fa-check"></i> Read the popup counts before closing it — they're your receipt.</li>
+            <li><i class="fa-solid fa-check"></i> Read the popup counts before closing it — they're your receipt, cancellations included.</li>
             <li><i class="fa-solid fa-check"></i> Move NEW / NEW PREORDER into main / preorder right away, same sitting.</li>
+            <li><i class="fa-solid fa-check"></i> Open the <span class="ex">Cancelled Orders</span> tab afterwards if the popup flagged anything "Already Completed/Shipped" — that needs your manual review.</li>
           </ul>
         </div>
         <div class="dd-card dont">
@@ -633,6 +697,7 @@ a{color:inherit;}
             <li><i class="fa-solid fa-xmark"></i> Don't run this while sitting on <span class="ex">main</span> or another reserved tab — it must be the fresh import.</li>
             <li><i class="fa-solid fa-xmark"></i> Don't import the same CSV twice expecting different results — duplicates are blocked automatically.</li>
             <li><i class="fa-solid fa-xmark"></i> Don't worry when the import tab disappears afterward — that's automatic clean-up, not an error.</li>
+            <li><i class="fa-solid fa-xmark"></i> Don't manually delete or "fix" a red row you weren't expecting — it means that Order Number + Item ID really was cancelled somewhere in your import.</li>
           </ul>
         </div>
       </div>
@@ -648,23 +713,186 @@ a{color:inherit;}
             <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1Av1R0SB44sqj6KXgXan4OhlcLRtSFnzd" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
           </div>
           <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">01 / 05 · ADD NEW ORDERS</div>
+          <div class="video-cap">01a — THE BASIC IMPORT</div>
+        </div>
+      </div>
+
+      <div class="video-block reveal">
+        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Add New Orders with cancellations in the same import</h4></div>
+        <div class="video-frame">
+          <div class="video-aspect">
+            <iframe src="https://drive.google.com/file/d/1QNVyAoYJAtoMahsBsT-Luy7cfy2ZmZq8/preview" allow="autoplay" allowfullscreen title="Video: Add New Orders with cancelled orders marked" loading="lazy"></iframe>
+          </div>
+          <div class="video-actions">
+            <a class="watch-link" href="https://drive.google.com/file/d/1QNVyAoYJAtoMahsBsT-Luy7cfy2ZmZq8/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1QNVyAoYJAtoMahsBsT-Luy7cfy2ZmZq8" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+          </div>
+          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
+          <div class="video-cap">01b — SAME IMPORT, WITH CANCELLATIONS MARKED</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       CHAPTER 02 — PROCUREMENT · ALL (optional)
+       CHAPTER 02 — CHECK CANCEL ORDERS
   ============================================================= -->
-  <section class="chapter" id="ch2" style="--chapter-color:var(--amber); --chapter-tint:var(--amber-tint); background:linear-gradient(180deg, var(--paper) 0%, var(--amber-tint) 120%);">
+  <section class="chapter" id="ch2" style="--chapter-color:var(--cancel); --chapter-tint:var(--cancel-tint); background:linear-gradient(180deg, var(--paper) 0%, var(--cancel-tint) 120%);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 02 · Menu item: "Process Procurement - All"</div>
+      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 02 · Menu item: "Check Cancel Orders"</div>
+      <h2 class="chapter-title reveal">Marking cancellations <em>on their own</em></h2>
+      <p class="chapter-dek reveal reveal-delay-1">Chapter 01 already catches cancellations automatically whenever you import a new order batch. This chapter is for the other situation: the website (or a customer) has sent you a cancellation update on its own — separate from your usual new-orders cycle — and you just want existing rows in <span class="mono">main</span> / <span class="mono">preorder</span> marked, nothing else.</p>
+      <div class="chip-row reveal reveal-delay-1">
+        <span class="chip"><i class="fa-solid fa-file-import"></i> Reads: whichever tab is active</span>
+        <span class="chip"><i class="fa-solid fa-highlighter"></i> Marks: main + preorder + NEW + NEW PREORDER</span>
+        <span class="chip"><i class="fa-solid fa-table-list"></i> Logs to: Cancelled Orders</span>
+        <span class="chip"><i class="fa-solid fa-bolt"></i> Order-independent — run any time</span>
+      </div>
+
+      <div class="explain-grid reveal reveal-delay-2">
+        <div class="explain-card">
+          <h3><i class="fa-solid fa-lightbulb" style="color:var(--cancel);"></i> What's actually happening</h3>
+          <p>Import whatever the website gave you — a dedicated cancellations report, or even a full orders export — into a fresh tab, just like Chapter 01. This tool reads that active tab and looks specifically at the "Order Status" column for anything that says Cancelled or Cancel Request. The check is spelling-tolerant, so "canceled," "cancle," or "cancellation request" are all caught too.</p>
+          <p>For every cancelled line it finds, it looks for that same Order Number + Item ID in <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, and <span class="mono">NEW PREORDER</span> — checking all four, since a cancelled order might still be sitting in NEW/NEW PREORDER if it hasn't been copied into main yet.</p>
+          <p>Wherever it finds a match, it colours that entire row a medium red, then strikes through the old text in both the <span class="mono">status</span> and <span class="mono">Order Status</span> cells and appends "Cancelled" or "Cancel Request" right after it, in the same cell.</p>
+          <p>Every cancelled line — whether or not a match was found anywhere — gets logged to the <span class="mono">Cancelled Orders</span> tab, using the same columns as <span class="mono">main</span> plus a trailing "Cancellation Reason." Lines already logged on a previous run are never logged twice.</p>
+          <p>Just like Chapter 01, any row that's already <span class="mono">completed</span> or <span class="mono">shipped</span> is left completely untouched — no colour, no strike-through — because a shipped book needs manual handling (refund/return), not an automatic status change. The popup flags these separately so you know to look at them yourself.</p>
+        </div>
+        <div class="flow-card">
+          <h4>How the data moves</h4>
+          <svg class="flow-diagram" viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: an imported cancellations tab is scanned for cancelled or cancel request lines, matched against main preorder NEW and NEW PREORDER, coloured red with status struck through, and logged to Cancelled Orders">
+            <rect class="flow-box" x="70" y="8" width="180" height="50" rx="10"/>
+            <text class="flow-label" x="160" y="28" text-anchor="middle">Imported tab</text>
+            <text class="flow-sub" x="160" y="41" text-anchor="middle">cancellations report, or full export</text>
+
+            <path id="cc1" class="flow-path" d="M160,58 L160,84"/>
+            <circle class="flow-dot" r="3.6"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#cc1"/></animateMotion></circle>
+
+            <rect class="flow-box" x="70" y="86" width="180" height="44" rx="10"/>
+            <text class="flow-label" x="160" y="105" text-anchor="middle" style="font-size:9px;">find Cancelled / Cancel Request</text>
+            <text class="flow-sub" x="160" y="118" text-anchor="middle" style="font-size:7.5px;">spelling-tolerant match</text>
+
+            <path id="cc2a" class="flow-path" d="M130,130 C90,155 60,160 45,175"/>
+            <path id="cc2b" class="flow-path" d="M190,130 C230,155 260,160 275,175"/>
+            <circle class="flow-dot" r="3.2"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".4s"><mpath href="#cc2a"/></animateMotion></circle>
+            <circle class="flow-dot" r="3.2"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".7s"><mpath href="#cc2b"/></animateMotion></circle>
+
+            <rect class="flow-box" x="0" y="177" width="130" height="46" rx="10"/>
+            <text class="flow-label" x="65" y="196" text-anchor="middle" style="font-size:8.5px;">main / preorder /</text>
+            <text class="flow-label" x="65" y="208" text-anchor="middle" style="font-size:8.5px;">NEW / NEW PREORDER</text>
+            <text class="flow-sub" x="65" y="219" text-anchor="middle" style="font-size:7px;">row → red, status struck through</text>
+
+            <rect class="flow-box" x="190" y="177" width="130" height="46" rx="10"/>
+            <text class="flow-label" x="255" y="196" text-anchor="middle" style="font-size:9px;">Cancelled Orders</text>
+            <text class="flow-sub" x="255" y="209" text-anchor="middle" style="font-size:7.5px;">logged, one line each</text>
+            <text class="flow-sub" x="255" y="219" text-anchor="middle" style="font-size:7px;">skips lines already logged</text>
+
+            <rect class="flow-box manual" x="70" y="240" width="180" height="42" rx="10"/>
+            <text class="flow-label" x="160" y="258" text-anchor="middle" style="font-size:9px;">completed / shipped rows</text>
+            <text class="flow-sub" x="160" y="270" text-anchor="middle" style="font-size:7.5px;">left untouched — flagged for manual review</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="steps-heading reveal">
+        <h3>Step by step</h3>
+        <span class="count">6 steps · under a minute</span>
+      </div>
+      <div class="steps-list reveal reveal-delay-1">
+        <div class="step"><div class="step-num">1</div><div>
+          <h5>Get the cancellations update from the website</h5>
+          <p>This can be a report that only lists cancelled / cancel-request orders, or a full orders export — either works, since the tool only acts on the lines that actually say Cancelled or Cancel Request.</p>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div>
+          <h5>Import it as a brand-new tab, exactly like Chapter 01</h5>
+          <p>Use <span class="mono">File → Import → Insert new sheet</span>. Any name is fine, as long as it isn't one of the reserved PI Tools tab names.</p>
+          <div class="callout warn"><i class="fa-solid fa-triangle-exclamation"></i> Must contain an "Order Status" column, or the tool will stop and tell you it can't find one.</div>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div>
+          <h5>Click into that new tab so it's the active sheet on screen</h5>
+          <p>Same rule as everywhere else — the active tab is what gets read.</p>
+        </div></div>
+        <div class="step"><div class="step-num">4</div><div>
+          <h5>Go to <span class="mono">PI Tools → Check Cancel Orders</span></h5>
+          <p>If nothing cancelled is found in this import, you'll just get a short "nothing found" message and nothing else happens. If something is found, you'll see exactly how many lines, and a reminder of what's about to be marked, before you confirm.</p>
+        </div></div>
+        <div class="step"><div class="step-num">5</div><div>
+          <h5>Confirm, and let it mark + log</h5>
+          <p>This runs in a few seconds — it's only scanning four tabs plus writing to the log, not the whole stock sheet.</p>
+        </div></div>
+        <div class="step"><div class="step-num">6</div><div>
+          <h5>Read the summary popup</h5>
+          <p>It breaks down exactly how many rows were matched and marked in each of <span class="mono">main</span>, <span class="mono">preorder</span>, <span class="mono">NEW</span>, and <span class="mono">NEW PREORDER</span>, how many were already Completed/Shipped and left alone, and how many new lines were logged to <span class="mono">Cancelled Orders</span>.</p>
+          <div class="callout tip"><i class="fa-solid fa-circle-check"></i> A tab showing "(tab not found)" simply means that tab doesn't exist right now — that's not an error, it's just skipped.</div>
+        </div></div>
+      </div>
+
+      <div class="eg-table-wrap reveal reveal-delay-1">
+        <div class="dd-heading"><h3>What happens to a matched row, by its current status</h3></div>
+        <table class="eg-table">
+          <thead><tr><th>Row's current status</th><th>What Check Cancel Orders does</th><th>Verdict</th></tr></thead>
+          <tbody>
+            <tr class="good"><td class="mono">Confirmed</td><td>Coloured red, status struck through + "Cancelled" appended</td><td><span class="verdict"><i class="fa-solid fa-circle-check"></i> Auto-marked</span></td></tr>
+            <tr class="good"><td class="mono">Processing</td><td>Coloured red, status struck through + "Cancel Request" appended</td><td><span class="verdict"><i class="fa-solid fa-circle-check"></i> Auto-marked</span></td></tr>
+            <tr class="bad"><td class="mono">Completed</td><td>Left completely untouched — no colour, no strike-through</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Manual review needed</span></td></tr>
+            <tr class="bad"><td class="mono">Shipped</td><td>Left completely untouched — no colour, no strike-through</td><td><span class="verdict"><i class="fa-solid fa-circle-xmark"></i> Manual review needed</span></td></tr>
+            <tr class="good"><td class="mono">(already marked Cancelled)</td><td>Detected, but the label isn't appended a second time</td><td><span class="verdict"><i class="fa-solid fa-circle-check"></i> Safe to re-run</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dd-heading reveal"><h3>Dos &amp; Don'ts</h3></div>
+      <div class="dd-grid reveal reveal-delay-1">
+        <div class="dd-card do">
+          <div class="dd-tape"></div>
+          <h4><i class="fa-solid fa-circle-check"></i> Do</h4>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Use this any time you get a cancellation update on its own — you don't need to wait for your next new-orders import.</li>
+            <li><i class="fa-solid fa-check"></i> Read the per-tab breakdown in the popup so you know exactly what got touched.</li>
+            <li><i class="fa-solid fa-check"></i> Manually review anything flagged "Already Completed/Shipped" — that's a refund/return conversation, not a status flip.</li>
+            <li><i class="fa-solid fa-check"></i> Run this and Chapter 01 in either order — the result is identical either way.</li>
+          </ul>
+        </div>
+        <div class="dd-card dont">
+          <div class="dd-tape"></div>
+          <h4><i class="fa-solid fa-circle-xmark"></i> Don't</h4>
+          <ul>
+            <li><i class="fa-solid fa-xmark"></i> Don't run this while sitting on <span class="ex">main</span> or another reserved tab — it needs the freshly imported tab active.</li>
+            <li><i class="fa-solid fa-xmark"></i> Don't expect it to touch <span class="ex">porders</span>, <span class="ex">SelAllProc</span>, or any procurement tab — it only ever marks main / preorder / NEW / NEW PREORDER.</li>
+            <li><i class="fa-solid fa-xmark"></i> Don't manually un-colour a red row — procurement already skips red/cancelled rows on purpose, so leaving it marked is what keeps that book from being re-ordered by mistake.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="video-block reveal">
+        <div class="vh"><i class="fa-solid fa-circle-play"></i><h4>Watch it happen — Check Cancel Orders, on its own</h4></div>
+        <div class="video-frame">
+          <div class="video-aspect">
+            <iframe src="https://drive.google.com/file/d/1g6liOFzCOkvIx38CtXzcNW-VUfGmTfPX/preview" allow="autoplay" allowfullscreen title="Video: Check Cancel Orders" loading="lazy"></iframe>
+          </div>
+          <div class="video-actions">
+            <a class="watch-link" href="https://drive.google.com/file/d/1g6liOFzCOkvIx38CtXzcNW-VUfGmTfPX/view" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Watch online in Drive</a>
+            <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1g6liOFzCOkvIx38CtXzcNW-VUfGmTfPX" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
+          </div>
+          <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
+          <div class="video-cap">02 / 06 · CHECK CANCEL ORDERS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CHAPTER 03 — PROCUREMENT · ALL (optional)
+  ============================================================= -->
+  <section class="chapter" id="ch3" style="--chapter-color:var(--amber); --chapter-tint:var(--amber-tint); background:linear-gradient(180deg, var(--paper) 0%, var(--amber-tint) 120%);">
+    <div class="chapter-inner">
+      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 03 · Menu item: "Process Procurement - All"</div>
       <h2 class="chapter-title reveal">The <em>whole-sheet</em> sweep — use sparingly</h2>
-      <p class="chapter-dek reveal reveal-delay-1">This one procures every uncoloured row in <span class="mono">main</span> at once. Powerful, but blunt — most days you want Chapter 03 instead. Think of this as the "spring cleaning" option, not the daily one.</p>
+      <p class="chapter-dek reveal reveal-delay-1">This one procures every uncoloured row in <span class="mono">main</span> at once. Powerful, but blunt — most days you want Chapter 04 instead. Think of this as the "spring cleaning" option, not the daily one.</p>
       <div class="chip-row reveal reveal-delay-1">
         <span class="chip"><i class="fa-solid fa-triangle-exclamation"></i> Optional — not for daily use</span>
         <span class="chip"><i class="fa-solid fa-fill-drip"></i> Rule: white AWB cell = include</span>
+        <span class="chip"><i class="fa-solid fa-ban"></i> Cancelled / Cancel Request rows are always skipped</span>
         <span class="chip"><i class="fa-solid fa-clock"></i> Takes 3–4 minutes</span>
       </div>
 
@@ -672,9 +900,9 @@ a{color:inherit;}
         <div class="explain-card">
           <h3><i class="fa-solid fa-lightbulb" style="color:var(--amber);"></i> What's actually happening</h3>
           <p>This tool scans <span class="mono">main</span> top to bottom and looks at the background <em>colour</em> of each row's AWB cell — not the text, the colour.</p>
-          <p>If the AWB cell has no fill colour (plain white / uncoloured), that row is treated as "not yet handled" and gets pulled in for procurement. Any row you've coloured — for any reason — is skipped.</p>
+          <p>If the AWB cell has no fill colour (plain white / uncoloured), that row is treated as "not yet handled" and gets pulled in for procurement. Any row you've coloured — for any reason, including a cancellation mark from Chapter 01 or 02 — is skipped. As a safety net, it also checks the "status" text itself and skips anything that reads Cancelled / Cancel Request, even if the colour is missing for some reason.</p>
           <p>Everything pulled in is checked against every tab in the PI Stock sheet, quantities are totalled per ISBN, and two tabs are produced: one consolidated list, and one split by publisher/distributor.</p>
-          <p>Because it reads <em>every</em> row in <span class="mono">main</span>, it's slower and much less targeted than Chapter 03 — that's exactly why it's the occasional-use option.</p>
+          <p>Because it reads <em>every</em> row in <span class="mono">main</span>, it's slower and much less targeted than Chapter 04 — that's exactly why it's the occasional-use option.</p>
         </div>
         <div class="flow-card">
           <h4>How the data moves</h4>
@@ -687,19 +915,19 @@ a{color:inherit;}
             <text class="flow-label" x="235" y="30" text-anchor="middle">PI Stock</text>
             <text class="flow-sub" x="235" y="43" text-anchor="middle">every publisher tab</text>
 
-            <path id="p2a1" class="flow-path" d="M110,60 C130,90 160,100 175,120"/>
-            <path id="p2a2" class="flow-path" d="M210,60 C190,90 170,100 165,120"/>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin="0s"><mpath href="#p2a1"/></animateMotion></circle>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".4s"><mpath href="#p2a2"/></animateMotion></circle>
+            <path id="p3a1" class="flow-path" d="M110,60 C130,90 160,100 175,120"/>
+            <path id="p3a2" class="flow-path" d="M210,60 C190,90 170,100 165,120"/>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin="0s"><mpath href="#p3a1"/></animateMotion></circle>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".4s"><mpath href="#p3a2"/></animateMotion></circle>
 
             <rect class="flow-box" x="105" y="120" width="130" height="46" rx="10"/>
             <text class="flow-label" x="170" y="140" text-anchor="middle">match &amp; total</text>
             <text class="flow-sub" x="170" y="153" text-anchor="middle">per ISBN, purple = multi-source</text>
 
-            <path id="p2b1" class="flow-path" d="M150,166 C110,190 70,195 55,208"/>
-            <path id="p2b2" class="flow-path" d="M190,166 C230,190 270,195 285,208"/>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".8s"><mpath href="#p2b1"/></animateMotion></circle>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s"><mpath href="#p2b2"/></animateMotion></circle>
+            <path id="p3b1" class="flow-path" d="M150,166 C110,190 70,195 55,208"/>
+            <path id="p3b2" class="flow-path" d="M190,166 C230,190 270,195 285,208"/>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".8s"><mpath href="#p3b1"/></animateMotion></circle>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s"><mpath href="#p3b2"/></animateMotion></circle>
 
             <rect class="flow-box" x="0" y="208" width="120" height="46" rx="10"/>
             <text class="flow-label" x="60" y="228" text-anchor="middle">proc all</text>
@@ -723,7 +951,7 @@ a{color:inherit;}
         </div></div>
         <div class="step"><div class="step-num">2</div><div>
           <h5>Colour-fill any rows you want excluded</h5>
-          <p>Any fill colour at all — it doesn't matter which one — tells the tool "already handled, skip me."</p>
+          <p>Any fill colour at all — it doesn't matter which one — tells the tool "already handled, skip me." Rows marked red by Chapter 01 or 02 are already excluded automatically.</p>
         </div></div>
         <div class="step"><div class="step-num">3</div><div>
           <h5>Go to <span class="mono">PI Tools → Process Procurement - All</span></h5>
@@ -732,7 +960,7 @@ a{color:inherit;}
         </div></div>
         <div class="step"><div class="step-num">4</div><div>
           <h5>Review <span class="mono">proc all</span> and <span class="mono">PI Procurement All</span></h5>
-          <p>Same output shape as Chapter 03 — one flat list, one grouped-by-publisher view — just built from the whole sheet instead of a hand-picked list.</p>
+          <p>Same output shape as Chapter 04 — one flat list, one grouped-by-publisher view — just built from the whole sheet instead of a hand-picked list. The popup also tells you how many Cancelled/Cancel Request lines were skipped.</p>
         </div></div>
       </div>
 
@@ -750,7 +978,7 @@ a{color:inherit;}
           <div class="dd-tape"></div>
           <h4><i class="fa-solid fa-circle-xmark"></i> Don't</h4>
           <ul>
-            <li><i class="fa-solid fa-xmark"></i> Don't make this your everyday procurement tool — that's Chapter 03.</li>
+            <li><i class="fa-solid fa-xmark"></i> Don't make this your everyday procurement tool — that's Chapter 04.</li>
             <li><i class="fa-solid fa-xmark"></i> Don't run it expecting a quick result on a large sheet — budget the full 3–4 minutes.</li>
           </ul>
         </div>
@@ -767,18 +995,18 @@ a{color:inherit;}
             <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1lQxOPEb6urWfcUNdIvdQjFMZBOxAWuAV" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
           </div>
           <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">02 / 05 · PROCUREMENT · ALL (OPTIONAL)</div>
+          <div class="video-cap">03 / 06 · PROCUREMENT · ALL (OPTIONAL)</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       CHAPTER 03 — PROCUREMENT · SELECTED (the daily workflow)
+       CHAPTER 04 — PROCUREMENT · SELECTED (the daily workflow)
   ============================================================= -->
-  <section class="chapter" id="ch3" style="--chapter-color:var(--peri); --chapter-tint:var(--peri-tint);">
+  <section class="chapter" id="ch4" style="--chapter-color:var(--peri); --chapter-tint:var(--peri-tint);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 03 · Menu items: "Selected Procurement (Fetch P orders)" + "Process Procurement - Selected"</div>
+      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 04 · Menu items: "Selected Procurement (Fetch P orders)" + "Process Procurement - Selected"</div>
       <h2 class="chapter-title reveal">Your <em>everyday</em> procurement engine</h2>
       <p class="chapter-dek reveal reveal-delay-1">This is the one you'll reach for most. You choose exactly which orders to procure by marking them, and the tool does the rest — checking every publisher's stock, totalling quantities, and flagging anything available from more than one place.</p>
       <div class="chip-row reveal reveal-delay-1">
@@ -793,6 +1021,7 @@ a{color:inherit;}
           <p>This chapter is really two clicks working together. First, <span class="mono">Fetch P orders</span> scans <span class="mono">main</span> for any row where the AWB column is exactly <span class="mono">p</span> or <span class="mono">P</span> — nothing else counts — and copies just those rows into a working tab called <span class="mono">porders</span>.</p>
           <p>Then, <span class="mono">Process Procurement - Selected</span> reads <span class="mono">porders</span>, cleans up each ISBN, and adds quantities together if the same book was ordered more than once. It then checks that ISBN against <em>every single tab</em> in the PI Stock sheet — each tab there represents one publisher or distributor's own list.</p>
           <p>If a book is found in more than one publisher's tab, that row gets highlighted <strong style="color:var(--peri);">light purple</strong> and every source is listed together — useful when one distributor is faster or cheaper than another.</p>
+          <p>Any row whose status already says Cancelled / Cancel Request is skipped here too, so a cancelled book can never accidentally slip into a procurement list.</p>
           <p>The result lands in two places: a consolidated master list, and a second tab with a separate little table for each publisher — ready to copy straight into a message or email to that distributor.</p>
         </div>
         <div class="flow-card">
@@ -802,8 +1031,8 @@ a{color:inherit;}
             <text class="flow-label" x="160" y="28" text-anchor="middle">main</text>
             <text class="flow-sub" x="160" y="41" text-anchor="middle">AWB = p or P</text>
 
-            <path id="p3a" class="flow-path" d="M160,56 L160,86"/>
-            <circle class="flow-dot" r="3.6"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#p3a"/></animateMotion></circle>
+            <path id="p4a" class="flow-path" d="M160,56 L160,86"/>
+            <circle class="flow-dot" r="3.6"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#p4a"/></animateMotion></circle>
 
             <rect class="flow-box" x="95" y="88" width="130" height="46" rx="10"/>
             <text class="flow-label" x="160" y="108" text-anchor="middle">porders</text>
@@ -813,20 +1042,20 @@ a{color:inherit;}
             <text class="flow-label" x="275" y="108" text-anchor="middle" style="font-size:9px;">PI Stock</text>
             <text class="flow-sub" x="275" y="121" text-anchor="middle" style="font-size:7.5px;">every tab</text>
 
-            <path id="p3b" class="flow-path" d="M225,111 C245,111 250,111 232,111"/>
-            <circle class="flow-dot" r="3.2"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#p3b"/></animateMotion></circle>
+            <path id="p4b" class="flow-path" d="M225,111 C245,111 250,111 232,111"/>
+            <circle class="flow-dot" r="3.2"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#p4b"/></animateMotion></circle>
 
-            <path id="p3c" class="flow-path" d="M160,134 L160,164"/>
-            <circle class="flow-dot" r="3.6"><animateMotion dur="2s" repeatCount="indefinite" begin=".3s"><mpath href="#p3c"/></animateMotion></circle>
+            <path id="p4c" class="flow-path" d="M160,134 L160,164"/>
+            <circle class="flow-dot" r="3.6"><animateMotion dur="2s" repeatCount="indefinite" begin=".3s"><mpath href="#p4c"/></animateMotion></circle>
 
             <rect class="flow-box" x="90" y="166" width="140" height="46" rx="10"/>
             <text class="flow-label" x="160" y="186" text-anchor="middle">match &amp; total</text>
             <text class="flow-sub" x="160" y="199" text-anchor="middle">purple = multi-source</text>
 
-            <path id="p3d1" class="flow-path" d="M135,212 C100,236 65,240 50,254"/>
-            <path id="p3d2" class="flow-path" d="M185,212 C220,236 255,240 270,254"/>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".6s"><mpath href="#p3d1"/></animateMotion></circle>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1s"><mpath href="#p3d2"/></animateMotion></circle>
+            <path id="p4d1" class="flow-path" d="M135,212 C100,236 65,240 50,254"/>
+            <path id="p4d2" class="flow-path" d="M185,212 C220,236 255,240 270,254"/>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".6s"><mpath href="#p4d1"/></animateMotion></circle>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1s"><mpath href="#p4d2"/></animateMotion></circle>
 
             <rect class="flow-box" x="0" y="254" width="110" height="44" rx="10"/>
             <text class="flow-label" x="55" y="272" text-anchor="middle" style="font-size:9px;">SelAllProc</text>
@@ -919,7 +1148,7 @@ a{color:inherit;}
             <li><i class="fa-solid fa-xmark"></i> Don't use words like <span class="ex">proc</span>, <span class="ex">pending</span>, <span class="ex">PP</span> thinking they'll work.</li>
             <li><i class="fa-solid fa-xmark"></i> Don't close or refresh the sheet while it says <span class="ex">Working…</span>.</li>
             <li><i class="fa-solid fa-xmark"></i> Don't forget Step 8 — it's the #1 cause of duplicate procurement.</li>
-            <li><i class="fa-solid fa-xmark"></i> Don't reach for Chapter 02 out of habit — this is your daily tool.</li>
+            <li><i class="fa-solid fa-xmark"></i> Don't reach for Chapter 03 out of habit — this is your daily tool.</li>
           </ul>
         </div>
       </div>
@@ -935,18 +1164,18 @@ a{color:inherit;}
             <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1I25Mb7w8pzzJyQqRRpDgexISGCDEuHym" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
           </div>
           <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">03 / 05 · PROCUREMENT · SELECTED (MAIN TOOL)</div>
+          <div class="video-cap">04 / 06 · PROCUREMENT · SELECTED (MAIN TOOL)</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       CHAPTER 04 — ENQUIRY
+       CHAPTER 05 — ENQUIRY
   ============================================================= -->
-  <section class="chapter" id="ch4" style="--chapter-color:var(--sky); --chapter-tint:var(--sky-tint); background:linear-gradient(180deg, var(--paper) 0%, var(--sky-tint) 120%);">
+  <section class="chapter" id="ch5" style="--chapter-color:var(--sky); --chapter-tint:var(--sky-tint); background:linear-gradient(180deg, var(--paper) 0%, var(--sky-tint) 120%);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 04 · Menu item: "Check Availability (Enquiry)"</div>
+      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 05 · Menu item: "Check Availability (Enquiry)"</div>
       <h2 class="chapter-title reveal">A quick "<em>do we have this?</em>" check</h2>
       <p class="chapter-dek reveal reveal-delay-1">No orders involved — this is purely for checking whether a book exists anywhere in your stock network before you promise it to a customer or place an order.</p>
       <div class="chip-row reveal reveal-delay-1">
@@ -958,7 +1187,7 @@ a{color:inherit;}
       <div class="explain-grid reveal reveal-delay-2">
         <div class="explain-card">
           <h3><i class="fa-solid fa-lightbulb" style="color:var(--sky);"></i> What's actually happening</h3>
-          <p>Every ISBN you list gets checked against every tab in PI Stock — the exact same search Chapter 03 uses, just without any order data attached.</p>
+          <p>Every ISBN you list gets checked against every tab in PI Stock — the exact same search Chapter 04 uses, just without any order data attached.</p>
           <p>For each ISBN it finds, it fills in the title, author, publisher, every location it's available ("Available Where"), stock quantity, and regular price. If it can't find the ISBN anywhere, the Status column simply says <span class="mono">❌ Not found</span>.</p>
           <p>Cell E1 keeps you posted — it shows <span class="mono">Working…</span> while the search is running, then switches to a timestamp with a "X / Y found" count when it's done.</p>
         </div>
@@ -973,17 +1202,17 @@ a{color:inherit;}
             <text class="flow-label" x="235" y="30" text-anchor="middle">PI Stock</text>
             <text class="flow-sub" x="235" y="43" text-anchor="middle">every publisher tab</text>
 
-            <path id="p4a" class="flow-path" d="M110,60 C130,90 160,100 175,120"/>
-            <path id="p4b" class="flow-path" d="M210,60 C190,90 170,100 165,120"/>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#p4a"/></animateMotion></circle>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".4s"><mpath href="#p4b"/></animateMotion></circle>
+            <path id="p5a" class="flow-path" d="M110,60 C130,90 160,100 175,120"/>
+            <path id="p5b" class="flow-path" d="M210,60 C190,90 170,100 165,120"/>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#p5a"/></animateMotion></circle>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".4s"><mpath href="#p5b"/></animateMotion></circle>
 
             <rect class="flow-box" x="80" y="122" width="160" height="46" rx="10"/>
             <text class="flow-label" x="160" y="142" text-anchor="middle">match per ISBN</text>
             <text class="flow-sub" x="160" y="155" text-anchor="middle">title, author, stock, price</text>
 
-            <path id="p4c" class="flow-path" d="M160,168 L160,190"/>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2s" repeatCount="indefinite" begin=".8s"><mpath href="#p4c"/></animateMotion></circle>
+            <path id="p5c" class="flow-path" d="M160,168 L160,190"/>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2s" repeatCount="indefinite" begin=".8s"><mpath href="#p5c"/></animateMotion></circle>
 
             <rect class="flow-box" x="50" y="192" width="220" height="26" rx="8"/>
             <text class="flow-label" x="160" y="209" text-anchor="middle" style="font-size:9px;">Enquiry · columns B – H filled in</text>
@@ -1046,18 +1275,18 @@ a{color:inherit;}
             <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1ZvIwALD2iF5BFDPT3fYn_pD0SRAX2JV-" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
           </div>
           <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">04 / 05 · ENQUIRY</div>
+          <div class="video-cap">05 / 06 · ENQUIRY</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       CHAPTER 05 — PROCESS AWB & MAIL AUTOMATION
+       CHAPTER 06 — PROCESS AWB & MAIL AUTOMATION
   ============================================================= -->
-  <section class="chapter" id="ch5" style="--chapter-color:var(--coral); --chapter-tint:var(--coral-tint);">
+  <section class="chapter" id="ch6" style="--chapter-color:var(--coral); --chapter-tint:var(--coral-tint);">
     <div class="chapter-inner">
-      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 05 · Menu item: "Process AWB" + a manual website step</div>
+      <div class="chapter-kicker reveal"><span class="dot"></span>Chapter 06 · Menu item: "Process AWB" + a manual website step</div>
       <h2 class="chapter-title reveal">From "<em>packed</em>" to "<em>customer notified</em>"</h2>
       <p class="chapter-dek reveal reveal-delay-1">This is the last mile — and the one with the most real-world consequences, because the end of this chapter is an actual email landing in a customer's inbox. Two stages: the sheet does the sorting, the website does the sending.</p>
       <div class="chip-row reveal reveal-delay-1">
@@ -1081,8 +1310,8 @@ a{color:inherit;}
             <text class="flow-sub" x="160" y="41" text-anchor="middle" style="font-size:7.5px;">status must read "completed"</text>
             <text class="flow-sub" x="160" y="53" text-anchor="middle" style="font-size:7.5px;">(the small status column)</text>
 
-            <path id="p5a" class="flow-path" d="M160,64 L160,90"/>
-            <circle class="flow-dot" r="3.6"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#p5a"/></animateMotion></circle>
+            <path id="p6a" class="flow-path" d="M160,64 L160,90"/>
+            <circle class="flow-dot" r="3.6"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#p6a"/></animateMotion></circle>
 
             <rect class="flow-box" x="70" y="92" width="180" height="48" rx="10"/>
             <text class="flow-label" x="160" y="112" text-anchor="middle">Tracking Summary</text>
@@ -1091,15 +1320,15 @@ a{color:inherit;}
             <line x1="10" y1="158" x2="310" y2="158" class="flow-path dashed"/>
             <text class="flow-sub" x="160" y="152" text-anchor="middle" style="font-size:7px; font-weight:700;">— outside the sheet, on the website —</text>
 
-            <path id="p5b" class="flow-path dashed" d="M160,140 L160,170"/>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".4s"><mpath href="#p5b"/></animateMotion></circle>
+            <path id="p6b" class="flow-path dashed" d="M160,140 L160,170"/>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".4s"><mpath href="#p6b"/></animateMotion></circle>
 
             <rect class="flow-box manual" x="90" y="172" width="140" height="42" rx="10"/>
             <text class="flow-label" x="160" y="190" text-anchor="middle" style="font-size:9px;">copy → save as CSV</text>
             <text class="flow-sub" x="160" y="202" text-anchor="middle" style="font-size:7.5px;">today's rows only</text>
 
-            <path id="p5c" class="flow-path dashed" d="M160,214 L160,238"/>
-            <circle class="flow-dot" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".8s"><mpath href="#p5c"/></animateMotion></circle>
+            <path id="p6c" class="flow-path dashed" d="M160,214 L160,238"/>
+            <circle class="flow-dot" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".8s"><mpath href="#p6c"/></animateMotion></circle>
 
             <rect class="flow-box manual" x="80" y="240" width="160" height="42" rx="10"/>
             <text class="flow-label" x="160" y="258" text-anchor="middle" style="font-size:9px;">website import → mail sent</text>
@@ -1193,7 +1422,7 @@ a{color:inherit;}
             <a class="dl-link" href="https://drive.google.com/uc?export=download&id=1Y7CSnuMGCeC03CrjVEpS-Fp864hCCO4L" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download video</a>
           </div>
           <div class="video-fallback-note">If the player above stays blank, use "Watch online in Drive" — some networks block embedded video.</div>
-          <div class="video-cap">05 / 05 · PROCESS AWB &amp; MAIL</div>
+          <div class="video-cap">06 / 06 · PROCESS AWB &amp; MAIL</div>
         </div>
       </div>
     </div>
@@ -1202,7 +1431,7 @@ a{color:inherit;}
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <h3>That's the whole shelf.</h3>
-    <p>Five operations, one shared brain: the order sheet, the stock sheet, and a handful of exact-match words that decide what happens next.</p>
+    <p>Six operations, one shared brain: the order sheet, the stock sheet, and a handful of exact-match words that decide what happens next — including the spelling-tolerant check that catches every cancellation.</p>
     <p>When in doubt — check the AWB column, check the status column, and check the clock (3–4 minutes is normal, not stuck).</p>
     <div class="fnote">PI TOOLS · INTERNAL STAFF PLAYBOOK · PADHEGA INDIA</div>
   </footer>
@@ -1218,7 +1447,7 @@ a{color:inherit;}
 
   var spines = Array.prototype.slice.call(document.querySelectorAll('.spine, .mobile-spine, [data-target]'));
   var sections = {};
-  ['ch1','ch2','ch3','ch4','ch5'].forEach(function(id){
+  ['ch1','ch2','ch3','ch4','ch5','ch6'].forEach(function(id){
     var el = document.getElementById(id);
     if(el) sections[id] = el;
   });
